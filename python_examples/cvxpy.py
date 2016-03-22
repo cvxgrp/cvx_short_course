@@ -10,11 +10,8 @@ b = np.asmatrix(np.random.randn(m,1))
 
 # Construct the problem.
 x = Variable(n)
-# Operator overloading of * and -.
 cost = sum_squares(A*x - b)
 objective = Minimize(cost)
-# Constructing a list.
-# Operator overloading of <=.
 constraints = [0 <= x, x <= 1]
 prob = Problem(objective, constraints)
 
