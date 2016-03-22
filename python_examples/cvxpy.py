@@ -10,8 +10,10 @@ b = np.asmatrix(np.random.randn(m,1))
 
 # Construct the problem.
 x = Variable(n)
+# *, +, -, / are overloaded to construct CVXPY objects.
 cost = sum_squares(A*x - b)
 objective = Minimize(cost)
+# <=, >=, == are overloaded to construct CVXPY constraints.
 constraints = [0 <= x, x <= 1]
 prob = Problem(objective, constraints)
 
