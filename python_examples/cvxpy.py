@@ -1,16 +1,20 @@
 from cvxpy import *
-import numpy
+import numpy as np
 
 # Problem data.
 m = 30
 n = 20
-numpy.random.seed(1)
-A = numpy.random.randn(m, n)
-b = numpy.random.randn(m)
+np.random.seed(1)
+A = np.asmatrix(np.random.randn(m, n))
+b = np.asmatrix(np.random.randn(m,1))
 
 # Construct the problem.
 x = Variable(n)
-objective = Minimize(sum_squares(A*x - b))
+# Operator overloading of * and -.
+cost = sum_squares(A*x - b)
+objective = Minimize(cost)
+# Constructing a list.
+# Operator overloading of <=.
 constraints = [0 <= x, x <= 1]
 prob = Problem(objective, constraints)
 
