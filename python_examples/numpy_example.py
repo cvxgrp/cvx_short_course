@@ -11,6 +11,7 @@ A = np.zeros( (3, 4) )
 # CVXPY works best with matrices
 # It's best to cast every array to a matrix manually
 A = np.asmatrix(A)
+print A.shape # size of A
 
 # All-one matrix
 B = np.ones( (3, 4) )
