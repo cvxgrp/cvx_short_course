@@ -1,4 +1,4 @@
-# Matplotlib gives the plotting functionality of MATLAB.
+# matplotlib package has the plotting functionality of MATLAB
 import matplotlib.pyplot as plt
 import math
 

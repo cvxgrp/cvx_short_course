@@ -49,9 +49,9 @@ print z[0, 0]
 #   Elementwise multiplication
 #     np.multiply(A, B)
 #   Sum of each column (as a row vector)
-#     np.sum(A, 0)
+#     np.sum(A, axis=0)
 #   Sum of each row (as a column vector)
-#     np.sum(A, 1)
+#     np.sum(A, axis=1)
 
 (d, V) = np.linalg.eig(Q) # Eigendecomposition
 vnorm = np.linalg.norm(v) # 2-norm of a vector

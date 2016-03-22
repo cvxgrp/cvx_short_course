@@ -33,5 +33,9 @@ d['guido'] = 4127
 print d
 print d['jack']
 
+# iterating over a dictionary.
+for key, value in d.items():
+    print key,value
+
 # making an empty dictionary
 empty_dict = dict()

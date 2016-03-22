@@ -18,6 +18,6 @@ for i in range(5):
     # print a random number in [0, 1)
     print rn.random()
 
-# Import all the 'math' functions into the namespace.
+# Import all the 'math' functions into the namespace
 from math import *
 print sin(pi)
