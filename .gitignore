@@ -30,3 +30,4 @@
 cvx*.pdf
 dcp.pdf
 *.DS_Store
+.ipynb_checkpoints
