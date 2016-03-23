@@ -1,0 +1,29 @@
+dcp.stanford.edu quiz
+
+additional exercises
+13.3 portfolio
+16.9 energy
+
+Day 1:
+1.5 hours optimization overview (steven)
+1 hour Python  (14:40-15:40) (Jaehyun)
+15:50-17:35 exercises:
+- make sure cvxpy installed
+- hello world with cvxpy
+- basic control problem
+- go over solutions (last 30 minutes)
+
+Day 2:
+1.5 hours DCP talk (steven)
+14:40 - 15:40 computer session 1
+15:50 - 17:35 computer session 2
+- dcp.stanford.edu (get to hard)
+- energy problem
+- ???
+- go over solutions + questions (last 30 minutes)
+
+Day 3:
+1.5 hours applications talk (Jaehyun)
+- portfolio problem
+-
+- go over solutions + questions (last 30 minutes)
