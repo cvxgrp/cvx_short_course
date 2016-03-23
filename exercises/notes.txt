@@ -10,7 +10,7 @@ Day 1:
 15:50-17:35 exercises:
 - make sure cvxpy installed
 - hello world with cvxpy
-- basic control problem
+- LASSO
 - go over solutions (last 30 minutes)
 
 Day 2:
@@ -18,12 +18,16 @@ Day 2:
 14:40 - 15:40 computer session 1
 15:50 - 17:35 computer session 2
 - dcp.stanford.edu (get to hard)
-- energy problem
-- ???
+- 16.9 energy problem
+- 3.20 Optimal vehicle speed scheduling
 - go over solutions + questions (last 30 minutes)
 
 Day 3:
 1.5 hours applications talk (Jaehyun)
-- portfolio problem
--
+- 13.3 portfolio problem
+- 17.3 cell growth
 - go over solutions + questions (last 30 minutes)
+
+Bonus:
+5.13 fitting with censored data
+13.9 optimal odds
