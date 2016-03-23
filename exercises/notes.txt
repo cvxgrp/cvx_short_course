@@ -1,10 +1,4 @@
-dcp.stanford.edu quiz
-
-additional exercises
-13.3 portfolio
-16.9 energy
-
-Day 1:
+[Day 1]
 1.5 hours optimization overview (steven)
 1 hour Python  (14:40-15:40) (Jaehyun)
 15:50-17:35 exercises:
@@ -13,7 +7,7 @@ Day 1:
 - LASSO
 - go over solutions (last 30 minutes)
 
-Day 2:
+[Day 2]
 1.5 hours DCP talk (steven)
 14:40 - 15:40 computer session 1
 15:50 - 17:35 computer session 2
@@ -22,12 +16,13 @@ Day 2:
 - 3.20 Optimal vehicle speed scheduling
 - go over solutions + questions (last 30 minutes)
 
-Day 3:
+[Day 3]
 1.5 hours applications talk (Jaehyun)
 - 13.3 portfolio problem
 - 17.3 cell growth
 - go over solutions + questions (last 30 minutes)
 
-Bonus:
+[Bonus]
 5.13 fitting with censored data
 13.9 optimal odds
+16.10 air conditioning
