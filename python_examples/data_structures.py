@@ -1,6 +1,6 @@
 # making a list using list comprehension
 # same as
-#   a = [0, 1, 4, 9, ..., 81]
+#   a = [0, 1, 4, 9, 16]
 a = [x**2 for x in range(5)]
 print a
 print len(a) # length of the list
