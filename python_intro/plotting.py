@@ -1,6 +1,19 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# # Plotting
+# 
+# This notebook covers the basics of plotting in Python with matplotlib.
+
+# In[1]:
+
+
 # matplotlib package has the plotting functionality of MATLAB
 import matplotlib.pyplot as plt
-import math
+
+# In a Jupyter notebook, include the command
+get_ipython().run_line_magic('matplotlib', 'inline')
+# to display graphs in the notebook.
 
 # plt.plot generates a line on the graph from a list of
 # x-coordinates and a list of y-coordinates.
@@ -19,9 +32,6 @@ plt.xlabel(r"$x$", fontsize=16)
 # plt.legend adds a legend to the graph with the line labels.
 plt.legend(loc='upper left')
 
-# In a Jupyter notebook, include the command
-# %matplotlib inline
-# to display graphs in the notebook.
-
 # plt.show displays the graph.
 plt.show()
+
