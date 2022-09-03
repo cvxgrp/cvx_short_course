@@ -60,3 +60,11 @@ sections, which the participants need to fill in with code constructing and solv
 * Recap.
 * References for next steps in learning about and applying convex optimization.
 
+8. Build the book
+
+9. Build a Jupyter Book with
+```bash
+jupyter-book clean book
+jupyter-book build book
+```
+Book is now book/_build/html
