@@ -32,3 +32,4 @@ dcp.pdf
 *.DS_Store
 .ipynb_checkpoints
 exercises/*_sltn.ipynb
+_build
