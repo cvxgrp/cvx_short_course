@@ -3,7 +3,19 @@
 format: jb-book
 root: docs/index
 chapters:
-    #- file: docs/applications/portfolio_optimization
     - file: docs/applications/index
       sections:
-        - glob: docs/applications/*
+        - glob: docs/applications/notebooks/*
+    - file: docs/scipy22_slides/index
+    - file: docs/dcp/index
+      sections:
+        - glob: docs/dcp/notebooks/*
+    - file: docs/python_intro/index
+      sections:
+        - glob: docs/python_intro/notebooks/*
+    - file: docs/exercises/index
+      sections:
+        - glob: docs/exercises/notebooks/*
+    - file: docs/intro/index
+      sections:
+        - glob: docs/intro/notebooks/*

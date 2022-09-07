@@ -9,16 +9,17 @@ execute:
   execute_notebooks: force
   timeout: 600  # 10 minutes timeout
 
-#sphinx:
-#  config:
-#    html_js_files:
-#    - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
+sphinx:
+  config:
+    html_js_files:
+    - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
 
 parse:
   myst_enable_extensions:
     - substitution
     - linkify
     - dollarmath
+    - amsmath
 
 
 # Information about where the book exists on the web

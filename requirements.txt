@@ -1,3 +1,4 @@
 cvxpy
 jupyter-book
 matplotlib
+dask
