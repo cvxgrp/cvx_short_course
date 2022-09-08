@@ -30,8 +30,8 @@ python test.py
 2. Hello world
 * Participants will install CVXPY and solve their first convex optimization problem. Participants will get experience
 with basic CVXPY syntax.
-* [Hello world exercise](docs/exercises/hello_world)
-* [Extra exercise](docs/exercises/Lasso.ipynb)
+* [Hello world exercise](exercises/notebooks/hello_world)
+* [Extra exercise](exercises/notebooks/Lasso)
 
 3. Constructive convex analysis
 * Mathematically define convex, concave, and affine functions. Give many examples.
@@ -43,7 +43,7 @@ CVXPY.
 4. DCP exercises
 * Participants will solve their first convex optimization problem with CVXPY, getting experience with basic CVXPY
 syntax./
-* [DCP exercise](docs/exercises/DCP_analysis.ipynb)
+* [DCP exercise](exercises/notebooks/DCP_analysis)
 * [DCP site](https://dcp.stanford.edu/)
 * [DCP quiz](https://dcp.stanford.edu/quiz)
 
@@ -52,8 +52,8 @@ syntax./
 * For each application, the instructors will give a motivating overview, and participants will then code up and solve
 a problem arising in the application using CVXPY. Concretely, exercises will consist of notebooks with missing
 sections, which the participants need to fill in with code constructing and solving a CVXPY problem.
-* [Simple portfolio optimization](docs/exercises/13.3)
-* [Portfolio rebalancing](docs/exercises/13.21.ipynb)
+* [Simple portfolio optimization](exercises/notebooks/13.3)
+* [Portfolio rebalancing](exercises/notebooks/13.21)
 * [Multiple risk models](https://github.com/cvxgrp/cvx_short_course/blob/master/exercises/13.22.ipynb)
 
 * [Risk budget allocation](https://github.com/cvxgrp/cvx_short_course/blob/master/exercises/13.20.ipynb)
