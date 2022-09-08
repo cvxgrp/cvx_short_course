@@ -6,8 +6,9 @@ author: CVX
 only_build_toc_files: true
 
 execute:
-  execute_notebooks: cache   #auto   # only execute if there is at least on output cell missing
-  timeout: 600  # 10 minutes timeout
+  execute_notebooks: auto   #auto   # only execute if there is at least on output cell missing
+  timeout: 60  # 10 minutes timeout
+  allow_errors: true
 
 sphinx:
   config:

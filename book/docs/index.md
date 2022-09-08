@@ -77,3 +77,5 @@ sections, which the participants need to fill in with code constructing and solv
 * Recap.
 * References for next steps in learning about and applying convex optimization.
 
+```{nb-exec-table}
+```
