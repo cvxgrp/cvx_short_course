@@ -3,6 +3,7 @@
 format: jb-book
 root: docs/index
 chapters:
+    - file: docs/hello
     - file: docs/applications/index
       sections:
         - glob: docs/applications/notebooks/*
