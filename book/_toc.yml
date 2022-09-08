@@ -3,20 +3,38 @@
 format: jb-book
 root: docs/index
 chapters:
-    - file: docs/hello
-    - file: docs/applications/index
-      sections:
-        - glob: docs/applications/notebooks/*
-    - file: docs/scipy22_slides/index
-    - file: docs/dcp/index
-      sections:
-        - glob: docs/dcp/notebooks/*
-#    - file: docs/python_intro/index
-#      sections:
-#        - glob: docs/python_intro/notebooks/*
-    - file: docs/exercises/index
-      sections:
-        - glob: docs/exercises/notebooks/*
+    - file: docs/overview
+
     - file: docs/intro/index
       sections:
         - glob: docs/intro/notebooks/*
+
+    - file: docs/hello/index
+      sections:
+        - glob: docs/hello/notebooks/*
+
+    - file: docs/constructive
+
+    - file: docs/dcp/index
+      sections:
+        - glob: docs/dcp/notebooks/*
+
+    - file: docs/applications/index
+      sections:
+        - glob: docs/applications/notebooks/*
+
+    - file: docs/advanced
+
+    - file: docs/scipy22_slides/index
+#    - file: docs/python_intro/index
+#      sections:
+#        - glob: docs/python_intro/notebooks/*
+
+    - file: docs/exercises/index
+      sections:
+        - glob: docs/exercises/notebooks/*
+
+    - file: docs/conclusions
+
+    - file: docs/local
+
