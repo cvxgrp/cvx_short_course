@@ -1,7 +1,5 @@
 # Slides
 
-Those slides are from X,Y,Z
-
 * {download}`Short Course <cvx_about_course.pdf>`.
 * {download}`Applications <cvx_applications.pdf>`.
 * {download}`Disciplined Convex Programming <cvx_dcp.pdf>`.

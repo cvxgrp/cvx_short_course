@@ -5,7 +5,7 @@ root: docs/index
 chapters:
     - file: docs/overview
 
-    - file: docs/intro/index
+    - file: docs/python_intro/index
       sections:
         - glob: docs/intro/notebooks/*
 
@@ -26,9 +26,6 @@ chapters:
     - file: docs/advanced
 
     - file: docs/scipy22_slides/index
-#    - file: docs/python_intro/index
-#      sections:
-#        - glob: docs/python_intro/notebooks/*
 
     - file: docs/exercises/index
       sections:
