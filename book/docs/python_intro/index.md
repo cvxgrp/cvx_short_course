@@ -1,2 +1,4 @@
 # Introduction to Python
 
+```{tableofcontents}
+```

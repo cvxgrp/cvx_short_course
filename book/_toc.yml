@@ -7,7 +7,7 @@ chapters:
 
     - file: docs/python_intro/index
       sections:
-        - glob: docs/intro/notebooks/*
+        - glob: docs/python_intro/notebooks/*
 
     - file: docs/hello/index
       sections:

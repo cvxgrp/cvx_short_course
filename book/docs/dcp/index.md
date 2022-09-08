@@ -5,3 +5,5 @@
 * [DCP site](https://dcp.stanford.edu/)
 * [DCP quiz](https://dcp.stanford.edu/quiz)
 
+```{tableofcontents}
+```

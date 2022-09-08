@@ -1,1 +1,4 @@
 # Applications
+
+```{tableofcontents}
+```
