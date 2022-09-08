@@ -10,9 +10,9 @@ chapters:
     - file: docs/dcp/index
       sections:
         - glob: docs/dcp/notebooks/*
-    - file: docs/python_intro/index
-      sections:
-        - glob: docs/python_intro/notebooks/*
+#    - file: docs/python_intro/index
+#      sections:
+#        - glob: docs/python_intro/notebooks/*
     - file: docs/exercises/index
       sections:
         - glob: docs/exercises/notebooks/*

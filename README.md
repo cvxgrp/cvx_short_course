@@ -62,3 +62,5 @@ sections, which the participants need to fill in with code constructing and solv
 
 8. Build the book
 
+# address mathjax issues
+# bring readme into
