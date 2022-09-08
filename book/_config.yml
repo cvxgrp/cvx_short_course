@@ -9,7 +9,8 @@ execute:
   execute_notebooks: auto   #auto   # only execute if there is at least on output cell missing
   timeout: 60  # 10 minutes timeout
   allow_errors: true
-
+  exclude_patterns:
+    - 'DCP_analysis.ipynb'
 sphinx:
   config:
     html_js_files:
