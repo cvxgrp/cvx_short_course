@@ -6,11 +6,16 @@ author: CVX
 only_build_toc_files: true
 
 execute:
-  execute_notebooks: auto   #auto   # only execute if there is at least on output cell missing
+  execute_notebooks: force   #auto   # only execute if there is at least on output cell missing
   timeout: 60  # 10 minutes timeout
   allow_errors: true
   exclude_patterns:
-    - 'DCP_analysis.ipynb'
+    - _build
+    - .DS_Store
+    - "*.ipynb_checkpoints"
+    - "exercises/notebooks/*.ipynb"
+    - "hello/notebooks/*.ipynb"
+
 sphinx:
   config:
     html_js_files:
