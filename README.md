@@ -1,4 +1,4 @@
-# CVXPY tutorial
+# [CVXPY tutorial]
 
 CVXPY is an open source Python-embedded modeling language for convex optimization problems. 
 It lets you express your problem in a natural way that follows the math, 
