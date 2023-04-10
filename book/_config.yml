@@ -3,6 +3,7 @@
 
 title: CVX Short Course
 author: CVX
+logo: static/logo.jpeg
 only_build_toc_files: true
 
 execute:
