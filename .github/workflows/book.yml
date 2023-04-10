@@ -1,0 +1,36 @@
+name: deploy-book
+
+on: [push]
+
+# This job installs dependencies, builds the book, and pushes it to `gh-pages`
+jobs:
+  deploy-book:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    # Install dependencies
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install jupyterbook
+      run: |
+        pip install -r requirements.txt
+        pip install jupyter-book
+        python -m ipykernel install --user --name="cvx"
+        
+    # Build the book
+    - name: Build the book
+      run: |
+        jupyter-book clean book
+        jupyter-book build book
+        cp -r book/_build/html ./docs
+    
+    # Push the book's HTML to github-pages
+    - name: GitHub Pages action
+      uses: peaceiris/actions-gh-pages@v3.6.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: book/_build/html
