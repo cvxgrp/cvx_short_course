@@ -11,7 +11,9 @@ jobs:
 
     # cache for binder
     - name: cache binder build on mybinder.org
-      uses: jupyterhub/repo2docker-action@master
+      # replace tschm with jupyterhub once my pending pull request has been accepted,
+      # see https://github.com/jupyterhub/repo2docker-action/pull/100
+      uses: tschm/repo2docker-action@master
       with:
         NO_PUSH: true
         MYBINDERORG_TAG: ${{ github.event.ref }}
