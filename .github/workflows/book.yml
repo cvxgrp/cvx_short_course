@@ -30,7 +30,7 @@ jobs:
     
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
-      uses: peaceiris/actions-gh-pages@v3.6.1
+      uses: JamesIves/github-pages-deploy-action@v4.2.2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: book/_build/html
+          branch: gh-pages # The branch the action should deploy to.
+          folder: book/_build/html # The folder the action should deploy.
