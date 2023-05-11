@@ -5,7 +5,7 @@ CVXPY is an open source Python-embedded modeling language for convex optimizatio
 ## Getting started
 
 1. Clone this repository. 
-2. Install CVXPY following [these instructions](https://www.cvxpy.org/install/index.html). We recommend Python 3.9 and CVXPY 1.2. 
+2. Install CVXPY following [these instructions](https://www.cvxpy.org/install/index.html). We recommend Python 3.10 and CVXPY 1.3. 
 3. Test your CVXPY installation by running ``test.py`` in the repository.
 
 ## Example tutorial schedule
