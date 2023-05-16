@@ -20,13 +20,13 @@ jobs:
         pip install -r requirements.txt
         pip install jupyter-book
         python -m ipykernel install --user --name="cvx"
-        
+
     # Build the book
     - name: Build the book
       run: |
         jupyter-book clean book
         jupyter-book build book
-    
+
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: JamesIves/github-pages-deploy-action@v4.2.2
