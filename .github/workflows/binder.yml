@@ -1,0 +1,18 @@
+name: binder
+
+on: [push]
+# enough to be executed whenever requirements.txt or runtime.txt change
+
+# This job builds and caches the Docker image for binder on their infrastructure
+jobs:
+  Serve-binder-cache:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    # cache for binder
+    - name: cache binder build on mybinder.org
+      uses: jupyterhub/repo2docker-action@master
+      with:
+        NO_PUSH: true
+        MYBINDERORG_TAG: ${{ github.event.ref }}
