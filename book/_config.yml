@@ -29,15 +29,15 @@ only_build_toc_files: true
 
 
 # Information about where the book exists on the web
-#repository:
-#  url: https://github.com/cvxgrp/cvx_short_course  # Online location of your book
-#  path_to_book: book  # Optional path to your book, relative to the repository root
-#  branch: master # 15-remove-expensive-binder-caching
+repository:
+  url: https://github.com/cvxgrp/cvx_short_course  # Online location of your book
+  path_to_book: book  # Optional path to your book, relative to the repository root
+  branch: master # 15-remove-expensive-binder-caching
   #branch: master  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
-#html:
+html:
   # use_issues_button: true
-  #use_repository_button: true
-#  extra_navbar: Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+  use_repository_button: true
+  extra_navbar: Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
