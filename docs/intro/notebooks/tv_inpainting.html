@@ -1,0 +1,988 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Total variation in-painting &#8212; CVX Short Course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/intro/notebooks/tv_inpainting';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="Control" href="control.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Hello World
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Introduction</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="SVM.html">Support vector machine classifier with <span class="math notranslate nohighlight">\(\ell_1\)</span>-regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="control.html">Control</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Total variation in-painting</a></li>
+
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course/issues/new?title=Issue%20on%20page%20%2Fdocs/intro/notebooks/tv_inpainting.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/intro/notebooks/tv_inpainting.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Total variation in-painting</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Total variation in-painting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grayscale-images">Grayscale Images</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#color-images">Color Images</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="total-variation-in-painting">
+<h1>Total variation in-painting<a class="headerlink" href="#total-variation-in-painting" title="Permalink to this heading">#</a></h1>
+<section id="grayscale-images">
+<h2>Grayscale Images<a class="headerlink" href="#grayscale-images" title="Permalink to this heading">#</a></h2>
+<p>A grayscale image is represented as an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix of intensities
+<span class="math notranslate nohighlight">\(U^\mathrm{orig}\)</span> (typically between the values <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(255\)</span>).
+We are given the values <span class="math notranslate nohighlight">\(U^\mathrm{orig}_{ij}\)</span>, for <span class="math notranslate nohighlight">\((i,j) \in \mathcal K\)</span>, where
+<span class="math notranslate nohighlight">\(\mathcal K \subset \{1,\ldots, m\} \times \{1, \ldots, n\}\)</span> is the set of indices
+corresponding to known pixel values.
+Our job is to <em>in-paint</em> the image by guessing the missing pixel values,
+<em>i.e.</em>, those with indices not in <span class="math notranslate nohighlight">\(\mathcal K\)</span>.
+The reconstructed image will be represented by <span class="math notranslate nohighlight">\(U \in {\bf R}^{m \times n}\)</span>,
+where <span class="math notranslate nohighlight">\(U\)</span> matches the known pixels, <em>i.e.</em>,
+<span class="math notranslate nohighlight">\(U_{ij} = U^\mathrm{orig}_{ij}\)</span> for <span class="math notranslate nohighlight">\((i,j) \in \mathcal K\)</span>.</p>
+<p>The reconstruction <span class="math notranslate nohighlight">\(U\)</span> is found by minimizing the total variation of <span class="math notranslate nohighlight">\(U\)</span>,
+subject to matching the known pixel values. We will use the <span class="math notranslate nohighlight">\(\ell_2\)</span> total
+variation, defined as
+$<span class="math notranslate nohighlight">\(\mathop{\bf tv}(U) =
+\sum_{i=1}^{m-1} \sum_{j=1}^{n-1}
+\left\| \left[ \begin{array}{c}
+ U_{i+1,j}-U_{ij}\\ U_{i,j+1}-U_{ij} \end{array} \right] \right\|_2.\)</span>$
+Note that the norm of the discretized gradient is <em>not</em> squared.</p>
+<p>We load the original image and the corrupted image and construct the Known matrix. Both images are displayed below. The corrupted image has the missing pixels whited out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Load the images.</span>
+<span class="n">u_orig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;data/loki512.png&quot;</span><span class="p">)</span>
+<span class="n">u_corr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;data/loki512_corrupted.png&quot;</span><span class="p">)</span>
+<span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">u_orig</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="c1"># known is 1 if the pixel is known,</span>
+<span class="c1"># 0 if the pixel was corrupted.</span>
+<span class="n">known</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">u_orig</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">u_corr</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]:</span>
+            <span class="n">known</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">u_orig</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original Image&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">u_corr</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Corrupted Image&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/0a7bad95b8b6f71ea7f8ed4451d918c25ee3e7a8cd52378eb1fbf37f5b7b221c.png" src="../../../_images/0a7bad95b8b6f71ea7f8ed4451d918c25ee3e7a8cd52378eb1fbf37f5b7b221c.png" />
+</div>
+</div>
+<p>The total variation in-painting problem can be easily expressed in CVXPY. We use the solver SCS, which scales to larger problems than ECOS does.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recover the original image using total variation in-painting.</span>
+<span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
+
+
+<span class="n">U</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Minimize</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">tv</span><span class="p">(</span><span class="n">U</span><span class="p">))</span>
+<span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">known</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span> <span class="o">==</span> <span class="n">cp</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">known</span><span class="p">,</span> <span class="n">u_corr</span><span class="p">)]</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
+
+<span class="c1"># Use SCS to solve the problem.</span>
+<span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">SCS</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;optimal objective value: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============================================================================
+                                     CVXPY                                     
+                                     v1.3.1                                    
+===============================================================================
+(CVXPY) Jun 23 06:14:11 PM: Your problem has 262144 variables, 1 constraints, and 0 parameters.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:14:11 PM: It is compliant with the following grammars: DCP, DQCP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:14:11 PM: (If you need to solve this problem multiple times, but with different data, consider using parameters.)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:14:11 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+                                  Compilation                                  
+-------------------------------------------------------------------------------
+(CVXPY) Jun 23 06:14:11 PM: Compiling problem (target solver=SCS).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:14:11 PM: Reduction chain: Dcp2Cone -&gt; CvxAttr2Constr -&gt; ConeMatrixStuffing -&gt; SCS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:14:11 PM: Applying reduction Dcp2Cone
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:14:11 PM: Applying reduction CvxAttr2Constr
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:14:11 PM: Applying reduction ConeMatrixStuffing
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:14:12 PM: Applying reduction SCS
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:14:12 PM: Finished problem compilation (took 1.305e+00 seconds).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+                                Numerical solver                               
+-------------------------------------------------------------------------------
+(CVXPY) Jun 23 06:14:12 PM: Invoking solver SCS  to obtain a solution.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>------------------------------------------------------------------
+	       SCS v3.2.3 - Splitting Conic Solver
+	(c) Brendan O&#39;Donoghue, Stanford University, 2012
+------------------------------------------------------------------
+problem:  variables n: 523265, constraints m: 1045507
+cones: 	  z: primal zero / dual free vars: 262144
+	  q: soc vars: 783363, qsize: 261121
+settings: eps_abs: 1.0e-05, eps_rel: 1.0e-05, eps_infeas: 1.0e-07
+	  alpha: 1.50, scale: 1.00e-01, adaptive_scale: 1
+	  max_iters: 100000, normalize: 1, rho_x: 1.00e-06
+	  acceleration_lookback: 10, acceleration_interval: 10
+lin-sys:  sparse-direct-amd-qdldl
+	  nnz(A): 1554199, nnz(P): 0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>------------------------------------------------------------------
+ iter | pri res | dua res |   gap   |   obj   |  scale  | time (s)
+------------------------------------------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     0| 2.55e+01  1.00e+00  6.66e+06 -3.33e+06  1.00e-01  4.81e+00 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   250| 7.19e-02  2.86e-03  2.61e-03  1.03e+04  1.00e-01  3.66e+01 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   500| 1.10e-02  2.17e-03  6.12e-04  1.10e+04  3.17e-01  7.15e+01 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   750| 6.40e-03  1.04e-03  2.14e-04  1.10e+04  3.17e-01  1.03e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000| 3.59e-03  5.17e-04  1.26e-05  1.10e+04  3.17e-01  1.35e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1250| 2.70e-03  3.71e-04  8.97e-06  1.10e+04  3.17e-01  1.67e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1500| 1.98e-03  3.96e-04  5.01e-06  1.10e+04  3.17e-01  2.00e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1750| 1.56e-03  9.95e-05  5.02e-06  1.10e+04  3.17e-01  2.32e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2000| 1.39e-03  8.32e-05  5.14e-06  1.10e+04  3.17e-01  2.65e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2250| 1.13e+00  2.80e-01  2.21e-06  1.10e+04  3.17e-01  2.97e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2500| 1.36e-03  5.27e-05  3.95e-06  1.10e+04  3.17e-01  3.30e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2750| 1.35e-03  7.23e-05  3.65e-06  1.10e+04  3.17e-01  3.62e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3000| 7.92e-04  2.34e-04  3.85e-06  1.10e+04  3.17e-01  3.95e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3250| 6.69e-04  1.48e-05  3.80e-06  1.10e+04  3.17e-01  4.27e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3500| 6.28e-04  9.53e-05  3.97e-05  1.10e+04  1.00e+00  4.62e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3750| 3.94e-04  7.09e-05  3.92e-05  1.10e+04  1.00e+00  4.94e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4000| 2.98e-04  1.31e-04  3.89e-05  1.10e+04  1.00e+00  5.27e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4250| 2.41e-04  5.76e-05  3.88e-05  1.10e+04  1.00e+00  5.59e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4500| 2.14e-04  1.64e-05  3.86e-05  1.10e+04  1.00e+00  5.91e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Failure:interrupted
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">SolverError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># Use SCS to solve the problem.</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">SCS</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;optimal objective value: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/problems/problem.py:493,</span> in <span class="ni">Problem.solve</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">491</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">492</span>     <span class="n">solve_func</span> <span class="o">=</span> <span class="n">Problem</span><span class="o">.</span><span class="n">_solve</span>
+<span class="ne">--&gt; </span><span class="mi">493</span> <span class="k">return</span> <span class="n">solve_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/problems/problem.py:1068,</span> in <span class="ni">Problem._solve</span><span class="nt">(self, solver, warm_start, verbose, gp, qcp, requires_grad, enforce_dpp, ignore_dpp, canon_backend, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1066</span> <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1067</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solve_time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+<span class="ne">-&gt; </span><span class="mi">1068</span> <span class="bp">self</span><span class="o">.</span><span class="n">unpack_results</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">solving_chain</span><span class="p">,</span> <span class="n">inverse_data</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1069</span> <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1070</span>     <span class="nb">print</span><span class="p">(</span><span class="n">_FOOTER</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/problems/problem.py:1393,</span> in <span class="ni">Problem.unpack_results</span><span class="nt">(self, solution, chain, inverse_data)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1391</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">INF_OR_UNB_MESSAGE</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1392</span> <span class="k">if</span> <span class="n">solution</span><span class="o">.</span><span class="n">status</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1393</span>     <span class="k">raise</span> <span class="n">error</span><span class="o">.</span><span class="n">SolverError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1394</span>             <span class="s2">&quot;Solver &#39;</span><span class="si">%s</span><span class="s2">&#39; failed. &quot;</span> <span class="o">%</span> <span class="n">chain</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">+</span>
+<span class="g g-Whitespace">   </span><span class="mi">1395</span>             <span class="s2">&quot;Try another solver, or solve with verbose=True for more &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1396</span>             <span class="s2">&quot;information.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1398</span> <span class="bp">self</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1399</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver_stats</span> <span class="o">=</span> <span class="n">SolverStats</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="o">.</span><span class="n">attr</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1400</span>                                  <span class="n">chain</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+
+<span class="ne">SolverError</span>: Solver &#39;SCS&#39; failed. Try another solver, or solve with verbose=True for more information.
+</pre></div>
+</div>
+</div>
+</div>
+<p>After solving the problem, the in-painted image is stored in <code class="docutils literal notranslate"><span class="pre">U.value</span></code>. We display the in-painted image and the intensity difference between the original and in-painted images. The intensity difference is magnified by a factor of 10 so it is more visible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1"># Display the in-painted image.</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">U</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;In-Painted Image&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+<span class="n">img_diff</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">u_orig</span> <span class="o">-</span> <span class="n">U</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_diff</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Difference Image&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/d56feb2c68c26cfb6798b5a43fe9017f8ac5c68f4329504a4b3fabace4f11dfb.png" src="../../../_images/d56feb2c68c26cfb6798b5a43fe9017f8ac5c68f4329504a4b3fabace4f11dfb.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="color-images">
+<h1>Color Images<a class="headerlink" href="#color-images" title="Permalink to this heading">#</a></h1>
+<p>For color images, the in-painting problem is similar to the grayscale case. A color image is represented as an <span class="math notranslate nohighlight">\(m \times n \times 3\)</span> matrix of RGB values
+<span class="math notranslate nohighlight">\(U^\mathrm{orig}\)</span> (typically between the values <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(255\)</span>).
+We are given the pixels <span class="math notranslate nohighlight">\(U^\mathrm{orig}_{ij}\)</span>, for <span class="math notranslate nohighlight">\((i,j) \in \mathcal K\)</span>, where
+<span class="math notranslate nohighlight">\(\mathcal K \subset \{1,\ldots, m\} \times \{1, \ldots, n\}\)</span> is the set of indices
+corresponding to known pixels. Each pixel <span class="math notranslate nohighlight">\(U^\mathrm{orig}_{ij}\)</span> is a vector in <span class="math notranslate nohighlight">\({\bf R}^3\)</span> of RGB values.
+Our job is to <em>in-paint</em> the image by guessing the missing pixels,
+<em>i.e.</em>, those with indices not in <span class="math notranslate nohighlight">\(\mathcal K\)</span>.
+The reconstructed image will be represented by <span class="math notranslate nohighlight">\(U \in {\bf R}^{m \times n \times 3}\)</span>,
+where <span class="math notranslate nohighlight">\(U\)</span> matches the known pixels, <em>i.e.</em>,
+<span class="math notranslate nohighlight">\(U_{ij} = U^\mathrm{orig}_{ij}\)</span> for <span class="math notranslate nohighlight">\((i,j) \in \mathcal K\)</span>.</p>
+<p>The reconstruction <span class="math notranslate nohighlight">\(U\)</span> is found by minimizing the total variation of <span class="math notranslate nohighlight">\(U\)</span>,
+subject to matching the known pixel values. We will use the <span class="math notranslate nohighlight">\(\ell_2\)</span> total
+variation, defined as
+$<span class="math notranslate nohighlight">\(\mathop{\bf tv}(U) =
+\sum_{i=1}^{m-1} \sum_{j=1}^{n-1}
+\left\| \left[ \begin{array}{c}
+ U_{i+1,j}-U_{ij}\\ 
+ U_{i,j+1}-U_{ij} 
+ \end{array} \right] \right\|_2.\)</span>$
+Note that the norm of the discretized gradient is <em>not</em> squared.</p>
+<p>We load the original image and construct the Known matrix by randomly selecting 30% of the pixels to keep and discarding the others. The original and corrupted images are displayed below. The corrupted image has the missing pixels blacked out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Load the images.</span>
+<span class="n">u_orig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;data/loki512color.png&quot;</span><span class="p">)</span>
+<span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">colors</span> <span class="o">=</span> <span class="n">u_orig</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="c1"># known is 1 if the pixel is known,</span>
+<span class="c1"># 0 if the pixel was corrupted.</span>
+<span class="c1"># The known matrix is initialized randomly.</span>
+<span class="n">known</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">colors</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.7</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">colors</span><span class="p">):</span>
+                <span class="n">known</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">u_corr</span> <span class="o">=</span> <span class="n">known</span> <span class="o">*</span> <span class="n">u_orig</span>
+
+<span class="c1"># Display the images.</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">u_orig</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original Image&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">u_corr</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Corrupted Image&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/83e28461dac7389705f68f770cf10b50928f57cc15e3a8eef8d7191075093fa6.png" src="../../../_images/83e28461dac7389705f68f770cf10b50928f57cc15e3a8eef8d7191075093fa6.png" />
+</div>
+</div>
+<p>We express the total variation color in-painting problem in CVXPY using three matrix variables (one for the red values, one for the blue values, and one for the green values). We use the solver SCS; the solvers ECOS and CVXOPT don’t scale to this large problem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recover the original image using total variation in-painting.</span>
+<span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
+
+
+<span class="n">variables</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">constraints</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">colors</span><span class="p">):</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+    <span class="n">variables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+    <span class="n">constraints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">cp</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">known</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">U</span><span class="p">)</span> <span class="o">==</span> <span class="n">cp</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">known</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">u_corr</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">])</span>
+    <span class="p">)</span>
+
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">Minimize</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">tv</span><span class="p">(</span><span class="o">*</span><span class="n">variables</span><span class="p">)),</span> <span class="n">constraints</span><span class="p">)</span>
+<span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">SCS</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;optimal objective value: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prob</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============================================================================
+                                     CVXPY                                     
+                                     v1.2.1                                    
+===============================================================================
+(CVXPY) Jun 03 10:36:40 PM: Your problem has 786432 variables, 3 constraints, and 0 parameters.
+(CVXPY) Jun 03 10:36:40 PM: It is compliant with the following grammars: DCP, DQCP
+(CVXPY) Jun 03 10:36:40 PM: (If you need to solve this problem multiple times, but with different data, consider using parameters.)
+(CVXPY) Jun 03 10:36:40 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+-------------------------------------------------------------------------------
+                                  Compilation                                  
+-------------------------------------------------------------------------------
+(CVXPY) Jun 03 10:36:40 PM: Compiling problem (target solver=SCS).
+(CVXPY) Jun 03 10:36:40 PM: Reduction chain: Dcp2Cone -&gt; CvxAttr2Constr -&gt; ConeMatrixStuffing -&gt; SCS
+(CVXPY) Jun 03 10:36:40 PM: Applying reduction Dcp2Cone
+(CVXPY) Jun 03 10:36:40 PM: Applying reduction CvxAttr2Constr
+(CVXPY) Jun 03 10:36:40 PM: Applying reduction ConeMatrixStuffing
+(CVXPY) Jun 03 10:36:42 PM: Applying reduction SCS
+(CVXPY) Jun 03 10:36:42 PM: Finished problem compilation (took 2.215e+00 seconds).
+-------------------------------------------------------------------------------
+                                Numerical solver                               
+-------------------------------------------------------------------------------
+(CVXPY) Jun 03 10:36:42 PM: Invoking solver SCS  to obtain a solution.
+------------------------------------------------------------------
+	       SCS v3.2.0 - Splitting Conic Solver
+	(c) Brendan O&#39;Donoghue, Stanford University, 2012
+------------------------------------------------------------------
+problem:  variables n: 1047553, constraints m: 2614279
+cones: 	  z: primal zero / dual free vars: 786432
+	  q: soc vars: 1827847, qsize: 261121
+settings: eps_abs: 1.0e-05, eps_rel: 1.0e-05, eps_infeas: 1.0e-07
+	  alpha: 1.50, scale: 1.00e-01, adaptive_scale: 1
+	  max_iters: 100000, normalize: 1, rho_x: 1.00e-06
+	  acceleration_lookback: 10, acceleration_interval: 10
+lin-sys:  sparse-direct
+	  nnz(A): 3630814, nnz(P): 0
+------------------------------------------------------------------
+ iter | pri res | dua res |   gap   |   obj   |  scale  | time (s)
+------------------------------------------------------------------
+     0| 2.71e+01  1.00e+00  7.08e+06 -3.54e+06  1.00e-01  5.82e-01 
+   250| 3.58e-02  3.24e-03  2.50e-03  1.07e+04  1.00e-01  5.22e+01 
+   500| 1.66e-02  1.24e-03  7.94e-04  1.12e+04  1.00e-01  1.04e+02 
+   750| 1.17e-02  2.20e-03  9.78e-04  1.14e+04  3.17e-01  1.75e+02 
+  1000| 5.36e-03  9.09e-04  3.01e-04  1.14e+04  3.17e-01  2.59e+02 
+  1250| 1.06e+00  3.48e-01  2.50e-05  1.15e+04  3.17e-01  3.19e+02 
+  1500| 2.70e-03  5.42e-04  1.00e-04  1.15e+04  3.17e-01  3.81e+02 
+  1750| 2.33e-03  3.57e-04  8.27e-05  1.15e+04  3.17e-01  4.42e+02 
+  2000| 1.83e-03  3.88e-04  6.97e-05  1.15e+04  3.17e-01  5.07e+02 
+  2250| 1.50e-03  2.00e-04  6.68e-05  1.15e+04  3.17e-01  5.60e+02 
+  2500| 1.57e-03  1.49e-04  5.74e-05  1.15e+04  3.17e-01  6.13e+02 
+  2750| 1.34e-03  1.07e-04  5.81e-05  1.15e+04  3.17e-01  6.76e+02 
+  3000| 1.06e-03  1.03e-04  5.25e-05  1.15e+04  3.17e-01  7.34e+02 
+  3250| 8.55e-04  1.08e-04  5.37e-05  1.15e+04  3.17e-01  7.89e+02 
+  3500| 6.99e-04  3.80e-05  5.18e-05  1.15e+04  3.17e-01  8.47e+02 
+  3750| 6.09e-04  5.63e-05  4.94e-05  1.15e+04  3.17e-01  9.02e+02 
+  4000| 5.64e-01  1.26e-01  1.65e-05  1.15e+04  3.17e-01  9.54e+02 
+  4250| 4.66e-04  6.66e-05  4.72e-05  1.15e+04  3.17e-01  1.01e+03 
+  4500| 3.93e-04  2.62e-05  4.92e-05  1.15e+04  3.17e-01  1.06e+03 
+  4750| 3.69e-04  2.88e-05  4.67e-05  1.15e+04  3.17e-01  1.11e+03 
+  5000| 3.40e-04  5.04e-05  4.57e-05  1.15e+04  3.17e-01  1.16e+03 
+  5250| 3.33e-04  1.93e-05  4.65e-05  1.15e+04  3.17e-01  1.22e+03 
+  5500| 3.26e-04  9.41e-06  4.64e-05  1.15e+04  3.17e-01  1.27e+03 
+  5750| 2.94e-04  8.40e-06  4.90e-05  1.15e+04  3.17e-01  1.32e+03 
+  6000| 2.85e-04  1.56e-05  4.91e-05  1.15e+04  3.17e-01  1.37e+03 
+  6250| 2.51e-04  2.28e-05  4.53e-05  1.15e+04  3.17e-01  1.43e+03 
+  6500| 2.42e-04  1.24e-05  4.68e-05  1.15e+04  3.17e-01  1.48e+03 
+  6750| 7.97e-01  1.86e-01  3.77e-04  1.15e+04  3.17e-01  1.53e+03 
+  7000| 2.05e-04  9.45e-06  4.66e-05  1.15e+04  3.17e-01  1.59e+03 
+  7250| 1.80e-04  1.30e-05  4.35e-05  1.15e+04  3.17e-01  1.64e+03 
+  7500| 1.68e-04  2.58e-05  8.23e-07  1.15e+04  1.00e+00  1.70e+03 
+  7750| 1.50e-04  4.78e-05  9.05e-07  1.15e+04  1.00e+00  1.75e+03 
+  8000| 1.29e-04  1.07e-05  1.65e-06  1.15e+04  1.00e+00  1.80e+03 
+  8250| 2.27e-01  1.68e-01  1.68e-04  1.15e+04  1.00e+00  1.86e+03 
+  8500| 1.22e-04  6.08e-05  1.76e-06  1.15e+04  1.00e+00  1.91e+03 
+  8750| 1.01e-04  7.30e-05  2.63e-06  1.15e+04  1.00e+00  1.96e+03 
+  9000| 9.51e-05  1.22e-05  2.95e-06  1.15e+04  1.00e+00  2.02e+03 
+  9250| 9.00e-05  4.02e-06  2.77e-06  1.15e+04  1.00e+00  2.07e+03 
+  9500| 6.92e-05  1.05e-05  2.22e-06  1.15e+04  1.00e+00  2.12e+03 
+  9750| 6.88e-05  1.32e-05  2.74e-06  1.15e+04  1.00e+00  2.17e+03 
+ 10000| 5.91e-05  4.79e-06  3.06e-06  1.15e+04  1.00e+00  2.22e+03 
+ 10250| 5.67e-05  1.27e-05  2.80e-06  1.15e+04  1.00e+00  2.27e+03 
+ 10500| 5.31e-05  4.85e-06  2.65e-06  1.15e+04  1.00e+00  2.33e+03 
+ 10750| 5.14e-05  9.36e-06  3.02e-06  1.15e+04  1.00e+00  2.38e+03 
+ 11000| 2.15e-01  1.59e-01  8.76e-05  1.15e+04  1.00e+00  2.43e+03 
+ 11250| 4.62e-05  9.17e-06  2.82e-06  1.15e+04  1.00e+00  2.48e+03 
+ 11500| 4.42e-05  9.30e-07  3.01e-06  1.15e+04  1.00e+00  2.53e+03 
+ 11750| 4.24e-05  5.54e-06  2.58e-06  1.15e+04  1.00e+00  2.59e+03 
+ 12000| 4.07e-05  5.71e-06  3.14e-06  1.15e+04  1.00e+00  2.64e+03 
+ 12250| 3.90e-05  8.65e-07  2.86e-06  1.15e+04  1.00e+00  2.70e+03 
+ 12500| 3.74e-05  1.54e-05  2.57e-06  1.15e+04  1.00e+00  2.76e+03 
+ 12750| 3.58e-05  1.20e-06  3.50e-06  1.15e+04  1.00e+00  2.82e+03 
+ 13000| 3.43e-05  6.64e-07  3.28e-06  1.15e+04  1.00e+00  2.88e+03 
+ 13250| 3.28e-05  6.79e-07  2.98e-06  1.15e+04  1.00e+00  2.93e+03 
+ 13500| 3.14e-05  3.27e-07  3.36e-06  1.15e+04  1.00e+00  2.98e+03 
+ 13750| 1.85e-01  1.37e-01  3.57e-04  1.15e+04  1.00e+00  3.04e+03 
+ 14000| 2.88e-05  3.07e-06  2.97e-06  1.15e+04  1.00e+00  3.11e+03 
+ 14250| 2.75e-05  1.02e-06  3.21e-06  1.15e+04  1.00e+00  3.21e+03 
+ 14500| 2.63e-05  7.75e-07  2.46e-06  1.15e+04  1.00e+00  3.32e+03 
+ 14750| 2.51e-05  2.23e-07  2.66e-06  1.15e+04  1.00e+00  3.44e+03 
+ 15000| 2.41e-05  7.05e-06  9.43e-06  1.15e+04  3.18e+00  3.57e+03 
+ 15250| 7.28e-02  1.71e-01  5.08e-05  1.15e+04  3.18e+00  3.71e+03 
+ 15500| 2.11e-05  6.44e-06  9.66e-06  1.15e+04  3.18e+00  3.83e+03 
+ 15525| 2.10e-05  3.64e-06  9.46e-06  1.15e+04  3.18e+00  3.84e+03 
+------------------------------------------------------------------
+status:  solved
+timings: total: 3.86e+03s = setup: 1.07e+01s + solve: 3.84e+03s
+	 lin-sys: 2.77e+03s, cones: 3.63e+02s, accel: 8.79e+01s
+------------------------------------------------------------------
+objective = 11465.601441
+------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                                    Summary                                    
+-------------------------------------------------------------------------------
+(CVXPY) Jun 03 11:40:58 PM: Problem status: optimal
+(CVXPY) Jun 03 11:40:58 PM: Optimal value: 1.147e+04
+(CVXPY) Jun 03 11:40:58 PM: Compilation took 2.215e+00 seconds
+(CVXPY) Jun 03 11:40:58 PM: Solver (including time spent in interface) took 3.855e+03 seconds
+optimal objective value: 11465.611027977855
+</pre></div>
+</div>
+</div>
+</div>
+<p>After solving the problem, the RGB values of the in-painted image are stored in the value fields of the three variables. We display the in-painted image and the difference in RGB values at each pixel of the original and in-painted image. Though the in-painted image looks almost identical to the original image, you can see that many of the RGB values differ.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">rec_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">colors</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">colors</span><span class="p">):</span>
+    <span class="n">rec_arr</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">variables</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="n">rec_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">rec_arr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rec_arr</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;In-Painted Image&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+<span class="n">img_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">u_orig</span> <span class="o">-</span> <span class="n">rec_arr</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_diff</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Difference Image&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.5, 511.5, 511.5, -0.5)
+</pre></div>
+</div>
+<img alt="../../../_images/3ab71aeaecbfc431cf584b35daed61de77332d9b7ecf61d81982037ef95204eb.png" src="../../../_images/3ab71aeaecbfc431cf584b35daed61de77332d9b7ecf61d81982037ef95204eb.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/intro/notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="control.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Control</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Total variation in-painting</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grayscale-images">Grayscale Images</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#color-images">Color Images</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By CVX
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
