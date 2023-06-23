@@ -163,6 +163,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../intro/index.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/SVM.html">Support vector machine classifier with <span class="math notranslate nohighlight">\(\ell_1\)</span>-regularization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/control.html">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/tv_inpainting.html">Total variation in-painting</a></li>
+
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Applications</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
@@ -473,12 +475,6 @@ We can get the same risk-return trade-off by fixing return and minimizing risk.<
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1985/3491241395.py:10: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
-  ret_data[i] = ret.value
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -507,7 +503,7 @@ We can get the same risk-return trade-off by fixing return and minimizing risk.<
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/f7940963ae43290c8d1a94594ddb15ef6af1e813141cd3e1d1dcc8fc85358d3d.svg" src="../../../_images/f7940963ae43290c8d1a94594ddb15ef6af1e813141cd3e1d1dcc8fc85358d3d.svg" /></div>
+<img alt="../../../_images/3dbfc67b21580c20ebffcda75a937a77d2200513f11a05445a469e0136c2947a.svg" src="../../../_images/3dbfc67b21580c20ebffcda75a937a77d2200513f11a05445a469e0136c2947a.svg" /></div>
 </div>
 <p>We plot below the return distributions for the two risk aversion values marked on the trade-off curve.
 Notice that the probability of a loss is near 0 for the low risk value and far above 0 for the high risk value.</p>
@@ -536,7 +532,7 @@ Notice that the probability of a loss is near 0 for the low risk value and far a
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/f6eda092630bc4ac783472934eaa97009bb52f2fe932b87ce3f3d81e19c2ca98.svg" src="../../../_images/f6eda092630bc4ac783472934eaa97009bb52f2fe932b87ce3f3d81e19c2ca98.svg" /></div>
+<img alt="../../../_images/d25134638a603c63bcd5e32e08aad749d2bf698fdb75917f852ec9a35f672873.svg" src="../../../_images/d25134638a603c63bcd5e32e08aad749d2bf698fdb75917f852ec9a35f672873.svg" /></div>
 </div>
 <section id="portfolio-constraints">
 <h3>Portfolio constraints<a class="headerlink" href="#portfolio-constraints" title="Permalink to this heading">#</a></h3>
@@ -579,12 +575,6 @@ Notice that more leverage increases returns and allows greater risk.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1985/231315309.py:14: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
-  ret_data[k, i] = ret.value
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -602,7 +592,7 @@ Notice that more leverage increases returns and allows greater risk.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/c6b8296c56c8f2ede4f1adb557bbf102bb88169b0d3708db6acdc6603c89740b.svg" src="../../../_images/c6b8296c56c8f2ede4f1adb557bbf102bb88169b0d3708db6acdc6603c89740b.svg" /></div>
+<img alt="../../../_images/705c108b56deb7d7e534a7acca03c6b5a2245bfa7f348eac167086fae07281b5.svg" src="../../../_images/705c108b56deb7d7e534a7acca03c6b5a2245bfa7f348eac167086fae07281b5.svg" /></div>
 </div>
 <p>We next examine the points on each trade-off curve where <span class="math notranslate nohighlight">\(w^T\Sigma w = 2\)</span>.
 We plot the amount of each asset held in each portfolio as bar graphs. (Negative holdings indicate a short position.)
@@ -648,7 +638,7 @@ Notice that some assets are held in a long position for the low leverage portfol
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/7a0b7f955694d0a0f252d012ca59a98169de42358d1c899a913bd223770a329a.svg" src="../../../_images/7a0b7f955694d0a0f252d012ca59a98169de42358d1c899a913bd223770a329a.svg" /></div>
+<img alt="../../../_images/9f1b63ff94134f15e21f15e7b91432cd89bb598d0d1884658b364bf770f0f354.svg" src="../../../_images/9f1b63ff94134f15e21f15e7b91432cd89bb598d0d1884658b364bf770f0f354.svg" /></div>
 </div>
 </section>
 </section>
@@ -731,55 +721,29 @@ We collected the timings on a MacBook Air with an Intel Core i7 processor.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============================================================================
                                      CVXPY                                     
-                                     v1.3.1                                    
+                                     v1.2.1                                    
 ===============================================================================
-(CVXPY) Jun 23 09:20:07 PM: Your problem has 3050 variables, 3 constraints, and 2 parameters.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: It is compliant with the following grammars: DCP, DQCP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+(CVXPY) Jun 04 10:33:10 AM: Your problem has 3050 variables, 3 constraints, and 2 parameters.
+(CVXPY) Jun 04 10:33:10 AM: It is compliant with the following grammars: DCP, DQCP
+(CVXPY) Jun 04 10:33:10 AM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+-------------------------------------------------------------------------------
                                   Compilation                                  
 -------------------------------------------------------------------------------
-(CVXPY) Jun 23 09:20:07 PM: Compiling problem (target solver=OSQP).
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Applying reduction FlipObjective
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Applying reduction CvxAttr2Constr
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Applying reduction Qp2SymbolicQp
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Applying reduction QpMatrixStuffing
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Applying reduction OSQP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Finished problem compilation (took 8.367e-02 seconds).
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+(CVXPY) Jun 04 10:33:10 AM: Compiling problem (target solver=OSQP).
+(CVXPY) Jun 04 10:33:11 AM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
+(CVXPY) Jun 04 10:33:11 AM: Applying reduction FlipObjective
+(CVXPY) Jun 04 10:33:11 AM: Applying reduction CvxAttr2Constr
+(CVXPY) Jun 04 10:33:11 AM: Applying reduction Qp2SymbolicQp
+(CVXPY) Jun 04 10:33:11 AM: Applying reduction QpMatrixStuffing
+(CVXPY) Jun 04 10:33:11 AM: Applying reduction OSQP
+(CVXPY) Jun 04 10:33:11 AM: Finished problem compilation (took 6.259e-02 seconds).
+(CVXPY) Jun 04 10:33:11 AM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
+-------------------------------------------------------------------------------
                                 Numerical solver                               
 -------------------------------------------------------------------------------
-(CVXPY) Jun 23 09:20:07 PM: Invoking solver OSQP  to obtain a solution.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------
-           OSQP v0.6.3  -  Operator Splitting QP Solver
+(CVXPY) Jun 04 10:33:11 AM: Invoking solver OSQP  to obtain a solution.
+-----------------------------------------------------------------
+           OSQP v0.6.2  -  Operator Splitting QP Solver
               (c) Bartolomeo Stellato,  Goran Banjac
         University of Oxford  -  Stanford University 2021
 -----------------------------------------------------------------
@@ -795,56 +759,34 @@ settings: linear system solver = qdldl,
           warm start: on, polish: on, time_limit: off
 
 iter   objective    pri res    dua res    rho        time
-   1  -2.1363e+03   7.63e+00   3.73e+02   1.00e-01   5.89e-02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 200  -4.2091e+00   2.19e-03   7.84e-03   3.56e-01   3.46e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 400  -4.6228e+00   3.07e-04   5.76e-04   3.56e-01   5.98e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 600  -4.6427e+00   2.23e-04   8.76e-04   3.56e-01   8.50e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 800  -4.6215e+00   1.14e-04   4.97e-04   3.56e-01   1.10e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000  -4.6214e+00   8.78e-05   1.06e-04   3.56e-01   1.35e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1200  -4.6204e+00   8.58e-05   9.26e-06   3.56e-01   1.60e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1400  -4.6138e+00   6.70e-05   2.37e-04   3.56e-01   1.85e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1600  -4.6067e+00   2.86e-05   1.19e-04   3.56e-01   2.10e+00s
-1675  -4.6051e+00   1.91e-05   3.72e-05   3.56e-01   2.19e+00s
+   1  -2.1363e+03   7.63e+00   3.73e+02   1.00e-01   7.06e-02s
+ 200  -4.2091e+00   2.19e-03   7.84e-03   3.56e-01   4.62e-01s
+ 400  -4.6228e+00   3.07e-04   5.76e-04   3.56e-01   7.46e-01s
+ 600  -4.6427e+00   2.23e-04   8.76e-04   3.56e-01   1.00e+00s
+ 800  -4.6215e+00   1.14e-04   4.97e-04   3.56e-01   1.30e+00s
+1000  -4.6214e+00   8.78e-05   1.06e-04   3.56e-01   1.54e+00s
+1200  -4.6204e+00   8.58e-05   9.26e-06   3.56e-01   1.81e+00s
+1400  -4.6138e+00   6.70e-05   2.37e-04   3.56e-01   2.14e+00s
+1600  -4.6067e+00   2.86e-05   1.19e-04   3.56e-01   2.43e+00s
+1675  -4.6051e+00   1.91e-05   3.72e-05   3.56e-01   2.52e+00s
 
 status:               solved
 solution polish:      unsuccessful
 number of iterations: 1675
 optimal objective:    -4.6051
-run time:             2.23e+00s
+run time:             2.59e+00s
 optimal rho estimate: 3.20e-01
 
 -------------------------------------------------------------------------------
                                     Summary                                    
 -------------------------------------------------------------------------------
-(CVXPY) Jun 23 09:20:09 PM: Problem status: optimal
+(CVXPY) Jun 04 10:33:13 AM: Problem status: optimal
+(CVXPY) Jun 04 10:33:13 AM: Optimal value: 4.605e+00
+(CVXPY) Jun 04 10:33:13 AM: Compilation took 6.259e-02 seconds
+(CVXPY) Jun 04 10:33:13 AM: Solver (including time spent in interface) took 2.592e+00 seconds
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Optimal value: 4.605e+00
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Compilation took 8.367e-02 seconds
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Solver (including time spent in interface) took 2.232e+00 seconds
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.605102963696751
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.605102865930337
 </pre></div>
 </div>
 </div>
@@ -868,55 +810,29 @@ optimal rho estimate: 3.20e-01
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============================================================================
                                      CVXPY                                     
-                                     v1.3.1                                    
+                                     v1.2.1                                    
 ===============================================================================
-(CVXPY) Jun 23 09:20:09 PM: Your problem has 3000 variables, 2 constraints, and 2 parameters.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: It is compliant with the following grammars: DCP, DQCP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+(CVXPY) Jun 04 10:33:13 AM: Your problem has 3000 variables, 2 constraints, and 2 parameters.
+(CVXPY) Jun 04 10:33:13 AM: It is compliant with the following grammars: DCP, DQCP
+(CVXPY) Jun 04 10:33:13 AM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+-------------------------------------------------------------------------------
                                   Compilation                                  
 -------------------------------------------------------------------------------
-(CVXPY) Jun 23 09:20:09 PM: Compiling problem (target solver=OSQP).
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Applying reduction FlipObjective
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Applying reduction CvxAttr2Constr
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Applying reduction Qp2SymbolicQp
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Applying reduction QpMatrixStuffing
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:11 PM: Applying reduction OSQP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:12 PM: Finished problem compilation (took 2.257e+00 seconds).
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:12 PM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+(CVXPY) Jun 04 10:33:13 AM: Compiling problem (target solver=OSQP).
+(CVXPY) Jun 04 10:33:13 AM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
+(CVXPY) Jun 04 10:33:13 AM: Applying reduction FlipObjective
+(CVXPY) Jun 04 10:33:13 AM: Applying reduction CvxAttr2Constr
+(CVXPY) Jun 04 10:33:13 AM: Applying reduction Qp2SymbolicQp
+(CVXPY) Jun 04 10:33:13 AM: Applying reduction QpMatrixStuffing
+(CVXPY) Jun 04 10:33:17 AM: Applying reduction OSQP
+(CVXPY) Jun 04 10:33:17 AM: Finished problem compilation (took 3.845e+00 seconds).
+(CVXPY) Jun 04 10:33:17 AM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
+-------------------------------------------------------------------------------
                                 Numerical solver                               
 -------------------------------------------------------------------------------
-(CVXPY) Jun 23 09:20:12 PM: Invoking solver OSQP  to obtain a solution.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------
-           OSQP v0.6.3  -  Operator Splitting QP Solver
+(CVXPY) Jun 04 10:33:17 AM: Invoking solver OSQP  to obtain a solution.
+-----------------------------------------------------------------
+           OSQP v0.6.2  -  Operator Splitting QP Solver
               (c) Bartolomeo Stellato,  Goran Banjac
         University of Oxford  -  Stanford University 2021
 -----------------------------------------------------------------
@@ -932,1393 +848,189 @@ settings: linear system solver = qdldl,
           warm start: on, polish: on, time_limit: off
 
 iter   objective    pri res    dua res    rho        time
-   1  -1.1774e+04   2.65e+02   1.51e+04   1.00e-01   5.16e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 200  -4.1080e+02   2.42e-01   8.86e-04   1.00e-01   7.73e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 400  -1.9413e+02   1.13e-01   2.51e-04   1.00e-01   1.03e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 600  -1.2345e+02   6.40e-02   1.09e-04   1.00e-01   1.29e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 800  -8.7560e+01   4.67e-02   5.29e-05   1.00e-01   1.55e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000  -6.5202e+01   3.49e-02   2.99e-05   1.00e-01   1.81e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1200  -5.0118e+01   2.68e-02   1.91e-05   1.00e-01   2.07e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1400  -3.9737e+01   2.09e-02   1.41e-05   1.00e-01   2.33e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1600  -3.2445e+01   1.72e-02   1.06e-05   1.00e-01   2.59e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1800  -2.6947e+01   1.42e-02   8.27e-06   1.00e-01   2.85e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000  -2.2700e+01   1.17e-02   6.57e-06   1.00e-01   3.10e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2200  -1.9294e+01   9.74e-03   5.29e-06   1.00e-01   3.36e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2400  -1.6616e+01   8.26e-03   4.32e-06   1.00e-01   3.62e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2600  -1.4460e+01   7.01e-03   3.56e-06   1.00e-01   3.88e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2800  -1.2704e+01   5.95e-03   2.93e-06   1.00e-01   4.14e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000  -1.1267e+01   5.06e-03   2.43e-06   1.00e-01   4.40e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3200  -1.0092e+01   4.25e-03   2.00e-06   1.00e-01   4.65e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3400  -9.1244e+00   3.58e-03   1.66e-06   1.00e-01   4.91e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3600  -8.3286e+00   3.04e-03   1.38e-06   1.00e-01   5.18e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3800  -7.6760e+00   2.60e-03   1.14e-06   1.00e-01   5.44e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4000  -7.1409e+00   2.26e-03   9.40e-07   1.00e-01   5.69e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4200  -6.7000e+00   2.04e-03   7.81e-07   1.00e-01   5.95e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4400  -6.3366e+00   1.85e-03   6.50e-07   1.00e-01   6.21e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4600  -6.0382e+00   1.69e-03   5.41e-07   1.00e-01   6.47e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4800  -5.7969e+00   1.58e-03   4.54e-07   1.00e-01   6.73e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5000  -5.5953e+00   1.46e-03   3.83e-07   1.00e-01   6.99e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5200  -5.4277e+00   1.37e-03   3.24e-07   1.00e-01   7.24e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5400  -5.2885e+00   1.28e-03   2.73e-07   1.00e-01   7.50e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5600  -5.1729e+00   1.20e-03   2.30e-07   1.00e-01   7.76e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5800  -5.0768e+00   1.13e-03   1.94e-07   1.00e-01   8.02e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6000  -4.9968e+00   1.08e-03   1.63e-07   1.00e-01   8.28e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6200  -4.9301e+00   1.02e-03   1.37e-07   1.00e-01   8.53e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6400  -4.8746e+00   9.80e-04   1.18e-07   1.00e-01   8.79e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6600  -4.8281e+00   9.40e-04   1.09e-07   1.00e-01   9.05e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6800  -4.7893e+00   9.04e-04   1.01e-07   1.00e-01   9.31e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7000  -4.7568e+00   8.72e-04   9.40e-08   1.00e-01   9.57e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7200  -4.7295e+00   8.44e-04   8.75e-08   1.00e-01   9.82e+01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7400  -4.7372e+00   8.63e-04   2.54e-07   1.00e-01   1.01e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7600  -4.7339e+00   8.57e-04   1.41e-07   1.00e-01   1.03e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7800  -4.7278e+00   8.25e-04   8.93e-08   1.00e-01   1.06e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8000  -4.7195e+00   7.99e-04   5.47e-08   1.00e-01   1.09e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8200  -4.7100e+00   7.75e-04   4.25e-08   1.00e-01   1.11e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8400  -4.7002e+00   7.59e-04   3.67e-08   1.00e-01   1.14e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8600  -4.6909e+00   7.51e-04   3.23e-08   1.00e-01   1.16e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8800  -4.6824e+00   7.42e-04   3.05e-08   1.00e-01   1.19e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9000  -4.6749e+00   7.35e-04   2.86e-08   1.00e-01   1.21e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9200  -4.6684e+00   7.27e-04   2.66e-08   1.00e-01   1.24e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9400  -4.6627e+00   7.21e-04   2.47e-08   1.00e-01   1.27e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9600  -4.6577e+00   7.17e-04   2.29e-08   1.00e-01   1.29e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9800  -4.6534e+00   7.13e-04   2.15e-08   1.00e-01   1.32e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000  -4.6496e+00   7.10e-04   2.03e-08   1.00e-01   1.34e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10200  -4.6463e+00   7.06e-04   1.91e-08   1.00e-01   1.37e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10400  -4.6409e+00   7.00e-04   4.04e-07   5.01e-01   1.44e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10600  -4.6322e+00   6.86e-04   3.07e-07   5.01e-01   1.46e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10800  -4.6273e+00   6.73e-04   2.36e-07   5.01e-01   1.49e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11000  -4.6244e+00   6.63e-04   1.85e-07   5.01e-01   1.52e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11200  -4.6227e+00   6.53e-04   1.33e-07   5.01e-01   1.54e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11400  -4.6216e+00   6.44e-04   8.87e-08   5.01e-01   1.57e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11600  -4.6206e+00   6.43e-04   9.40e-08   5.01e-01   1.59e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11800  -4.6197e+00   6.43e-04   9.32e-08   5.01e-01   1.62e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12000  -4.6189e+00   6.42e-04   8.99e-08   5.01e-01   1.65e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12200  -4.6181e+00   6.40e-04   8.59e-08   5.01e-01   1.67e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12400  -4.6176e+00   6.39e-04   5.68e-06   5.01e-01   1.70e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12600  -4.6171e+00   6.19e-04   3.02e-07   5.01e-01   1.72e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12800  -4.6157e+00   6.16e-04   1.96e-07   5.01e-01   1.75e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13000  -4.6153e+00   6.13e-04   1.40e-07   5.01e-01   1.78e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13200  -4.6148e+00   6.10e-04   1.05e-07   5.01e-01   1.80e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13400  -4.6392e+00   5.67e-04   1.24e-07   5.42e-02   1.87e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13600  -4.6456e+00   5.56e-04   4.08e-08   5.42e-02   1.89e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13800  -4.6489e+00   5.51e-04   2.48e-08   5.42e-02   1.92e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14000  -4.6506e+00   5.47e-04   1.95e-08   5.42e-02   1.95e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14200  -4.6512e+00   5.42e-04   1.67e-08   5.42e-02   1.97e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14400  -4.6511e+00   5.38e-04   1.48e-08   5.42e-02   2.00e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14600  -4.6497e+00   5.33e-04   3.00e-07   2.80e-01   2.07e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14800  -4.6445e+00   5.24e-04   2.17e-07   2.80e-01   2.09e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15000  -4.6399e+00   5.12e-04   1.80e-07   2.80e-01   2.12e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15200  -4.6364e+00   5.01e-04   1.55e-07   2.80e-01   2.15e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15400  -4.6338e+00   4.91e-04   1.34e-07   2.80e-01   2.17e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15600  -4.6320e+00   4.78e-04   5.81e-07   2.80e-01   2.20e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15800  -4.6304e+00   4.65e-04   9.54e-08   2.80e-01   2.22e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16000  -4.6293e+00   4.57e-04   7.78e-08   2.80e-01   2.25e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16200  -4.6285e+00   4.51e-04   7.10e-08   2.80e-01   2.28e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16400  -4.6278e+00   4.45e-04   6.39e-08   2.80e-01   2.30e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16600  -4.6271e+00   4.40e-04   5.73e-08   2.80e-01   2.33e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16800  -4.6266e+00   4.37e-04   5.15e-08   2.80e-01   2.35e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17000  -4.6260e+00   4.34e-04   4.64e-08   2.80e-01   2.38e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17200  -4.6256e+00   4.31e-04   4.20e-08   2.80e-01   2.41e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17400  -4.6251e+00   4.29e-04   3.81e-08   2.80e-01   2.43e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17600  -4.6247e+00   4.27e-04   3.47e-08   2.80e-01   2.46e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17800  -4.6243e+00   4.25e-04   3.16e-08   2.80e-01   2.48e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18000  -4.6240e+00   4.23e-04   2.89e-08   2.80e-01   2.51e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18200  -4.6236e+00   4.22e-04   2.64e-08   2.80e-01   2.54e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18400  -4.6233e+00   4.21e-04   2.43e-08   2.80e-01   2.56e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18600  -4.6230e+00   4.21e-04   2.23e-08   2.80e-01   2.59e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18800  -4.6228e+00   4.21e-04   2.05e-08   2.80e-01   2.62e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19000  -4.6225e+00   4.21e-04   1.89e-08   2.80e-01   2.64e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200  -4.6223e+00   4.21e-04   1.74e-08   2.80e-01   2.67e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19400  -4.6220e+00   4.21e-04   1.61e-08   2.80e-01   2.69e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19600  -4.6218e+00   4.21e-04   1.49e-08   2.80e-01   2.72e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19800  -4.6216e+00   4.21e-04   1.38e-08   2.80e-01   2.75e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20000  -4.6214e+00   4.21e-04   1.29e-08   2.80e-01   2.77e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20200  -4.6212e+00   4.20e-04   1.19e-08   2.80e-01   2.80e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20400  -4.6211e+00   4.20e-04   1.11e-08   2.80e-01   2.83e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20600  -4.6209e+00   4.20e-04   1.03e-08   2.80e-01   2.85e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20800  -4.6207e+00   4.19e-04   1.95e-07   1.46e+00   2.92e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21000  -4.6202e+00   4.17e-04   1.44e-07   1.46e+00   2.95e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21200  -4.6238e+00   4.12e-04   1.13e-07   2.69e-01   3.02e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21400  -4.6229e+00   4.14e-04   1.10e-07   2.69e-01   3.04e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21600  -4.6225e+00   4.15e-04   7.95e-08   2.69e-01   3.07e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21800  -4.6224e+00   4.16e-04   6.05e-08   2.69e-01   3.09e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22000  -4.6225e+00   4.16e-04   4.75e-08   2.69e-01   3.12e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22200  -4.6226e+00   4.16e-04   3.81e-08   2.69e-01   3.14e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22400  -4.6227e+00   4.16e-04   3.11e-08   2.69e-01   3.17e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22600  -4.6229e+00   4.15e-04   2.57e-08   2.69e-01   3.20e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22800  -4.6230e+00   4.15e-04   2.16e-08   2.69e-01   3.22e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23000  -4.6231e+00   4.15e-04   1.87e-08   2.69e-01   3.25e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23200  -4.6232e+00   4.15e-04   1.65e-08   2.69e-01   3.27e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23400  -4.6233e+00   4.14e-04   1.46e-08   2.69e-01   3.30e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23600  -4.6234e+00   4.14e-04   1.29e-08   2.69e-01   3.33e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23800  -4.6235e+00   4.14e-04   1.16e-08   2.69e-01   3.35e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24000  -4.6235e+00   4.14e-04   1.04e-08   2.69e-01   3.38e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24200  -4.6236e+00   4.13e-04   2.25e-07   1.40e+00   3.45e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24400  -4.6238e+00   4.22e-04   2.19e-07   2.34e-01   3.52e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24600  -4.6265e+00   4.22e-04   3.79e-07   2.34e-01   3.54e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24800  -4.6302e+00   4.17e-04   1.29e-07   2.34e-01   3.57e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25000  -4.6321e+00   4.15e-04   1.06e-07   2.34e-01   3.59e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25200  -4.6335e+00   4.13e-04   8.90e-08   2.34e-01   3.62e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25400  -4.6344e+00   4.11e-04   7.58e-08   2.34e-01   3.64e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25600  -4.6351e+00   4.09e-04   6.66e-08   2.34e-01   3.67e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25800  -4.6356e+00   4.07e-04   5.95e-08   2.34e-01   3.70e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26000  -4.6361e+00   4.05e-04   5.33e-08   2.34e-01   3.72e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26200  -4.6365e+00   4.04e-04   4.80e-08   2.34e-01   3.75e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26400  -4.6368e+00   4.03e-04   4.34e-08   2.34e-01   3.77e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26600  -4.6372e+00   4.02e-04   4.13e-08   2.34e-01   3.80e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26800  -4.6375e+00   4.00e-04   3.59e-08   2.34e-01   3.83e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27000  -4.6377e+00   4.00e-04   3.39e-08   2.34e-01   3.85e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27200  -4.6380e+00   3.99e-04   3.16e-08   2.34e-01   3.88e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27400  -4.6383e+00   3.99e-04   2.91e-08   2.34e-01   3.90e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27600  -4.6385e+00   3.98e-04   2.68e-08   2.34e-01   3.93e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27800  -4.6388e+00   3.98e-04   2.47e-08   2.34e-01   3.96e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28000  -4.6390e+00   3.98e-04   2.28e-08   2.34e-01   3.98e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28200  -4.6393e+00   3.98e-04   2.14e-08   2.34e-01   4.01e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28400  -4.6395e+00   3.97e-04   2.05e-08   2.34e-01   4.03e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28600  -4.6397e+00   3.97e-04   1.95e-08   2.34e-01   4.06e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28800  -4.6400e+00   3.97e-04   1.79e-08   2.34e-01   4.08e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29000  -4.6405e+00   3.85e-04   3.46e-07   2.34e-01   4.11e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29200  -4.6448e+00   3.75e-04   2.10e-07   2.34e-01   4.14e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29400  -4.6481e+00   3.69e-04   1.46e-07   2.34e-01   4.16e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29600  -4.6501e+00   3.68e-04   1.09e-07   2.34e-01   4.19e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29800  -4.6512e+00   3.68e-04   8.54e-08   2.34e-01   4.21e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30000  -4.6517e+00   3.69e-04   6.90e-08   2.34e-01   4.24e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30200  -4.6556e+00   3.65e-04   3.43e-07   2.34e-01   4.27e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30400  -4.6609e+00   3.68e-04   1.75e-07   2.34e-01   4.29e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30600  -4.6612e+00   3.71e-04   1.03e-07   2.34e-01   4.32e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30800  -4.6598e+00   3.71e-04   6.73e-08   2.34e-01   4.34e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31000  -4.6582e+00   3.70e-04   4.67e-08   2.34e-01   4.37e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31200  -4.6582e+00   3.67e-04   1.96e-07   2.34e-01   4.40e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31400  -4.6574e+00   3.60e-04   1.08e-07   2.34e-01   4.42e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31600  -4.6560e+00   3.54e-04   6.89e-08   2.34e-01   4.45e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31800  -4.6550e+00   3.51e-04   4.76e-08   2.34e-01   4.47e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32000  -4.6543e+00   3.48e-04   3.47e-08   2.34e-01   4.50e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32200  -4.6538e+00   3.46e-04   2.65e-08   2.34e-01   4.53e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32400  -4.6534e+00   3.46e-04   2.09e-08   2.34e-01   4.55e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32600  -4.6532e+00   3.45e-04   1.87e-08   2.34e-01   4.58e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32800  -4.6530e+00   3.45e-04   1.76e-08   2.34e-01   4.61e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33000  -4.6529e+00   3.45e-04   1.66e-08   2.34e-01   4.63e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33200  -4.6559e+00   3.44e-04   1.70e-07   2.34e-01   4.66e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33400  -4.6590e+00   3.43e-04   1.26e-07   2.34e-01   4.68e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33600  -4.6602e+00   3.42e-04   1.01e-07   2.34e-01   4.71e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33800  -4.6603e+00   3.40e-04   8.33e-08   2.34e-01   4.74e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34000  -4.6600e+00   3.37e-04   7.09e-08   2.34e-01   4.76e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34200  -4.6594e+00   3.35e-04   6.14e-08   2.34e-01   4.79e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34400  -4.6588e+00   3.33e-04   5.38e-08   2.34e-01   4.81e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34600  -4.6582e+00   3.30e-04   4.77e-08   2.34e-01   4.84e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34800  -4.6576e+00   3.28e-04   4.25e-08   2.34e-01   4.87e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35000  -4.6570e+00   3.26e-04   3.81e-08   2.34e-01   4.89e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35200  -4.6565e+00   3.24e-04   3.44e-08   2.34e-01   4.92e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35400  -4.6561e+00   3.22e-04   3.11e-08   2.34e-01   4.94e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35600  -4.6557e+00   3.20e-04   2.82e-08   2.34e-01   4.97e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35800  -4.6553e+00   3.18e-04   2.67e-08   2.34e-01   4.99e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36000  -4.6550e+00   3.17e-04   2.55e-08   2.34e-01   5.02e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36200  -4.6547e+00   3.15e-04   2.43e-08   2.34e-01   5.05e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36400  -4.6544e+00   3.14e-04   2.32e-08   2.34e-01   5.07e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36600  -4.6542e+00   3.13e-04   2.21e-08   2.34e-01   5.10e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36800  -4.6540e+00   3.11e-04   2.10e-08   2.34e-01   5.12e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37000  -4.6538e+00   3.10e-04   2.00e-08   2.34e-01   5.15e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37200  -4.6536e+00   3.09e-04   1.90e-08   2.34e-01   5.18e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37400  -4.6567e+00   3.11e-04   4.28e-07   2.34e-01   5.20e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37600  -4.6643e+00   2.98e-04   1.74e-07   2.34e-01   5.23e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37800  -4.6640e+00   2.94e-04   1.01e-07   2.34e-01   5.25e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38000  -4.6621e+00   2.92e-04   7.74e-08   2.34e-01   5.28e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38200  -4.6601e+00   2.89e-04   6.50e-08   2.34e-01   5.31e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38400  -4.6584e+00   2.87e-04   5.52e-08   2.34e-01   5.33e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38600  -4.6570e+00   2.85e-04   4.80e-08   2.34e-01   5.36e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38800  -4.6559e+00   2.84e-04   4.62e-08   2.34e-01   5.38e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39000  -4.6550e+00   2.84e-04   4.42e-08   2.34e-01   5.41e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39200  -4.6543e+00   2.84e-04   4.23e-08   2.34e-01   5.44e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39400  -4.6537e+00   2.85e-04   4.04e-08   2.34e-01   5.46e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39600  -4.6532e+00   2.85e-04   3.85e-08   2.34e-01   5.49e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39800  -4.6528e+00   2.85e-04   3.66e-08   2.34e-01   5.51e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40000  -4.6525e+00   2.85e-04   3.49e-08   2.34e-01   5.54e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40200  -4.6522e+00   2.85e-04   3.32e-08   2.34e-01   5.56e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40400  -4.6520e+00   2.85e-04   3.16e-08   2.34e-01   5.59e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40600  -4.6518e+00   2.84e-04   3.00e-08   2.34e-01   5.62e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40800  -4.6516e+00   2.84e-04   2.86e-08   2.34e-01   5.64e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41000  -4.6514e+00   2.84e-04   2.72e-08   2.34e-01   5.67e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41200  -4.6512e+00   2.84e-04   2.59e-08   2.34e-01   5.70e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41400  -4.6511e+00   2.84e-04   2.47e-08   2.34e-01   5.72e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41600  -4.6509e+00   2.83e-04   2.36e-08   2.34e-01   5.75e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41800  -4.6508e+00   2.83e-04   2.25e-08   2.34e-01   5.77e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42000  -4.6507e+00   2.83e-04   2.15e-08   2.34e-01   5.80e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42200  -4.6505e+00   2.83e-04   2.05e-08   2.34e-01   5.82e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42400  -4.6504e+00   2.82e-04   1.96e-08   2.34e-01   5.85e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42600  -4.6503e+00   2.82e-04   1.88e-08   2.34e-01   5.88e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42800  -4.6502e+00   2.82e-04   1.80e-08   2.34e-01   5.90e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43000  -4.6501e+00   2.81e-04   1.72e-08   2.34e-01   5.93e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43200  -4.6499e+00   2.81e-04   1.65e-08   2.34e-01   5.95e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43400  -4.6498e+00   2.81e-04   1.58e-08   2.34e-01   5.98e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43600  -4.6497e+00   2.81e-04   1.51e-08   2.34e-01   6.01e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43800  -4.6496e+00   2.80e-04   1.45e-08   2.34e-01   6.03e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44000  -4.6495e+00   2.80e-04   1.40e-08   2.34e-01   6.06e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44200  -4.6494e+00   2.80e-04   1.34e-08   2.34e-01   6.08e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44400  -4.6493e+00   2.79e-04   1.29e-08   2.34e-01   6.11e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44600  -4.6492e+00   2.79e-04   1.24e-08   2.34e-01   6.14e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44800  -4.6491e+00   2.79e-04   1.19e-08   2.34e-01   6.16e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45000  -4.6490e+00   2.78e-04   1.15e-08   2.34e-01   6.19e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45200  -4.6489e+00   2.78e-04   1.11e-08   2.34e-01   6.21e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45400  -4.6488e+00   2.78e-04   1.07e-08   2.34e-01   6.24e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45600  -4.6488e+00   2.77e-04   1.03e-08   2.34e-01   6.27e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45800  -4.6487e+00   2.77e-04   9.91e-09   2.34e-01   6.29e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46000  -4.6486e+00   2.77e-04   9.57e-09   2.34e-01   6.32e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46200  -4.6485e+00   2.77e-04   9.23e-09   2.34e-01   6.34e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46400  -4.6484e+00   2.76e-04   8.92e-09   2.34e-01   6.37e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46600  -4.6483e+00   2.76e-04   8.62e-09   2.34e-01   6.40e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46800  -4.6482e+00   2.76e-04   8.33e-09   2.34e-01   6.42e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47000  -4.6485e+00   2.75e-04   1.51e-07   2.34e-01   6.45e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47200  -4.6485e+00   2.72e-04   1.07e-07   2.34e-01   6.47e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47400  -4.6479e+00   2.69e-04   8.23e-08   2.34e-01   6.50e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47600  -4.6474e+00   2.67e-04   6.62e-08   2.34e-01   6.52e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47800  -4.6470e+00   2.65e-04   5.45e-08   2.34e-01   6.55e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48000  -4.6466e+00   2.63e-04   4.61e-08   2.34e-01   6.58e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48200  -4.6463e+00   2.61e-04   3.99e-08   2.34e-01   6.60e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48400  -4.6459e+00   2.59e-04   3.51e-08   2.34e-01   6.63e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48600  -4.6456e+00   2.58e-04   3.13e-08   2.34e-01   6.66e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48800  -4.6454e+00   2.57e-04   2.83e-08   2.34e-01   6.68e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49000  -4.6451e+00   2.57e-04   2.59e-08   2.34e-01   6.71e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49200  -4.6449e+00   2.57e-04   2.39e-08   2.34e-01   6.73e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49400  -4.6447e+00   2.57e-04   2.32e-08   2.34e-01   6.76e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49600  -4.6445e+00   2.57e-04   2.26e-08   2.34e-01   6.79e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49800  -4.6443e+00   2.56e-04   2.20e-08   2.34e-01   6.81e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50000  -4.6441e+00   2.56e-04   2.15e-08   2.34e-01   6.84e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50200  -4.6440e+00   2.56e-04   2.09e-08   2.34e-01   6.87e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50400  -4.6438e+00   2.55e-04   2.04e-08   2.34e-01   6.89e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50600  -4.6437e+00   2.55e-04   1.99e-08   2.34e-01   6.92e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50800  -4.6435e+00   2.55e-04   1.94e-08   2.34e-01   6.94e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51000  -4.6434e+00   2.55e-04   1.90e-08   2.34e-01   6.97e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51200  -4.6433e+00   2.54e-04   1.85e-08   2.34e-01   7.00e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51400  -4.6431e+00   2.54e-04   1.81e-08   2.34e-01   7.02e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51600  -4.6430e+00   2.54e-04   1.77e-08   2.34e-01   7.05e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51800  -4.6429e+00   2.53e-04   1.73e-08   2.34e-01   7.07e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52000  -4.6435e+00   2.53e-04   9.66e-08   2.34e-01   7.10e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52200  -4.6442e+00   2.54e-04   6.55e-08   2.34e-01   7.12e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52400  -4.6445e+00   2.53e-04   5.23e-08   2.34e-01   7.15e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52600  -4.6446e+00   2.52e-04   4.44e-08   2.34e-01   7.18e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52800  -4.6447e+00   2.51e-04   3.89e-08   2.34e-01   7.20e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53000  -4.6446e+00   2.50e-04   3.47e-08   2.34e-01   7.23e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53200  -4.6446e+00   2.49e-04   3.13e-08   2.34e-01   7.25e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53400  -4.6445e+00   2.49e-04   2.86e-08   2.34e-01   7.28e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53600  -4.6444e+00   2.48e-04   2.62e-08   2.34e-01   7.31e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53800  -4.6443e+00   2.47e-04   2.48e-08   2.34e-01   7.33e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54000  -4.6442e+00   2.46e-04   2.41e-08   2.34e-01   7.36e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54200  -4.6441e+00   2.45e-04   2.35e-08   2.34e-01   7.38e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54400  -4.6440e+00   2.45e-04   2.28e-08   2.34e-01   7.41e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54600  -4.6438e+00   2.44e-04   2.22e-08   2.34e-01   7.44e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54800  -4.6437e+00   2.44e-04   2.15e-08   2.34e-01   7.46e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55000  -4.6436e+00   2.43e-04   2.09e-08   2.34e-01   7.49e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55200  -4.6435e+00   2.42e-04   2.02e-08   2.34e-01   7.51e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55400  -4.6433e+00   2.42e-04   1.95e-08   2.34e-01   7.54e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55600  -4.6433e+00   2.41e-04   1.28e-08   2.34e-01   7.57e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55800  -4.6436e+00   2.41e-04   9.86e-09   2.34e-01   7.59e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56000  -4.6438e+00   2.41e-04   8.52e-09   2.34e-01   7.62e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56200  -4.6439e+00   2.40e-04   7.90e-09   2.34e-01   7.64e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56400  -4.6440e+00   2.40e-04   7.31e-09   2.34e-01   7.67e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56600  -4.6440e+00   2.40e-04   6.73e-09   2.34e-01   7.69e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56800  -4.6440e+00   2.40e-04   6.20e-09   2.34e-01   7.72e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57000  -4.6439e+00   2.39e-04   5.70e-09   2.34e-01   7.75e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57200  -4.6439e+00   2.37e-04   1.30e-07   1.19e+00   7.81e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57400  -4.6436e+00   2.35e-04   8.93e-08   1.19e+00   7.84e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57600  -4.6435e+00   2.34e-04   7.10e-08   1.19e+00   7.87e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57800  -4.6449e+00   2.34e-04   3.96e-06   1.19e+00   7.89e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58000  -4.6463e+00   2.32e-04   1.09e-06   1.19e+00   7.92e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58200  -4.6444e+00   2.34e-04   4.44e-07   1.19e+00   7.95e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58400  -4.6435e+00   2.37e-04   7.84e-07   1.19e+00   7.97e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58600  -4.6469e+00   2.39e-04   8.83e-08   1.57e-01   8.04e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58800  -4.6492e+00   2.44e-04   4.74e-08   1.57e-01   8.07e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59000  -4.6498e+00   2.46e-04   3.17e-08   1.57e-01   8.09e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59200  -4.6496e+00   2.48e-04   2.38e-08   1.57e-01   8.12e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59400  -4.6491e+00   2.49e-04   1.92e-08   1.57e-01   8.14e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59600  -4.6486e+00   2.49e-04   1.63e-08   1.57e-01   8.17e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59800  -4.6480e+00   2.50e-04   1.42e-08   1.57e-01   8.19e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60000  -4.6474e+00   2.50e-04   1.26e-08   1.57e-01   8.22e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60200  -4.6469e+00   2.51e-04   1.14e-08   1.57e-01   8.25e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60400  -4.6464e+00   2.51e-04   1.03e-08   1.57e-01   8.27e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60600  -4.6460e+00   2.52e-04   9.42e-09   1.57e-01   8.30e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60800  -4.6456e+00   2.52e-04   8.66e-09   1.57e-01   8.32e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61000  -4.6453e+00   2.52e-04   7.47e-09   1.57e-01   8.35e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61200  -4.6450e+00   2.53e-04   6.91e-09   1.57e-01   8.38e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61400  -4.6447e+00   2.54e-04   6.47e-09   1.57e-01   8.40e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61600  -4.6440e+00   2.54e-04   1.32e-07   7.92e-01   8.47e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61800  -4.6432e+00   2.55e-04   1.07e-07   7.92e-01   8.50e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62000  -4.6434e+00   2.55e-04   1.56e-07   7.92e-01   8.52e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62200  -4.6429e+00   2.52e-04   1.53e-06   7.92e-01   8.55e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62400  -4.6406e+00   2.35e-04   7.07e-07   7.92e-01   8.57e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62600  -4.6379e+00   2.21e-04   3.88e-07   7.92e-01   8.60e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62800  -4.6371e+00   2.08e-04   3.71e-06   7.92e-01   8.63e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63000  -4.6406e+00   1.78e-04   8.30e-07   7.92e-01   8.65e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63200  -4.6397e+00   1.80e-04   6.64e-07   7.92e-01   8.68e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63400  -4.6389e+00   1.79e-04   5.45e-07   7.92e-01   8.70e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63600  -4.6384e+00   1.76e-04   4.76e-07   7.92e-01   8.73e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63800  -4.6379e+00   1.74e-04   4.22e-07   7.92e-01   8.76e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64000  -4.6373e+00   1.71e-04   3.77e-07   7.92e-01   8.78e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64200  -4.6368e+00   1.69e-04   3.41e-07   7.92e-01   8.81e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64400  -4.6361e+00   1.58e-04   8.39e-07   7.92e-01   8.83e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64600  -4.6350e+00   1.45e-04   5.84e-07   7.92e-01   8.86e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64800  -4.6342e+00   1.41e-04   4.57e-07   7.92e-01   8.89e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65000  -4.6334e+00   1.37e-04   3.74e-07   7.92e-01   8.91e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65200  -4.6329e+00   1.34e-04   3.19e-07   7.92e-01   8.94e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65400  -4.6326e+00   1.31e-04   2.89e-07   7.92e-01   8.96e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65600  -4.6316e+00   1.21e-04   1.04e-06   7.92e-01   8.99e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65800  -4.6292e+00   1.16e-04   4.71e-07   7.92e-01   9.02e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66000  -4.6272e+00   1.12e-04   3.02e-07   7.92e-01   9.04e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66200  -4.6257e+00   1.10e-04   2.38e-07   7.92e-01   9.07e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66400  -4.6256e+00   1.09e-04   3.06e-07   7.92e-01   9.09e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66600  -4.6252e+00   1.08e-04   2.00e-07   7.92e-01   9.12e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66800  -4.6244e+00   1.06e-04   1.64e-07   7.92e-01   9.15e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67000  -4.6238e+00   1.05e-04   1.55e-07   7.92e-01   9.17e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67200  -4.6234e+00   1.04e-04   1.40e-07   7.92e-01   9.20e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67400  -4.6230e+00   1.03e-04   1.25e-07   7.92e-01   9.22e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67600  -4.6227e+00   1.03e-04   1.12e-07   7.92e-01   9.25e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67800  -4.6224e+00   1.02e-04   1.01e-07   7.92e-01   9.28e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68000  -4.6221e+00   1.02e-04   9.29e-08   7.92e-01   9.30e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68200  -4.6218e+00   1.01e-04   8.75e-08   7.92e-01   9.33e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68400  -4.6216e+00   1.01e-04   8.23e-08   7.92e-01   9.35e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68600  -4.6217e+00   9.98e-05   4.77e-07   7.92e-01   9.38e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68800  -4.6227e+00   9.69e-05   1.51e-07   7.92e-01   9.41e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69000  -4.6228e+00   9.59e-05   7.30e-07   7.92e-01   9.43e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69200  -4.6236e+00   9.48e-05   1.61e-07   7.92e-01   9.46e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69400  -4.6233e+00   9.36e-05   8.87e-08   7.92e-01   9.48e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69600  -4.6229e+00   9.28e-05   7.39e-08   7.92e-01   9.51e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69800  -4.6226e+00   9.20e-05   6.24e-08   7.92e-01   9.53e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70000  -4.6224e+00   9.12e-05   5.33e-08   7.92e-01   9.56e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70200  -4.6222e+00   9.07e-05   4.60e-08   7.92e-01   9.59e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70400  -4.6220e+00   9.02e-05   4.11e-08   7.92e-01   9.61e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70600  -4.6218e+00   8.98e-05   3.68e-08   7.92e-01   9.64e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70800  -4.6217e+00   8.95e-05   3.30e-08   7.92e-01   9.66e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71000  -4.6216e+00   8.92e-05   5.44e-07   7.92e-01   9.69e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71200  -4.6219e+00   8.79e-05   9.31e-08   7.92e-01   9.72e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71400  -4.6219e+00   8.77e-05   5.00e-08   7.92e-01   9.74e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71600  -4.6220e+00   8.75e-05   4.18e-08   7.92e-01   9.77e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71800  -4.6220e+00   8.71e-05   3.78e-08   7.92e-01   9.79e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72000  -4.6220e+00   8.68e-05   3.48e-08   7.92e-01   9.82e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72200  -4.6220e+00   8.64e-05   3.23e-08   7.92e-01   9.85e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72400  -4.6219e+00   8.61e-05   3.01e-08   7.92e-01   9.87e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72600  -4.6218e+00   8.58e-05   2.82e-08   7.92e-01   9.90e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72800  -4.6218e+00   8.56e-05   2.65e-08   7.92e-01   9.92e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73000  -4.6217e+00   8.53e-05   2.49e-08   7.92e-01   9.95e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73200  -4.6217e+00   8.51e-05   2.35e-08   7.92e-01   9.98e+02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73400  -4.6216e+00   8.48e-05   2.22e-08   7.92e-01   1.00e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73600  -4.6215e+00   8.47e-05   2.10e-08   7.92e-01   1.00e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73800  -4.6215e+00   8.48e-05   1.98e-08   7.92e-01   1.01e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74000  -4.6214e+00   8.49e-05   1.88e-08   7.92e-01   1.01e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74200  -4.6214e+00   8.50e-05   1.78e-08   7.92e-01   1.01e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74400  -4.6213e+00   8.51e-05   1.69e-08   7.92e-01   1.01e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74600  -4.6213e+00   8.52e-05   1.61e-08   7.92e-01   1.02e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74800  -4.6212e+00   8.53e-05   1.53e-08   7.92e-01   1.02e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75000  -4.6212e+00   8.53e-05   1.46e-08   7.92e-01   1.02e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75200  -4.6211e+00   8.54e-05   1.39e-08   7.92e-01   1.02e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75400  -4.6211e+00   8.54e-05   1.32e-08   7.92e-01   1.03e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75600  -4.6211e+00   8.55e-05   1.26e-08   7.92e-01   1.03e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75800  -4.6210e+00   8.55e-05   1.21e-08   7.92e-01   1.03e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76000  -4.6210e+00   8.55e-05   1.15e-08   7.92e-01   1.03e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76200  -4.6209e+00   8.55e-05   1.11e-08   7.92e-01   1.04e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76400  -4.6209e+00   8.55e-05   1.10e-08   7.92e-01   1.04e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76600  -4.6209e+00   8.55e-05   1.09e-08   7.92e-01   1.04e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76800  -4.6208e+00   8.55e-05   1.08e-08   7.92e-01   1.04e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77000  -4.6208e+00   8.55e-05   1.07e-08   7.92e-01   1.05e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77200  -4.6208e+00   8.55e-05   1.06e-08   7.92e-01   1.05e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77400  -4.6207e+00   8.55e-05   1.05e-08   7.92e-01   1.05e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77600  -4.6207e+00   8.54e-05   1.04e-08   7.92e-01   1.05e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77800  -4.6207e+00   8.54e-05   1.03e-08   7.92e-01   1.06e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78000  -4.6206e+00   8.54e-05   1.02e-08   7.92e-01   1.06e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78200  -4.6206e+00   8.54e-05   1.01e-08   7.92e-01   1.06e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78400  -4.6206e+00   8.53e-05   9.94e-09   7.92e-01   1.07e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78600  -4.6205e+00   8.53e-05   9.78e-09   7.92e-01   1.07e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78800  -4.6205e+00   8.53e-05   9.67e-09   7.92e-01   1.07e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79000  -4.6205e+00   8.52e-05   9.56e-09   7.92e-01   1.07e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79200  -4.6205e+00   8.52e-05   9.45e-09   7.92e-01   1.08e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79400  -4.6204e+00   8.51e-05   9.32e-09   7.92e-01   1.08e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79600  -4.6204e+00   8.51e-05   9.19e-09   7.92e-01   1.08e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79800  -4.6204e+00   8.50e-05   9.10e-09   7.92e-01   1.08e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80000  -4.6216e+00   8.55e-05   2.06e-07   7.92e-01   1.09e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80200  -4.6211e+00   8.46e-05   1.05e-07   7.92e-01   1.09e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80400  -4.6209e+00   8.37e-05   8.00e-08   7.92e-01   1.09e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80600  -4.6208e+00   8.36e-05   6.48e-08   7.92e-01   1.09e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80800  -4.6207e+00   8.35e-05   5.46e-08   7.92e-01   1.10e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81000  -4.6207e+00   8.34e-05   4.71e-08   7.92e-01   1.10e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81200  -4.6206e+00   8.32e-05   4.14e-08   7.92e-01   1.10e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81400  -4.6206e+00   8.31e-05   3.70e-08   7.92e-01   1.10e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81600  -4.6206e+00   8.30e-05   3.34e-08   7.92e-01   1.11e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81800  -4.6205e+00   8.28e-05   3.05e-08   7.92e-01   1.11e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82000  -4.6205e+00   8.27e-05   2.81e-08   7.92e-01   1.11e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82200  -4.6205e+00   8.26e-05   2.61e-08   7.92e-01   1.11e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82400  -4.6204e+00   8.25e-05   2.44e-08   7.92e-01   1.12e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82600  -4.6204e+00   8.24e-05   2.35e-08   7.92e-01   1.12e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82800  -4.6204e+00   8.23e-05   2.28e-08   7.92e-01   1.12e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83000  -4.6203e+00   8.22e-05   2.20e-08   7.92e-01   1.12e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83200  -4.6203e+00   8.21e-05   2.13e-08   7.92e-01   1.13e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83400  -4.6203e+00   8.20e-05   2.06e-08   7.92e-01   1.13e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83600  -4.6202e+00   8.19e-05   1.99e-08   7.92e-01   1.13e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83800  -4.6202e+00   8.19e-05   1.92e-08   7.92e-01   1.14e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84000  -4.6202e+00   8.18e-05   1.86e-08   7.92e-01   1.14e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84200  -4.6201e+00   8.17e-05   1.79e-08   7.92e-01   1.14e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84400  -4.6201e+00   8.16e-05   1.73e-08   7.92e-01   1.14e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84600  -4.6201e+00   8.16e-05   1.67e-08   7.92e-01   1.15e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84800  -4.6210e+00   7.60e-05   5.62e-07   7.92e-01   1.15e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85000  -4.6185e+00   7.30e-05   3.19e-07   7.92e-01   1.15e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85200  -4.6166e+00   7.25e-05   2.35e-07   7.92e-01   1.15e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85400  -4.6153e+00   7.22e-05   1.85e-07   7.92e-01   1.16e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85600  -4.6145e+00   7.20e-05   1.37e-07   7.92e-01   1.16e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85800  -4.6139e+00   7.18e-05   1.06e-07   7.92e-01   1.16e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86000  -4.6134e+00   7.15e-05   8.39e-08   7.92e-01   1.16e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86200  -4.6130e+00   7.11e-05   6.99e-08   7.92e-01   1.17e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86400  -4.6127e+00   7.08e-05   6.28e-08   7.92e-01   1.17e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86600  -4.6124e+00   7.04e-05   5.66e-08   7.92e-01   1.17e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86800  -4.6122e+00   7.01e-05   5.12e-08   7.92e-01   1.17e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87000  -4.6120e+00   6.97e-05   4.66e-08   7.92e-01   1.18e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87200  -4.6119e+00   6.93e-05   4.25e-08   7.92e-01   1.18e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87400  -4.6118e+00   6.90e-05   6.55e-08   7.92e-01   1.18e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87600  -4.6117e+00   6.85e-05   4.12e-08   7.92e-01   1.18e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87800  -4.6116e+00   6.82e-05   3.72e-08   7.92e-01   1.19e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88000  -4.6122e+00   6.68e-05   1.83e-07   7.92e-01   1.19e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88200  -4.6125e+00   6.62e-05   1.42e-07   7.92e-01   1.19e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88400  -4.6124e+00   6.55e-05   1.27e-07   7.92e-01   1.19e+03s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88600  -4.6123e+00   6.49e-05   1.19e-07   7.92e-01   1.20e+03s
-Solver interrupted
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">risk</span><span class="p">),</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">Lmax</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Uncomment to solve the problem.</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># WARNING: this will take many minutes to run.</span>
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100_000</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/problems/problem.py:493,</span> in <span class="ni">Problem.solve</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">491</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">492</span>     <span class="n">solve_func</span> <span class="o">=</span> <span class="n">Problem</span><span class="o">.</span><span class="n">_solve</span>
-<span class="ne">--&gt; </span><span class="mi">493</span> <span class="k">return</span> <span class="n">solve_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/problems/problem.py:1064,</span> in <span class="ni">Problem._solve</span><span class="nt">(self, solver, warm_start, verbose, gp, qcp, requires_grad, enforce_dpp, ignore_dpp, canon_backend, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1060</span>     <span class="n">s</span><span class="o">.</span><span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1061</span>             <span class="s1">&#39;Invoking solver </span><span class="si">%s</span><span class="s1">  to obtain a solution.&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1062</span>             <span class="n">solving_chain</span><span class="o">.</span><span class="n">reductions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
-<span class="g g-Whitespace">   </span><span class="mi">1063</span> <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="ne">-&gt; </span><span class="mi">1064</span> <span class="n">solution</span> <span class="o">=</span> <span class="n">solving_chain</span><span class="o">.</span><span class="n">solve_via_data</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1065</span>     <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1066</span> <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1067</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solve_time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/reductions/solvers/solving_chain.py:410,</span> in <span class="ni">SolvingChain.solve_via_data</span><span class="nt">(self, problem, data, warm_start, verbose, solver_opts)</span>
-<span class="g g-Whitespace">    </span><span class="mi">374</span> <span class="k">def</span> <span class="nf">solve_via_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">375</span>                    <span class="n">solver_opts</span><span class="o">=</span><span class="p">{}):</span>
-<span class="g g-Whitespace">    </span><span class="mi">376</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Solves the problem using the data output by the an apply invocation.</span>
-<span class="g g-Whitespace">    </span><span class="mi">377</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">378</span><span class="sd">     The semantics are:</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">408</span><span class="sd">         a Solution object.</span>
-<span class="g g-Whitespace">    </span><span class="mi">409</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">410</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">solve_via_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">411</span>                                       <span class="n">solver_opts</span><span class="p">,</span> <span class="n">problem</span><span class="o">.</span><span class="n">_solver_cache</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/reductions/solvers/qp_solvers/osqp_qpif.py:106,</span> in <span class="ni">OSQP.solve_via_data</span><span class="nt">(self, data, warm_start, verbose, solver_opts, solver_cache)</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span>     <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">104</span>         <span class="k">raise</span> <span class="n">SolverError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">106</span> <span class="n">results</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="k">if</span> <span class="n">solver_cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">109</span>     <span class="n">solver_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()]</span> <span class="o">=</span> <span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/osqp/interface.py:235,</span> in <span class="ni">OSQP.solve</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">231</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">232</span><span class="sd"> Solve QP Problem</span>
-<span class="g g-Whitespace">    </span><span class="mi">233</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">234</span> <span class="c1"># Solve QP</span>
-<span class="ne">--&gt; </span><span class="mi">235</span> <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">237</span> <span class="c1"># TODO(bart): this will be unnecessary when the derivative will be in C</span>
-<span class="g g-Whitespace">    </span><span class="mi">238</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derivative_cache</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span>
-
-<span class="ne">ValueError</span>: OSQP solve error!
+   1  -1.1774e+04   2.65e+02   1.51e+04   1.00e-01   5.67e+00s
+ 200  -4.1080e+02   2.42e-01   8.86e-04   1.00e-01   7.92e+00s
+ 400  -1.9413e+02   1.13e-01   2.51e-04   1.00e-01   1.05e+01s
+ 600  -1.2345e+02   6.40e-02   1.09e-04   1.00e-01   1.28e+01s
+ 800  -8.7560e+01   4.67e-02   5.29e-05   1.00e-01   1.51e+01s
+1000  -6.5202e+01   3.49e-02   2.99e-05   1.00e-01   1.73e+01s
+1200  -5.0118e+01   2.68e-02   1.91e-05   1.00e-01   1.96e+01s
+1400  -3.9737e+01   2.09e-02   1.41e-05   1.00e-01   2.18e+01s
+1600  -3.2445e+01   1.72e-02   1.06e-05   1.00e-01   2.41e+01s
+1800  -2.6947e+01   1.42e-02   8.27e-06   1.00e-01   2.63e+01s
+2000  -2.2700e+01   1.17e-02   6.57e-06   1.00e-01   2.93e+01s
+2200  -1.9294e+01   9.74e-03   5.29e-06   1.00e-01   3.15e+01s
+2400  -1.6616e+01   8.26e-03   4.32e-06   1.00e-01   3.38e+01s
+2600  -1.4460e+01   7.01e-03   3.56e-06   1.00e-01   3.60e+01s
+2800  -1.2704e+01   5.95e-03   2.93e-06   1.00e-01   3.83e+01s
+3000  -1.1267e+01   5.06e-03   2.43e-06   1.00e-01   4.05e+01s
+3200  -1.0092e+01   4.25e-03   2.00e-06   1.00e-01   4.27e+01s
+3400  -9.1244e+00   3.58e-03   1.66e-06   1.00e-01   4.53e+01s
+3600  -8.3286e+00   3.04e-03   1.38e-06   1.00e-01   4.75e+01s
+3800  -7.6760e+00   2.60e-03   1.14e-06   1.00e-01   4.97e+01s
+4000  -7.1409e+00   2.26e-03   9.40e-07   1.00e-01   5.20e+01s
+4200  -6.7000e+00   2.04e-03   7.81e-07   1.00e-01   5.42e+01s
+4400  -6.3366e+00   1.85e-03   6.50e-07   1.00e-01   5.64e+01s
+4600  -6.0382e+00   1.69e-03   5.41e-07   1.00e-01   5.87e+01s
+4800  -5.7969e+00   1.58e-03   4.54e-07   1.00e-01   6.10e+01s
+5000  -5.5953e+00   1.46e-03   3.83e-07   1.00e-01   6.34e+01s
+5200  -5.4277e+00   1.37e-03   3.24e-07   1.00e-01   6.58e+01s
+5400  -5.2885e+00   1.28e-03   2.73e-07   1.00e-01   6.81e+01s
+5600  -5.1729e+00   1.20e-03   2.30e-07   1.00e-01   7.03e+01s
+5800  -5.0768e+00   1.13e-03   1.94e-07   1.00e-01   7.26e+01s
+6000  -4.9968e+00   1.08e-03   1.63e-07   1.00e-01   7.49e+01s
+6200  -4.9301e+00   1.02e-03   1.37e-07   1.00e-01   7.71e+01s
+6400  -4.8746e+00   9.80e-04   1.18e-07   1.00e-01   7.98e+01s
+6600  -4.8281e+00   9.40e-04   1.09e-07   1.00e-01   8.20e+01s
+6800  -4.7893e+00   9.04e-04   1.01e-07   1.00e-01   8.43e+01s
+7000  -4.7568e+00   8.72e-04   9.40e-08   1.00e-01   8.66e+01s
+7200  -4.7295e+00   8.44e-04   8.75e-08   1.00e-01   8.88e+01s
+7400  -4.7372e+00   8.63e-04   2.54e-07   1.00e-01   9.11e+01s
+7600  -4.7339e+00   8.57e-04   1.41e-07   1.00e-01   9.33e+01s
+7800  -4.7278e+00   8.25e-04   8.93e-08   1.00e-01   9.58e+01s
+8000  -4.7195e+00   7.99e-04   5.47e-08   1.00e-01   9.82e+01s
+8200  -4.7100e+00   7.75e-04   4.25e-08   1.00e-01   1.00e+02s
+8400  -4.7002e+00   7.59e-04   3.67e-08   1.00e-01   1.03e+02s
+8600  -4.6909e+00   7.51e-04   3.23e-08   1.00e-01   1.05e+02s
+8800  -4.6824e+00   7.42e-04   3.05e-08   1.00e-01   1.07e+02s
+9000  -4.6749e+00   7.35e-04   2.86e-08   1.00e-01   1.09e+02s
+9200  -4.6684e+00   7.27e-04   2.66e-08   1.00e-01   1.12e+02s
+9400  -4.6627e+00   7.21e-04   2.47e-08   1.00e-01   1.14e+02s
+9600  -4.6577e+00   7.17e-04   2.29e-08   1.00e-01   1.16e+02s
+9800  -4.6534e+00   7.13e-04   2.15e-08   1.00e-01   1.19e+02s
+10000  -4.6496e+00   7.10e-04   2.03e-08   1.00e-01   1.21e+02s
+10200  -4.6463e+00   7.06e-04   1.91e-08   1.00e-01   1.23e+02s
+10400  -4.6434e+00   7.03e-04   1.81e-08   1.00e-01   1.25e+02s
+10600  -4.6335e+00   6.88e-04   3.27e-07   5.04e-01   1.33e+02s
+10800  -4.6280e+00   6.75e-04   2.51e-07   5.04e-01   1.35e+02s
+11000  -4.6248e+00   6.64e-04   1.95e-07   5.04e-01   1.37e+02s
+11200  -4.6228e+00   6.55e-04   1.54e-07   5.04e-01   1.39e+02s
+11400  -4.6218e+00   6.45e-04   8.79e-08   5.04e-01   1.41e+02s
+11600  -4.6207e+00   6.44e-04   9.50e-08   5.04e-01   1.44e+02s
+11800  -4.6198e+00   6.43e-04   9.48e-08   5.04e-01   1.46e+02s
+12000  -4.6190e+00   6.42e-04   9.17e-08   5.04e-01   1.49e+02s
+12200  -4.6182e+00   6.41e-04   8.76e-08   5.04e-01   1.51e+02s
+12400  -4.6175e+00   6.39e-04   8.33e-08   5.04e-01   1.53e+02s
+12600  -4.6175e+00   6.20e-04   3.63e-07   5.04e-01   1.55e+02s
+12800  -4.6158e+00   6.17e-04   2.08e-07   5.04e-01   1.57e+02s
+13000  -4.6153e+00   6.13e-04   1.47e-07   5.04e-01   1.60e+02s
+13200  -4.6148e+00   6.10e-04   1.09e-07   5.04e-01   1.62e+02s
+13400  -4.6454e+00   5.54e-04   2.45e-06   5.04e-01   1.64e+02s
+13600  -4.6464e+00   5.27e-04   7.63e-07   5.04e-01   1.67e+02s
+13800  -4.6382e+00   5.07e-04   5.38e-07   5.04e-01   1.69e+02s
+14000  -4.6332e+00   4.89e-04   4.15e-07   5.04e-01   1.71e+02s
+14200  -4.6304e+00   4.65e-04   3.03e-07   5.04e-01   1.73e+02s
+14400  -4.6286e+00   4.52e-04   2.31e-07   5.04e-01   1.76e+02s
+14600  -4.6274e+00   4.41e-04   1.90e-07   5.04e-01   1.78e+02s
+14800  -4.6263e+00   4.36e-04   1.57e-07   5.04e-01   1.80e+02s
+15000  -4.6254e+00   4.31e-04   1.31e-07   5.04e-01   1.83e+02s
+15200  -4.6247e+00   4.27e-04   1.10e-07   5.04e-01   1.85e+02s
+15400  -4.6240e+00   4.24e-04   9.37e-08   5.04e-01   1.87e+02s
+15600  -4.6234e+00   4.22e-04   8.00e-08   5.04e-01   1.89e+02s
+15800  -4.6229e+00   4.21e-04   6.87e-08   5.04e-01   1.92e+02s
+16000  -4.6224e+00   4.21e-04   5.93e-08   5.04e-01   1.94e+02s
+16200  -4.6220e+00   4.21e-04   5.14e-08   5.04e-01   1.96e+02s
+16400  -4.6217e+00   4.21e-04   4.48e-08   5.04e-01   1.99e+02s
+16600  -4.6213e+00   4.20e-04   3.92e-08   5.04e-01   2.01e+02s
+16800  -4.6210e+00   4.20e-04   3.44e-08   5.04e-01   2.03e+02s
+17000  -4.6208e+00   4.20e-04   2.84e-08   5.04e-01   2.05e+02s
+17200  -4.6207e+00   4.19e-04   2.37e-08   5.04e-01   2.08e+02s
+17400  -4.6205e+00   4.18e-04   2.00e-08   5.04e-01   2.10e+02s
+17600  -4.6203e+00   4.18e-04   1.82e-08   5.04e-01   2.12e+02s
+17800  -4.6202e+00   4.17e-04   1.72e-08   5.04e-01   2.15e+02s
+18000  -4.6200e+00   4.16e-04   1.64e-08   5.04e-01   2.17e+02s
+18200  -4.6256e+00   4.14e-04   9.55e-07   5.04e-01   2.19e+02s
+18400  -4.6227e+00   4.15e-04   3.35e-07   5.04e-01   2.21e+02s
+18600  -4.6224e+00   4.16e-04   1.95e-07   5.04e-01   2.24e+02s
+18800  -4.6226e+00   4.16e-04   1.27e-07   5.04e-01   2.26e+02s
+19000  -4.6229e+00   4.15e-04   8.84e-08   5.04e-01   2.28e+02s
+19200  -4.6231e+00   4.15e-04   6.51e-08   5.04e-01   2.31e+02s
+19400  -4.6233e+00   4.14e-04   5.14e-08   5.04e-01   2.33e+02s
+19600  -4.6235e+00   4.14e-04   4.14e-08   5.04e-01   2.35e+02s
+19800  -4.6236e+00   4.14e-04   3.39e-08   5.04e-01   2.37e+02s
+20000  -4.6236e+00   4.13e-04   2.83e-08   5.04e-01   2.40e+02s
+20200  -4.6237e+00   4.13e-04   2.40e-08   5.04e-01   2.42e+02s
+20400  -4.6279e+00   4.19e-04   1.10e-06   5.04e-01   2.44e+02s
+20600  -4.6328e+00   4.14e-04   4.43e-07   5.04e-01   2.47e+02s
+20800  -4.6348e+00   4.09e-04   3.19e-07   5.04e-01   2.49e+02s
+21000  -4.6360e+00   4.06e-04   2.50e-07   5.04e-01   2.51e+02s
+21200  -4.6368e+00   4.03e-04   2.00e-07   5.04e-01   2.53e+02s
+21400  -4.6375e+00   4.00e-04   1.62e-07   5.04e-01   2.56e+02s
+21600  -4.6380e+00   3.99e-04   1.40e-07   5.04e-01   2.58e+02s
+21800  -4.6386e+00   3.98e-04   1.18e-07   5.04e-01   2.60e+02s
+22000  -4.6392e+00   3.98e-04   1.00e-07   5.04e-01   2.62e+02s
+22200  -4.6396e+00   3.97e-04   9.12e-08   5.04e-01   2.65e+02s
+22400  -4.6402e+00   3.88e-04   1.72e-06   5.04e-01   2.67e+02s
+22600  -4.6481e+00   3.69e-04   6.62e-07   5.04e-01   2.69e+02s
+22800  -4.6513e+00   3.68e-04   3.75e-07   5.04e-01   2.72e+02s
+23000  -4.6578e+00   3.65e-04   1.26e-06   5.04e-01   2.74e+02s
+23200  -4.6606e+00   3.71e-04   3.81e-07   5.04e-01   2.76e+02s
+23400  -4.6574e+00   3.69e-04   1.74e-07   5.04e-01   2.78e+02s
+23600  -4.6563e+00   3.55e-04   3.46e-07   5.04e-01   2.81e+02s
+23800  -4.6543e+00   3.48e-04   1.62e-07   5.04e-01   2.83e+02s
+24000  -4.6534e+00   3.46e-04   9.43e-08   5.04e-01   2.85e+02s
+24200  -4.6530e+00   3.45e-04   7.96e-08   5.04e-01   2.87e+02s
+24400  -4.6575e+00   3.44e-04   6.80e-07   5.04e-01   2.90e+02s
+24600  -4.6604e+00   3.40e-04   4.12e-07   5.04e-01   2.92e+02s
+24800  -4.6596e+00   3.36e-04   2.92e-07   5.04e-01   2.94e+02s
+25000  -4.6582e+00   3.30e-04   2.22e-07   5.04e-01   2.97e+02s
+25200  -4.6570e+00   3.26e-04   1.74e-07   5.04e-01   2.99e+02s
+25400  -4.6560e+00   3.21e-04   1.40e-07   5.04e-01   3.01e+02s
+25600  -4.6552e+00   3.18e-04   1.21e-07   5.04e-01   3.03e+02s
+25800  -4.6545e+00   3.15e-04   1.09e-07   5.04e-01   3.07e+02s
+26000  -4.6540e+00   3.12e-04   9.83e-08   5.04e-01   3.10e+02s
+26200  -4.6536e+00   3.10e-04   8.83e-08   5.04e-01   3.13e+02s
+26400  -4.6644e+00   2.98e-04   8.13e-07   5.04e-01   3.15e+02s
+26600  -4.6618e+00   2.91e-04   3.47e-07   5.04e-01   3.18e+02s
+26800  -4.6579e+00   2.86e-04   2.42e-07   5.04e-01   3.20e+02s
+27000  -4.6555e+00   2.84e-04   2.09e-07   5.04e-01   3.22e+02s
+27200  -4.6539e+00   2.85e-04   1.89e-07   5.04e-01   3.25e+02s
+27400  -4.6529e+00   2.85e-04   1.70e-07   5.04e-01   3.28e+02s
+27600  -4.6522e+00   2.85e-04   1.53e-07   5.04e-01   3.31e+02s
+27800  -4.6517e+00   2.84e-04   1.38e-07   5.04e-01   3.33e+02s
+28000  -4.6513e+00   2.84e-04   1.24e-07   5.04e-01   3.36e+02s
+28200  -4.6510e+00   2.84e-04   1.12e-07   5.04e-01   3.39e+02s
+28400  -4.6507e+00   2.83e-04   1.01e-07   5.04e-01   3.41e+02s
+28600  -4.6504e+00   2.82e-04   9.15e-08   5.04e-01   3.44e+02s
+28800  -4.6502e+00   2.82e-04   8.31e-08   5.04e-01   3.46e+02s
+29000  -4.6499e+00   2.81e-04   7.57e-08   5.04e-01   3.48e+02s
+29200  -4.6497e+00   2.80e-04   6.92e-08   5.04e-01   3.51e+02s
+29400  -4.6495e+00   2.80e-04   6.34e-08   5.04e-01   3.54e+02s
+29600  -4.6493e+00   2.79e-04   5.82e-08   5.04e-01   3.56e+02s
+29800  -4.6491e+00   2.79e-04   5.35e-08   5.04e-01   3.58e+02s
+30000  -4.6489e+00   2.78e-04   4.94e-08   5.04e-01   3.61e+02s
+30200  -4.6487e+00   2.77e-04   4.57e-08   5.04e-01   3.64e+02s
+30400  -4.6485e+00   2.77e-04   4.23e-08   5.04e-01   3.68e+02s
+30600  -4.6483e+00   2.76e-04   3.93e-08   5.04e-01   3.70e+02s
+30800  -4.6487e+00   2.74e-04   5.85e-07   5.04e-01   3.72e+02s
+31000  -4.6476e+00   2.68e-04   3.31e-07   5.04e-01   3.75e+02s
+31200  -4.6467e+00   2.63e-04   2.20e-07   5.04e-01   3.77e+02s
+31400  -4.6460e+00   2.60e-04   1.63e-07   5.04e-01   3.79e+02s
+31600  -4.6454e+00   2.57e-04   1.29e-07   5.04e-01   3.81e+02s
+31800  -4.6449e+00   2.57e-04   1.09e-07   5.04e-01   3.84e+02s
+32000  -4.6444e+00   2.56e-04   1.03e-07   5.04e-01   3.86e+02s
+32200  -4.6441e+00   2.56e-04   9.75e-08   5.04e-01   3.88e+02s
+32400  -4.6437e+00   2.55e-04   9.23e-08   5.04e-01   3.91e+02s
+32600  -4.6434e+00   2.55e-04   8.76e-08   5.04e-01   3.93e+02s
+32800  -4.6431e+00   2.54e-04   8.33e-08   5.04e-01   3.95e+02s
+33000  -4.6428e+00   2.53e-04   7.93e-08   5.04e-01   3.98e+02s
+33200  -4.6443e+00   2.53e-04   2.76e-07   5.04e-01   4.00e+02s
+33400  -4.6446e+00   2.52e-04   1.90e-07   5.04e-01   4.03e+02s
+33600  -4.6446e+00   2.50e-04   1.48e-07   5.04e-01   4.05e+02s
+33800  -4.6444e+00   2.48e-04   1.22e-07   5.04e-01   4.07e+02s
+34000  -4.6442e+00   2.46e-04   1.11e-07   5.04e-01   4.10e+02s
+34200  -4.6439e+00   2.45e-04   1.05e-07   5.04e-01   4.12e+02s
+34400  -4.6437e+00   2.43e-04   9.84e-08   5.04e-01   4.14e+02s
+34600  -4.6434e+00   2.42e-04   9.15e-08   5.04e-01   4.16e+02s
+34800  -4.6435e+00   2.41e-04   4.91e-08   5.04e-01   4.19e+02s
+35000  -4.6439e+00   2.40e-04   3.71e-08   5.04e-01   4.21e+02s
+35200  -4.6440e+00   2.40e-04   3.12e-08   5.04e-01   4.24e+02s
+35400  -4.6439e+00   2.39e-04   2.61e-08   5.04e-01   4.26e+02s
+35600  -4.6439e+00   2.39e-04   2.20e-08   5.04e-01   4.29e+02s
+35800  -4.6439e+00   2.37e-04   2.52e-08   5.04e-01   4.31e+02s
+36000  -4.6438e+00   2.37e-04   2.04e-08   5.04e-01   4.33e+02s
+36200  -4.6437e+00   2.36e-04   1.75e-08   5.04e-01   4.36e+02s
+36400  -4.6436e+00   2.35e-04   1.55e-08   5.04e-01   4.38e+02s
 </pre></div>
 </div>
 </div>
