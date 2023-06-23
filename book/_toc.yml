@@ -11,6 +11,10 @@ chapters:
     sections:
       - glob: docs/applications/notebooks/*
 
+  - file: docs/advanced
+    -
+  - file: docs/scipy22_slides/index
+
   - file: docs/conclusions
 
   - file: docs/local
