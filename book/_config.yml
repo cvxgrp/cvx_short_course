@@ -11,8 +11,9 @@ execute:
   timeout: 1200               # 20 minutes timeout
   allow_errors: true
   exclude_patterns:
-    - _build
-    - .DS_Store
+    # those notebooks are extremely expensive
+    - docs/applications/notebooks/portfolio_optimization.ipynb
+    - docs/intro/notebooks/tv_inpainting.ipynb
     - "*.ipynb_checkpoints"
     - "exercises/notebooks/*.ipynb"
     - "hello/notebooks/*.ipynb"
