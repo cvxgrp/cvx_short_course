@@ -6,38 +6,42 @@ author: CVX
 logo: _static/logo.jpeg
 only_build_toc_files: true
 
-#execute:
-#  execute_notebooks: force
-#  timeout: 600               # 10 minutes timeout
-#  allow_errors: true
-#  exclude_patterns:
-#    - "*.ipynb_checkpoints"
-#    - "exercises/notebooks/*.ipynb"
-#    - "hello/notebooks/*.ipynb"
+execute:
+  execute_notebooks: cache
+  timeout: 1200               # 20 minutes timeout
+  allow_errors: true
+  exclude_patterns:
+    # those notebooks are extremely expensive
+    - docs/applications/notebooks/portfolio_optimization.ipynb
+    - docs/intro/notebooks/tv_inpainting.ipynb
+    - "*.ipynb_checkpoints"
+    - "exercises/notebooks/*.ipynb"
+    - "hello/notebooks/*.ipynb"
 
-#sphinx:
-#  config:
-#    html_js_files:
-#    - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
+sphinx:
+  config:
+    html_js_files:
+    - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
 
-#parse:
-#  myst_enable_extensions:
-#    - substitution
-#    - linkify
-#    - dollarmath
-#    - amsmath
+parse:
+  myst_enable_extensions:
+    - substitution
+    - linkify
+    - dollarmath
+    - amsmath
+  myst_substitutions:
+    book_url: https://www.cvxgrp.org/cvx_short_course
 
 
 # Information about where the book exists on the web
 repository:
   url: https://github.com/cvxgrp/cvx_short_course  # Online location of your book
   path_to_book: book  # Optional path to your book, relative to the repository root
-  branch: master # 15-remove-expensive-binder-caching
-  #branch: master  # Which branch of the repository should be used when creating links (optional)
+  branch: master
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
-  # use_issues_button: true
+  use_issues_button: true
   use_repository_button: true
   extra_navbar: Powered by <a href="https://jupyterbook.org">Jupyter Book</a>

@@ -19,11 +19,21 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install jupyter-book
-
+    
+    - uses: actions/cache@v3
+      name: Jupyter Cache
+      with:
+        path: book/_build/.jupyter_cache
+        key: ${{ runner.os }}-jupyter-${{ hashFiles('**/*') }}
+        restore-keys: |
+          ${{ runner.os }}-jupyter-
+          
     # Build the book
     - name: Build the book
       run: |
+        jupyter-book clean book
         jupyter-book build book
+        touch book/_build/html/.nojekyll
 
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
