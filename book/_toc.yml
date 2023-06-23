@@ -10,3 +10,8 @@ chapters:
   - file: docs/applications/index
     sections:
       - glob: docs/applications/notebooks/*
+
+  - file: docs/conclusions
+
+  - file: docs/local
+
