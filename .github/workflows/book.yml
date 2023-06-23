@@ -33,6 +33,7 @@ jobs:
       run: |
         jupyter-book clean book
         jupyter-book build book
+        touch book/_build/html/.nojekyll
 
     # Push the book's HTML to github-pages
     - name: GitHub Pages action
