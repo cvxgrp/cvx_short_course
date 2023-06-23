@@ -23,7 +23,7 @@ jobs:
     - uses: actions/cache@v3
       name: Jupyter Cache
       with:
-        path: ~/book/_build/.jupyter-cache
+        path: book/_build/.jupyter_cache
         key: ${{ runner.os }}-jupyter-${{ hashFiles('**/*') }}
         restore-keys: |
           ${{ runner.os }}-jupyter-
