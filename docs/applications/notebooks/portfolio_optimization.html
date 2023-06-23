@@ -1,0 +1,2469 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Portfolio optimization &#8212; CVX Short Course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/applications/notebooks/portfolio_optimization';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Quantile regression" href="quantile_regression.html" />
+    <link rel="prev" title="Optimal advertising" href="optimal_ad.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    CVXPY tutorial
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro/index.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/SVM.html">Support vector machine classifier with <span class="math notranslate nohighlight">\(\ell_1\)</span>-regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/control.html">Control</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Applications</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="huber_regression.html">Huber regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_fitting.html">Model fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimal_ad.html">Optimal advertising</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Portfolio optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quantile_regression.html">Quantile regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="worst_case_analysis.html">Worst-case risk analysis</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course/issues/new?title=Issue%20on%20page%20%2Fdocs/applications/notebooks/portfolio_optimization.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/applications/notebooks/portfolio_optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Portfolio optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-allocation-vector">Portfolio allocation vector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-returns">Asset returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-markowitz-portfolio-optimization">Classical (Markowitz) portfolio optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-constraints">Portfolio constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variations">Variations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-covariance-model">Factor covariance model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization-with-factor-covariance-model">Portfolio optimization with factor covariance model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="portfolio-optimization">
+<h1>Portfolio optimization<a class="headerlink" href="#portfolio-optimization" title="Permalink to this heading">#</a></h1>
+<section id="portfolio-allocation-vector">
+<h2>Portfolio allocation vector<a class="headerlink" href="#portfolio-allocation-vector" title="Permalink to this heading">#</a></h2>
+<p>In this example we show how to do portfolio optimization using CVXPY.
+We begin with the basic definitions.
+In portfolio optimization we have some amount of money to invest in any of <span class="math notranslate nohighlight">\(n\)</span> different assets.
+We choose what fraction <span class="math notranslate nohighlight">\(w_i\)</span> of our money to invest in each asset <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(i=1, \ldots, n\)</span>.</p>
+<p>We call <span class="math notranslate nohighlight">\(w\in {\bf R}^n\)</span> the <em>portfolio allocation vector</em>.
+We of course have the constraint that <span class="math notranslate nohighlight">\({\mathbf 1}^T w =1\)</span>.
+The allocation <span class="math notranslate nohighlight">\(w_i&lt;0\)</span> means a <em>short position</em> in asset <span class="math notranslate nohighlight">\(i\)</span>, or that we borrow shares to sell now that we must replace later.
+The allocation <span class="math notranslate nohighlight">\(w \geq 0\)</span> is a <em>long only</em> portfolio.
+The quantity
+$<span class="math notranslate nohighlight">\( \|w \|_1 = {\mathbf 1}^T w_+ + {\mathbf 1}^T w_- \)</span>$
+is known as <em>leverage</em>.</p>
+</section>
+<section id="asset-returns">
+<h2>Asset returns<a class="headerlink" href="#asset-returns" title="Permalink to this heading">#</a></h2>
+<p>We will only model investments held for one period. The initial prices are <span class="math notranslate nohighlight">\(p_i &gt; 0\)</span>. The end of period prices are <span class="math notranslate nohighlight">\(p_i^+ &gt;0\)</span>. The asset (fractional) returns are <span class="math notranslate nohighlight">\(r_i = (p_i^+-p_i)/p_i\)</span>. The porfolio (fractional) return is <span class="math notranslate nohighlight">\(R = r^Tw\)</span>.</p>
+<p>A common model is that <span class="math notranslate nohighlight">\(r\)</span> is a random variable with mean <span class="math notranslate nohighlight">\({\bf E}r = \mu\)</span> and covariance <span class="math notranslate nohighlight">\({\bf E{(r-\mu)(r-\mu)^T}} = \Sigma\)</span>.
+It follows that <span class="math notranslate nohighlight">\(R\)</span> is a random variable with <span class="math notranslate nohighlight">\({\bf E}R = \mu^T w\)</span> and <span class="math notranslate nohighlight">\({\bf var}(R) = w^T\Sigma w\)</span>.
+<span class="math notranslate nohighlight">\({\bf E}R\)</span> is the (mean) <em>return</em> of the portfolio. <span class="math notranslate nohighlight">\({\bf var}(R)\)</span> is the <em>risk</em> of the portfolio.
+(Risk is also sometimes given as <span class="math notranslate nohighlight">\({\bf std}(R) = \sqrt{{\bf var}(R)}\)</span>.)</p>
+<p>Portfolio optimization has two competing objectives: high return and low risk.</p>
+</section>
+<section id="classical-markowitz-portfolio-optimization">
+<h2>Classical (Markowitz) portfolio optimization<a class="headerlink" href="#classical-markowitz-portfolio-optimization" title="Permalink to this heading">#</a></h2>
+<p>Classical (Markowitz) portfolio optimization solves the optimization problem</p>
+<p>\begin{array}{ll} \mbox{maximize} &amp; \mu^T w - \gamma w^T\Sigma w\
+\mbox{subject to} &amp; {\bf 1}^T w = 1, \quad w \in {\cal W},
+\end{array}</p>
+<p>where <span class="math notranslate nohighlight">\(w \in {\bf R}^n\)</span> is the optimization variable, <span class="math notranslate nohighlight">\(\cal W\)</span> is a set of allowed portfolios (e.g., <span class="math notranslate nohighlight">\({\cal W} = {\bf R}_+^n\)</span> for a long only portfolio), and <span class="math notranslate nohighlight">\(\gamma &gt;0\)</span> is the <em>risk aversion parameter</em>.</p>
+<p>The objective <span class="math notranslate nohighlight">\(\mu^Tw - \gamma w^T\Sigma w\)</span> is the <em>risk-adjusted return</em>. Varying <span class="math notranslate nohighlight">\(\gamma\)</span> gives the optimal <em>risk-return trade-off</em>.
+We can get the same risk-return trade-off by fixing return and minimizing risk.</p>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<p>In the following code we compute and plot the optimal risk-return trade-off for <span class="math notranslate nohighlight">\(10\)</span> assets, restricting ourselves to a long only portfolio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data for long only portfolio optimization.</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Long only portfolio optimization.</span>
+<span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
+
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">w</span>
+<span class="n">risk</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">quad_form</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">risk</span><span class="p">),</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">w</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute trade-off curve.</span>
+<span class="n">SAMPLES</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">risk_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">SAMPLES</span><span class="p">)</span>
+<span class="n">ret_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">SAMPLES</span><span class="p">)</span>
+<span class="n">gamma_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">SAMPLES</span><span class="p">):</span>
+    <span class="n">gamma</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">gamma_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    <span class="n">risk_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">risk</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">ret_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1985/3491241395.py:10: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+  ret_data[i] = ret.value
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot long only trade-off curve.</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;svg&#39;
+
+<span class="n">markers_on</span> <span class="o">=</span> <span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">risk_data</span><span class="p">,</span> <span class="n">ret_data</span><span class="p">,</span> <span class="s2">&quot;g-&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">marker</span> <span class="ow">in</span> <span class="n">markers_on</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">risk_data</span><span class="p">[</span><span class="n">marker</span><span class="p">],</span> <span class="n">ret_data</span><span class="p">[</span><span class="n">marker</span><span class="p">],</span> <span class="s2">&quot;bs&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&quot;$\gamma = </span><span class="si">%.2f</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="n">gamma_vals</span><span class="p">[</span><span class="n">marker</span><span class="p">],</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">risk_data</span><span class="p">[</span><span class="n">marker</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.08</span><span class="p">,</span> <span class="n">ret_data</span><span class="p">[</span><span class="n">marker</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.03</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Sigma</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Standard deviation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Return&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/f7940963ae43290c8d1a94594ddb15ef6af1e813141cd3e1d1dcc8fc85358d3d.svg" src="../../../_images/f7940963ae43290c8d1a94594ddb15ef6af1e813141cd3e1d1dcc8fc85358d3d.svg" /></div>
+</div>
+<p>We plot below the return distributions for the two risk aversion values marked on the trade-off curve.
+Notice that the probability of a loss is near 0 for the low risk value and far above 0 for the high risk value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot return distributions for two points on the trade-off curve.</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">spstats</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">midx</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">markers_on</span><span class="p">):</span>
+    <span class="n">gamma</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">gamma_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span>
+        <span class="n">spstats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ret</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">risk</span><span class="o">.</span><span class="n">value</span><span class="p">),</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\gamma = </span><span class="si">%.2f</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="n">gamma</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Return&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/f6eda092630bc4ac783472934eaa97009bb52f2fe932b87ce3f3d81e19c2ca98.svg" src="../../../_images/f6eda092630bc4ac783472934eaa97009bb52f2fe932b87ce3f3d81e19c2ca98.svg" /></div>
+</div>
+<section id="portfolio-constraints">
+<h3>Portfolio constraints<a class="headerlink" href="#portfolio-constraints" title="Permalink to this heading">#</a></h3>
+<p>There are many other possible portfolio constraints besides the long only constraint. With no constraint (<span class="math notranslate nohighlight">\({\cal W} = {\bf R}^n\)</span>), the optimization problem has a simple analytical solution. We will look in detail at a <em>leverage limit</em>, or the constraint that <span class="math notranslate nohighlight">\(\|w \|_1 \leq L^\mathrm{max}\)</span>.</p>
+<p>Another interesting constraint is the <em>market neutral</em> constraint <span class="math notranslate nohighlight">\(m^T \Sigma w =0\)</span>, where <span class="math notranslate nohighlight">\(m_i\)</span> is the capitalization of asset <span class="math notranslate nohighlight">\(i\)</span>.
+<span class="math notranslate nohighlight">\(M = m^Tr\)</span> is the <em>market return</em>, and <span class="math notranslate nohighlight">\(m^T \Sigma w = {\bf cov}(M,R)\)</span>.
+The market neutral constraint ensures that the portfolio return is uncorrelated with the market return.</p>
+</section>
+<section id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>In the following code we compute and plot optimal risk-return trade-off curves for leverage limits of 1, 2, and 4.
+Notice that more leverage increases returns and allows greater risk.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Portfolio optimization with leverage limit.</span>
+<span class="n">Lmax</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">()</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span>
+    <span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">risk</span><span class="p">),</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">Lmax</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute trade-off curve for each leverage limit.</span>
+<span class="n">L_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">SAMPLES</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">risk_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">L_vals</span><span class="p">),</span> <span class="n">SAMPLES</span><span class="p">))</span>
+<span class="n">ret_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">L_vals</span><span class="p">),</span> <span class="n">SAMPLES</span><span class="p">))</span>
+<span class="n">gamma_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">)</span>
+<span class="n">w_vals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">L_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L_vals</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">SAMPLES</span><span class="p">):</span>
+        <span class="n">Lmax</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">L_val</span>
+        <span class="n">gamma</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">gamma_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">SCS</span><span class="p">)</span>
+        <span class="n">risk_data</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">risk</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">ret_data</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1985/231315309.py:14: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+  ret_data[k, i] = ret.value
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot trade-off curves for each leverage limit.</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">L_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L_vals</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">risk_data</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:],</span> <span class="n">ret_data</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$L^{\max}$ = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">L_val</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">w_val</span> <span class="ow">in</span> <span class="n">w_vals</span><span class="p">:</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">w_val</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">risk</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">ret</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;bs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Standard deviation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Return&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/c6b8296c56c8f2ede4f1adb557bbf102bb88169b0d3708db6acdc6603c89740b.svg" src="../../../_images/c6b8296c56c8f2ede4f1adb557bbf102bb88169b0d3708db6acdc6603c89740b.svg" /></div>
+</div>
+<p>We next examine the points on each trade-off curve where <span class="math notranslate nohighlight">\(w^T\Sigma w = 2\)</span>.
+We plot the amount of each asset held in each portfolio as bar graphs. (Negative holdings indicate a short position.)
+Notice that some assets are held in a long position for the low leverage portfolio but in a short position in the higher leverage portfolios.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Portfolio optimization with a leverage limit and a bound on risk.</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span><span class="p">),</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">Lmax</span><span class="p">,</span> <span class="n">risk</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute solution for different leverage limits.</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">L_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L_vals</span><span class="p">):</span>
+    <span class="n">Lmax</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">L_val</span>
+    <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    <span class="n">w_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot bar graph of holdings for different leverage limits.</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">]</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">mu</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">L_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L_vals</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">idx</span> <span class="o">-</span> <span class="mf">0.375</span><span class="p">,</span>
+        <span class="n">w_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">indices</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$L^{\max}$ = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">L_val</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$w_i$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$i$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.375</span><span class="p">,</span> <span class="mi">10</span> <span class="o">+</span> <span class="mf">0.375</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/7a0b7f955694d0a0f252d012ca59a98169de42358d1c899a913bd223770a329a.svg" src="../../../_images/7a0b7f955694d0a0f252d012ca59a98169de42358d1c899a913bd223770a329a.svg" /></div>
+</div>
+</section>
+</section>
+<section id="variations">
+<h2>Variations<a class="headerlink" href="#variations" title="Permalink to this heading">#</a></h2>
+<p>There are many more variations of classical portfolio optimization. We might require that <span class="math notranslate nohighlight">\(\mu^T w \geq R^\mathrm{min}\)</span> and minimize <span class="math notranslate nohighlight">\(w^T \Sigma w\)</span> or <span class="math notranslate nohighlight">\(\|\Sigma ^{1/2} w\|_2\)</span>.
+We could include the (broker) cost of short positions as the penalty <span class="math notranslate nohighlight">\(s^T (w)_-\)</span> for some <span class="math notranslate nohighlight">\(s \geq 0\)</span>.
+We could include transaction costs (from a previous portfolio <span class="math notranslate nohighlight">\(w^\mathrm{prev}\)</span>) as the penalty</p>
+<div class="math notranslate nohighlight">
+\[
+\kappa ^T |w-w^\mathrm{prev}|^\eta, \quad
+\kappa \geq 0.
+\]</div>
+<p>Common values of <span class="math notranslate nohighlight">\(\eta\)</span> are <span class="math notranslate nohighlight">\(\eta =1, ~ 3/2, ~2\)</span>.</p>
+</section>
+<section id="factor-covariance-model">
+<h2>Factor covariance model<a class="headerlink" href="#factor-covariance-model" title="Permalink to this heading">#</a></h2>
+<p>A particularly common and useful variation is to model the covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> as a factor model</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma  =  F \tilde \Sigma F^T + D,
+\]</div>
+<p>where  <span class="math notranslate nohighlight">\(F \in {\bf R}^{n \times k}\)</span>, <span class="math notranslate nohighlight">\(k \ll n\)</span> is the <em>factor loading matrix</em>. <span class="math notranslate nohighlight">\(k\)</span> is the number of factors (or sectors) (typically 10s). <span class="math notranslate nohighlight">\(F_{ij}\)</span> is the loading of asset <span class="math notranslate nohighlight">\(i\)</span> to factor <span class="math notranslate nohighlight">\(j\)</span>.
+<span class="math notranslate nohighlight">\(D\)</span> is a diagonal matrix; <span class="math notranslate nohighlight">\(D_{ii}&gt;0\)</span> is the <em>idiosyncratic risk</em>. <span class="math notranslate nohighlight">\(\tilde \Sigma &gt; 0\)</span> is the <em>factor covariance matrix</em>.</p>
+<p><span class="math notranslate nohighlight">\(F^Tw \in {\bf R}^k\)</span> gives the portfolio <em>factor exposures</em>. A portfolio is <em>factor <span class="math notranslate nohighlight">\(j\)</span> neutral</em> if <span class="math notranslate nohighlight">\((F^Tw)_j=0\)</span>.</p>
+</section>
+<section id="portfolio-optimization-with-factor-covariance-model">
+<h2>Portfolio optimization with factor covariance model<a class="headerlink" href="#portfolio-optimization-with-factor-covariance-model" title="Permalink to this heading">#</a></h2>
+<p>Using the factor covariance model, we frame the portfolio optimization problem as</p>
+<p>\begin{array}{ll} \mbox{maximize} &amp; \mu^T w - \gamma \left(f^T \tilde \Sigma f  + w^TDw \right) \
+\mbox{subject to} &amp; {\bf 1}^T w = 1, \quad f=F^Tw\
+&amp; w \in {\cal W}, \quad f \in {\cal F},
+\end{array}</p>
+<p>where the variables are the allocations <span class="math notranslate nohighlight">\(w \in {\bf R}^n\)</span> and factor exposures <span class="math notranslate nohighlight">\(f\in {\bf R}^k\)</span> and <span class="math notranslate nohighlight">\(\cal F\)</span> gives the factor exposure constraints.</p>
+<p>Using the factor covariance model in the optimization problem has a computational advantage. The solve time is <span class="math notranslate nohighlight">\(O(nk^2)\)</span> versus <span class="math notranslate nohighlight">\(O(n^3)\)</span> for the standard problem.</p>
+</section>
+<section id="id2">
+<h2>Example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>In the following code we generate and solve a portfolio optimization problem with 50 factors and 3000 assets.
+We set the leverage limit <span class="math notranslate nohighlight">\(=2\)</span> and <span class="math notranslate nohighlight">\(\gamma=0.1\)</span>.</p>
+<p>We solve the problem both with the covariance given as a single matrix and as a factor model.
+Using CVXPY with the OSQP solver running in a single thread, the solve time was 173.30 seconds for the single matrix formulation and 0.85 seconds for the factor model formulation.
+We collected the timings on a MacBook Air with an Intel Core i7 processor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data for factor model.</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Sigma_tilde</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="n">Sigma_tilde</span> <span class="o">=</span> <span class="n">Sigma_tilde</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sigma_tilde</span><span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diags</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">))</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Factor model portfolio optimization.</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Lmax</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">()</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">w</span>
+<span class="n">risk</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">quad_form</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Sigma_tilde</span><span class="p">)</span> <span class="o">+</span> <span class="n">cp</span><span class="o">.</span><span class="n">sum_squares</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="o">@</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">prob_factor</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span>
+    <span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">risk</span><span class="p">),</span>
+    <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">f</span> <span class="o">==</span> <span class="n">F</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">w</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">Lmax</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># Solve the factor model problem.</span>
+<span class="n">Lmax</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">gamma</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">prob_factor</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============================================================================
+                                     CVXPY                                     
+                                     v1.3.1                                    
+===============================================================================
+(CVXPY) Jun 23 09:20:07 PM: Your problem has 3050 variables, 3 constraints, and 2 parameters.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: It is compliant with the following grammars: DCP, DQCP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+                                  Compilation                                  
+-------------------------------------------------------------------------------
+(CVXPY) Jun 23 09:20:07 PM: Compiling problem (target solver=OSQP).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Applying reduction FlipObjective
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Applying reduction CvxAttr2Constr
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Applying reduction Qp2SymbolicQp
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Applying reduction QpMatrixStuffing
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Applying reduction OSQP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: Finished problem compilation (took 8.367e-02 seconds).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:07 PM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+                                Numerical solver                               
+-------------------------------------------------------------------------------
+(CVXPY) Jun 23 09:20:07 PM: Invoking solver OSQP  to obtain a solution.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------
+           OSQP v0.6.3  -  Operator Splitting QP Solver
+              (c) Bartolomeo Stellato,  Goran Banjac
+        University of Oxford  -  Stanford University 2021
+-----------------------------------------------------------------
+problem:  variables n = 9050, constraints m = 9052
+          nnz(P) + nnz(A) = 178325
+settings: linear system solver = qdldl,
+          eps_abs = 1.0e-05, eps_rel = 1.0e-05,
+          eps_prim_inf = 1.0e-04, eps_dual_inf = 1.0e-04,
+          rho = 1.00e-01 (adaptive),
+          sigma = 1.00e-06, alpha = 1.60, max_iter = 10000
+          check_termination: on (interval 25),
+          scaling: on, scaled_termination: off
+          warm start: on, polish: on, time_limit: off
+
+iter   objective    pri res    dua res    rho        time
+   1  -2.1363e+03   7.63e+00   3.73e+02   1.00e-01   5.89e-02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 200  -4.2091e+00   2.19e-03   7.84e-03   3.56e-01   3.46e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 400  -4.6228e+00   3.07e-04   5.76e-04   3.56e-01   5.98e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 600  -4.6427e+00   2.23e-04   8.76e-04   3.56e-01   8.50e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 800  -4.6215e+00   1.14e-04   4.97e-04   3.56e-01   1.10e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000  -4.6214e+00   8.78e-05   1.06e-04   3.56e-01   1.35e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1200  -4.6204e+00   8.58e-05   9.26e-06   3.56e-01   1.60e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1400  -4.6138e+00   6.70e-05   2.37e-04   3.56e-01   1.85e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1600  -4.6067e+00   2.86e-05   1.19e-04   3.56e-01   2.10e+00s
+1675  -4.6051e+00   1.91e-05   3.72e-05   3.56e-01   2.19e+00s
+
+status:               solved
+solution polish:      unsuccessful
+number of iterations: 1675
+optimal objective:    -4.6051
+run time:             2.23e+00s
+optimal rho estimate: 3.20e-01
+
+-------------------------------------------------------------------------------
+                                    Summary                                    
+-------------------------------------------------------------------------------
+(CVXPY) Jun 23 09:20:09 PM: Problem status: optimal
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Optimal value: 4.605e+00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Compilation took 8.367e-02 seconds
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Solver (including time spent in interface) took 2.232e+00 seconds
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.605102963696751
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cvxpy.atoms.affine.wraps</span> <span class="kn">import</span> <span class="n">psd_wrap</span>
+
+<span class="c1"># Standard portfolio optimization with data from factor model.</span>
+<span class="n">risk</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">quad_form</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">psd_wrap</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sigma_tilde</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="p">))</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span>
+    <span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">risk</span><span class="p">),</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">Lmax</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Uncomment to solve the problem.</span>
+<span class="c1"># WARNING: this will take many minutes to run.</span>
+<span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============================================================================
+                                     CVXPY                                     
+                                     v1.3.1                                    
+===============================================================================
+(CVXPY) Jun 23 09:20:09 PM: Your problem has 3000 variables, 2 constraints, and 2 parameters.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: It is compliant with the following grammars: DCP, DQCP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+                                  Compilation                                  
+-------------------------------------------------------------------------------
+(CVXPY) Jun 23 09:20:09 PM: Compiling problem (target solver=OSQP).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Applying reduction FlipObjective
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Applying reduction CvxAttr2Constr
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Applying reduction Qp2SymbolicQp
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:09 PM: Applying reduction QpMatrixStuffing
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:11 PM: Applying reduction OSQP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:12 PM: Finished problem compilation (took 2.257e+00 seconds).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 09:20:12 PM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+                                Numerical solver                               
+-------------------------------------------------------------------------------
+(CVXPY) Jun 23 09:20:12 PM: Invoking solver OSQP  to obtain a solution.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------
+           OSQP v0.6.3  -  Operator Splitting QP Solver
+              (c) Bartolomeo Stellato,  Goran Banjac
+        University of Oxford  -  Stanford University 2021
+-----------------------------------------------------------------
+problem:  variables n = 6000, constraints m = 6002
+          nnz(P) + nnz(A) = 4519500
+settings: linear system solver = qdldl,
+          eps_abs = 1.0e-05, eps_rel = 1.0e-05,
+          eps_prim_inf = 1.0e-04, eps_dual_inf = 1.0e-04,
+          rho = 1.00e-01 (adaptive),
+          sigma = 1.00e-06, alpha = 1.60, max_iter = 100000
+          check_termination: on (interval 25),
+          scaling: on, scaled_termination: off
+          warm start: on, polish: on, time_limit: off
+
+iter   objective    pri res    dua res    rho        time
+   1  -1.1774e+04   2.65e+02   1.51e+04   1.00e-01   5.16e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 200  -4.1080e+02   2.42e-01   8.86e-04   1.00e-01   7.73e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 400  -1.9413e+02   1.13e-01   2.51e-04   1.00e-01   1.03e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 600  -1.2345e+02   6.40e-02   1.09e-04   1.00e-01   1.29e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 800  -8.7560e+01   4.67e-02   5.29e-05   1.00e-01   1.55e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000  -6.5202e+01   3.49e-02   2.99e-05   1.00e-01   1.81e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1200  -5.0118e+01   2.68e-02   1.91e-05   1.00e-01   2.07e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1400  -3.9737e+01   2.09e-02   1.41e-05   1.00e-01   2.33e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1600  -3.2445e+01   1.72e-02   1.06e-05   1.00e-01   2.59e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1800  -2.6947e+01   1.42e-02   8.27e-06   1.00e-01   2.85e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000  -2.2700e+01   1.17e-02   6.57e-06   1.00e-01   3.10e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2200  -1.9294e+01   9.74e-03   5.29e-06   1.00e-01   3.36e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2400  -1.6616e+01   8.26e-03   4.32e-06   1.00e-01   3.62e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2600  -1.4460e+01   7.01e-03   3.56e-06   1.00e-01   3.88e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2800  -1.2704e+01   5.95e-03   2.93e-06   1.00e-01   4.14e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000  -1.1267e+01   5.06e-03   2.43e-06   1.00e-01   4.40e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3200  -1.0092e+01   4.25e-03   2.00e-06   1.00e-01   4.65e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3400  -9.1244e+00   3.58e-03   1.66e-06   1.00e-01   4.91e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3600  -8.3286e+00   3.04e-03   1.38e-06   1.00e-01   5.18e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3800  -7.6760e+00   2.60e-03   1.14e-06   1.00e-01   5.44e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4000  -7.1409e+00   2.26e-03   9.40e-07   1.00e-01   5.69e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4200  -6.7000e+00   2.04e-03   7.81e-07   1.00e-01   5.95e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4400  -6.3366e+00   1.85e-03   6.50e-07   1.00e-01   6.21e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4600  -6.0382e+00   1.69e-03   5.41e-07   1.00e-01   6.47e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4800  -5.7969e+00   1.58e-03   4.54e-07   1.00e-01   6.73e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5000  -5.5953e+00   1.46e-03   3.83e-07   1.00e-01   6.99e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5200  -5.4277e+00   1.37e-03   3.24e-07   1.00e-01   7.24e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5400  -5.2885e+00   1.28e-03   2.73e-07   1.00e-01   7.50e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5600  -5.1729e+00   1.20e-03   2.30e-07   1.00e-01   7.76e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5800  -5.0768e+00   1.13e-03   1.94e-07   1.00e-01   8.02e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6000  -4.9968e+00   1.08e-03   1.63e-07   1.00e-01   8.28e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6200  -4.9301e+00   1.02e-03   1.37e-07   1.00e-01   8.53e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6400  -4.8746e+00   9.80e-04   1.18e-07   1.00e-01   8.79e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6600  -4.8281e+00   9.40e-04   1.09e-07   1.00e-01   9.05e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6800  -4.7893e+00   9.04e-04   1.01e-07   1.00e-01   9.31e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7000  -4.7568e+00   8.72e-04   9.40e-08   1.00e-01   9.57e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7200  -4.7295e+00   8.44e-04   8.75e-08   1.00e-01   9.82e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7400  -4.7372e+00   8.63e-04   2.54e-07   1.00e-01   1.01e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7600  -4.7339e+00   8.57e-04   1.41e-07   1.00e-01   1.03e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7800  -4.7278e+00   8.25e-04   8.93e-08   1.00e-01   1.06e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8000  -4.7195e+00   7.99e-04   5.47e-08   1.00e-01   1.09e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8200  -4.7100e+00   7.75e-04   4.25e-08   1.00e-01   1.11e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8400  -4.7002e+00   7.59e-04   3.67e-08   1.00e-01   1.14e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8600  -4.6909e+00   7.51e-04   3.23e-08   1.00e-01   1.16e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8800  -4.6824e+00   7.42e-04   3.05e-08   1.00e-01   1.19e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9000  -4.6749e+00   7.35e-04   2.86e-08   1.00e-01   1.21e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9200  -4.6684e+00   7.27e-04   2.66e-08   1.00e-01   1.24e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9400  -4.6627e+00   7.21e-04   2.47e-08   1.00e-01   1.27e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9600  -4.6577e+00   7.17e-04   2.29e-08   1.00e-01   1.29e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9800  -4.6534e+00   7.13e-04   2.15e-08   1.00e-01   1.32e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000  -4.6496e+00   7.10e-04   2.03e-08   1.00e-01   1.34e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10200  -4.6463e+00   7.06e-04   1.91e-08   1.00e-01   1.37e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10400  -4.6409e+00   7.00e-04   4.04e-07   5.01e-01   1.44e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10600  -4.6322e+00   6.86e-04   3.07e-07   5.01e-01   1.46e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10800  -4.6273e+00   6.73e-04   2.36e-07   5.01e-01   1.49e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11000  -4.6244e+00   6.63e-04   1.85e-07   5.01e-01   1.52e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11200  -4.6227e+00   6.53e-04   1.33e-07   5.01e-01   1.54e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11400  -4.6216e+00   6.44e-04   8.87e-08   5.01e-01   1.57e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11600  -4.6206e+00   6.43e-04   9.40e-08   5.01e-01   1.59e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11800  -4.6197e+00   6.43e-04   9.32e-08   5.01e-01   1.62e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12000  -4.6189e+00   6.42e-04   8.99e-08   5.01e-01   1.65e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12200  -4.6181e+00   6.40e-04   8.59e-08   5.01e-01   1.67e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12400  -4.6176e+00   6.39e-04   5.68e-06   5.01e-01   1.70e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12600  -4.6171e+00   6.19e-04   3.02e-07   5.01e-01   1.72e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12800  -4.6157e+00   6.16e-04   1.96e-07   5.01e-01   1.75e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13000  -4.6153e+00   6.13e-04   1.40e-07   5.01e-01   1.78e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13200  -4.6148e+00   6.10e-04   1.05e-07   5.01e-01   1.80e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13400  -4.6392e+00   5.67e-04   1.24e-07   5.42e-02   1.87e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13600  -4.6456e+00   5.56e-04   4.08e-08   5.42e-02   1.89e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13800  -4.6489e+00   5.51e-04   2.48e-08   5.42e-02   1.92e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14000  -4.6506e+00   5.47e-04   1.95e-08   5.42e-02   1.95e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14200  -4.6512e+00   5.42e-04   1.67e-08   5.42e-02   1.97e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14400  -4.6511e+00   5.38e-04   1.48e-08   5.42e-02   2.00e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14600  -4.6497e+00   5.33e-04   3.00e-07   2.80e-01   2.07e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14800  -4.6445e+00   5.24e-04   2.17e-07   2.80e-01   2.09e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15000  -4.6399e+00   5.12e-04   1.80e-07   2.80e-01   2.12e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15200  -4.6364e+00   5.01e-04   1.55e-07   2.80e-01   2.15e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15400  -4.6338e+00   4.91e-04   1.34e-07   2.80e-01   2.17e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15600  -4.6320e+00   4.78e-04   5.81e-07   2.80e-01   2.20e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15800  -4.6304e+00   4.65e-04   9.54e-08   2.80e-01   2.22e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16000  -4.6293e+00   4.57e-04   7.78e-08   2.80e-01   2.25e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16200  -4.6285e+00   4.51e-04   7.10e-08   2.80e-01   2.28e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16400  -4.6278e+00   4.45e-04   6.39e-08   2.80e-01   2.30e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16600  -4.6271e+00   4.40e-04   5.73e-08   2.80e-01   2.33e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16800  -4.6266e+00   4.37e-04   5.15e-08   2.80e-01   2.35e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17000  -4.6260e+00   4.34e-04   4.64e-08   2.80e-01   2.38e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17200  -4.6256e+00   4.31e-04   4.20e-08   2.80e-01   2.41e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17400  -4.6251e+00   4.29e-04   3.81e-08   2.80e-01   2.43e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17600  -4.6247e+00   4.27e-04   3.47e-08   2.80e-01   2.46e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17800  -4.6243e+00   4.25e-04   3.16e-08   2.80e-01   2.48e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18000  -4.6240e+00   4.23e-04   2.89e-08   2.80e-01   2.51e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18200  -4.6236e+00   4.22e-04   2.64e-08   2.80e-01   2.54e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18400  -4.6233e+00   4.21e-04   2.43e-08   2.80e-01   2.56e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18600  -4.6230e+00   4.21e-04   2.23e-08   2.80e-01   2.59e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18800  -4.6228e+00   4.21e-04   2.05e-08   2.80e-01   2.62e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19000  -4.6225e+00   4.21e-04   1.89e-08   2.80e-01   2.64e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200  -4.6223e+00   4.21e-04   1.74e-08   2.80e-01   2.67e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19400  -4.6220e+00   4.21e-04   1.61e-08   2.80e-01   2.69e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19600  -4.6218e+00   4.21e-04   1.49e-08   2.80e-01   2.72e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19800  -4.6216e+00   4.21e-04   1.38e-08   2.80e-01   2.75e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20000  -4.6214e+00   4.21e-04   1.29e-08   2.80e-01   2.77e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20200  -4.6212e+00   4.20e-04   1.19e-08   2.80e-01   2.80e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20400  -4.6211e+00   4.20e-04   1.11e-08   2.80e-01   2.83e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20600  -4.6209e+00   4.20e-04   1.03e-08   2.80e-01   2.85e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20800  -4.6207e+00   4.19e-04   1.95e-07   1.46e+00   2.92e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21000  -4.6202e+00   4.17e-04   1.44e-07   1.46e+00   2.95e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21200  -4.6238e+00   4.12e-04   1.13e-07   2.69e-01   3.02e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21400  -4.6229e+00   4.14e-04   1.10e-07   2.69e-01   3.04e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21600  -4.6225e+00   4.15e-04   7.95e-08   2.69e-01   3.07e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21800  -4.6224e+00   4.16e-04   6.05e-08   2.69e-01   3.09e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22000  -4.6225e+00   4.16e-04   4.75e-08   2.69e-01   3.12e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22200  -4.6226e+00   4.16e-04   3.81e-08   2.69e-01   3.14e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22400  -4.6227e+00   4.16e-04   3.11e-08   2.69e-01   3.17e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22600  -4.6229e+00   4.15e-04   2.57e-08   2.69e-01   3.20e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22800  -4.6230e+00   4.15e-04   2.16e-08   2.69e-01   3.22e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23000  -4.6231e+00   4.15e-04   1.87e-08   2.69e-01   3.25e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23200  -4.6232e+00   4.15e-04   1.65e-08   2.69e-01   3.27e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23400  -4.6233e+00   4.14e-04   1.46e-08   2.69e-01   3.30e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23600  -4.6234e+00   4.14e-04   1.29e-08   2.69e-01   3.33e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23800  -4.6235e+00   4.14e-04   1.16e-08   2.69e-01   3.35e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24000  -4.6235e+00   4.14e-04   1.04e-08   2.69e-01   3.38e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24200  -4.6236e+00   4.13e-04   2.25e-07   1.40e+00   3.45e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24400  -4.6238e+00   4.22e-04   2.19e-07   2.34e-01   3.52e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24600  -4.6265e+00   4.22e-04   3.79e-07   2.34e-01   3.54e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24800  -4.6302e+00   4.17e-04   1.29e-07   2.34e-01   3.57e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25000  -4.6321e+00   4.15e-04   1.06e-07   2.34e-01   3.59e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25200  -4.6335e+00   4.13e-04   8.90e-08   2.34e-01   3.62e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25400  -4.6344e+00   4.11e-04   7.58e-08   2.34e-01   3.64e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25600  -4.6351e+00   4.09e-04   6.66e-08   2.34e-01   3.67e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25800  -4.6356e+00   4.07e-04   5.95e-08   2.34e-01   3.70e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26000  -4.6361e+00   4.05e-04   5.33e-08   2.34e-01   3.72e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26200  -4.6365e+00   4.04e-04   4.80e-08   2.34e-01   3.75e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26400  -4.6368e+00   4.03e-04   4.34e-08   2.34e-01   3.77e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26600  -4.6372e+00   4.02e-04   4.13e-08   2.34e-01   3.80e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26800  -4.6375e+00   4.00e-04   3.59e-08   2.34e-01   3.83e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27000  -4.6377e+00   4.00e-04   3.39e-08   2.34e-01   3.85e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27200  -4.6380e+00   3.99e-04   3.16e-08   2.34e-01   3.88e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27400  -4.6383e+00   3.99e-04   2.91e-08   2.34e-01   3.90e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27600  -4.6385e+00   3.98e-04   2.68e-08   2.34e-01   3.93e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27800  -4.6388e+00   3.98e-04   2.47e-08   2.34e-01   3.96e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28000  -4.6390e+00   3.98e-04   2.28e-08   2.34e-01   3.98e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28200  -4.6393e+00   3.98e-04   2.14e-08   2.34e-01   4.01e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28400  -4.6395e+00   3.97e-04   2.05e-08   2.34e-01   4.03e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28600  -4.6397e+00   3.97e-04   1.95e-08   2.34e-01   4.06e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>28800  -4.6400e+00   3.97e-04   1.79e-08   2.34e-01   4.08e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29000  -4.6405e+00   3.85e-04   3.46e-07   2.34e-01   4.11e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29200  -4.6448e+00   3.75e-04   2.10e-07   2.34e-01   4.14e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29400  -4.6481e+00   3.69e-04   1.46e-07   2.34e-01   4.16e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29600  -4.6501e+00   3.68e-04   1.09e-07   2.34e-01   4.19e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>29800  -4.6512e+00   3.68e-04   8.54e-08   2.34e-01   4.21e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30000  -4.6517e+00   3.69e-04   6.90e-08   2.34e-01   4.24e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30200  -4.6556e+00   3.65e-04   3.43e-07   2.34e-01   4.27e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30400  -4.6609e+00   3.68e-04   1.75e-07   2.34e-01   4.29e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30600  -4.6612e+00   3.71e-04   1.03e-07   2.34e-01   4.32e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30800  -4.6598e+00   3.71e-04   6.73e-08   2.34e-01   4.34e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31000  -4.6582e+00   3.70e-04   4.67e-08   2.34e-01   4.37e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31200  -4.6582e+00   3.67e-04   1.96e-07   2.34e-01   4.40e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31400  -4.6574e+00   3.60e-04   1.08e-07   2.34e-01   4.42e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31600  -4.6560e+00   3.54e-04   6.89e-08   2.34e-01   4.45e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>31800  -4.6550e+00   3.51e-04   4.76e-08   2.34e-01   4.47e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32000  -4.6543e+00   3.48e-04   3.47e-08   2.34e-01   4.50e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32200  -4.6538e+00   3.46e-04   2.65e-08   2.34e-01   4.53e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32400  -4.6534e+00   3.46e-04   2.09e-08   2.34e-01   4.55e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32600  -4.6532e+00   3.45e-04   1.87e-08   2.34e-01   4.58e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32800  -4.6530e+00   3.45e-04   1.76e-08   2.34e-01   4.61e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33000  -4.6529e+00   3.45e-04   1.66e-08   2.34e-01   4.63e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33200  -4.6559e+00   3.44e-04   1.70e-07   2.34e-01   4.66e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33400  -4.6590e+00   3.43e-04   1.26e-07   2.34e-01   4.68e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33600  -4.6602e+00   3.42e-04   1.01e-07   2.34e-01   4.71e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33800  -4.6603e+00   3.40e-04   8.33e-08   2.34e-01   4.74e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34000  -4.6600e+00   3.37e-04   7.09e-08   2.34e-01   4.76e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34200  -4.6594e+00   3.35e-04   6.14e-08   2.34e-01   4.79e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34400  -4.6588e+00   3.33e-04   5.38e-08   2.34e-01   4.81e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34600  -4.6582e+00   3.30e-04   4.77e-08   2.34e-01   4.84e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34800  -4.6576e+00   3.28e-04   4.25e-08   2.34e-01   4.87e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35000  -4.6570e+00   3.26e-04   3.81e-08   2.34e-01   4.89e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35200  -4.6565e+00   3.24e-04   3.44e-08   2.34e-01   4.92e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35400  -4.6561e+00   3.22e-04   3.11e-08   2.34e-01   4.94e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35600  -4.6557e+00   3.20e-04   2.82e-08   2.34e-01   4.97e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35800  -4.6553e+00   3.18e-04   2.67e-08   2.34e-01   4.99e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36000  -4.6550e+00   3.17e-04   2.55e-08   2.34e-01   5.02e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36200  -4.6547e+00   3.15e-04   2.43e-08   2.34e-01   5.05e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36400  -4.6544e+00   3.14e-04   2.32e-08   2.34e-01   5.07e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36600  -4.6542e+00   3.13e-04   2.21e-08   2.34e-01   5.10e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>36800  -4.6540e+00   3.11e-04   2.10e-08   2.34e-01   5.12e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37000  -4.6538e+00   3.10e-04   2.00e-08   2.34e-01   5.15e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37200  -4.6536e+00   3.09e-04   1.90e-08   2.34e-01   5.18e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37400  -4.6567e+00   3.11e-04   4.28e-07   2.34e-01   5.20e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37600  -4.6643e+00   2.98e-04   1.74e-07   2.34e-01   5.23e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37800  -4.6640e+00   2.94e-04   1.01e-07   2.34e-01   5.25e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38000  -4.6621e+00   2.92e-04   7.74e-08   2.34e-01   5.28e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38200  -4.6601e+00   2.89e-04   6.50e-08   2.34e-01   5.31e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38400  -4.6584e+00   2.87e-04   5.52e-08   2.34e-01   5.33e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38600  -4.6570e+00   2.85e-04   4.80e-08   2.34e-01   5.36e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38800  -4.6559e+00   2.84e-04   4.62e-08   2.34e-01   5.38e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39000  -4.6550e+00   2.84e-04   4.42e-08   2.34e-01   5.41e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39200  -4.6543e+00   2.84e-04   4.23e-08   2.34e-01   5.44e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39400  -4.6537e+00   2.85e-04   4.04e-08   2.34e-01   5.46e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39600  -4.6532e+00   2.85e-04   3.85e-08   2.34e-01   5.49e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>39800  -4.6528e+00   2.85e-04   3.66e-08   2.34e-01   5.51e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40000  -4.6525e+00   2.85e-04   3.49e-08   2.34e-01   5.54e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40200  -4.6522e+00   2.85e-04   3.32e-08   2.34e-01   5.56e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40400  -4.6520e+00   2.85e-04   3.16e-08   2.34e-01   5.59e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40600  -4.6518e+00   2.84e-04   3.00e-08   2.34e-01   5.62e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>40800  -4.6516e+00   2.84e-04   2.86e-08   2.34e-01   5.64e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41000  -4.6514e+00   2.84e-04   2.72e-08   2.34e-01   5.67e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41200  -4.6512e+00   2.84e-04   2.59e-08   2.34e-01   5.70e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41400  -4.6511e+00   2.84e-04   2.47e-08   2.34e-01   5.72e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41600  -4.6509e+00   2.83e-04   2.36e-08   2.34e-01   5.75e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41800  -4.6508e+00   2.83e-04   2.25e-08   2.34e-01   5.77e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42000  -4.6507e+00   2.83e-04   2.15e-08   2.34e-01   5.80e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42200  -4.6505e+00   2.83e-04   2.05e-08   2.34e-01   5.82e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42400  -4.6504e+00   2.82e-04   1.96e-08   2.34e-01   5.85e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42600  -4.6503e+00   2.82e-04   1.88e-08   2.34e-01   5.88e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42800  -4.6502e+00   2.82e-04   1.80e-08   2.34e-01   5.90e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43000  -4.6501e+00   2.81e-04   1.72e-08   2.34e-01   5.93e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43200  -4.6499e+00   2.81e-04   1.65e-08   2.34e-01   5.95e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43400  -4.6498e+00   2.81e-04   1.58e-08   2.34e-01   5.98e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43600  -4.6497e+00   2.81e-04   1.51e-08   2.34e-01   6.01e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>43800  -4.6496e+00   2.80e-04   1.45e-08   2.34e-01   6.03e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44000  -4.6495e+00   2.80e-04   1.40e-08   2.34e-01   6.06e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44200  -4.6494e+00   2.80e-04   1.34e-08   2.34e-01   6.08e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44400  -4.6493e+00   2.79e-04   1.29e-08   2.34e-01   6.11e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44600  -4.6492e+00   2.79e-04   1.24e-08   2.34e-01   6.14e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44800  -4.6491e+00   2.79e-04   1.19e-08   2.34e-01   6.16e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45000  -4.6490e+00   2.78e-04   1.15e-08   2.34e-01   6.19e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45200  -4.6489e+00   2.78e-04   1.11e-08   2.34e-01   6.21e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45400  -4.6488e+00   2.78e-04   1.07e-08   2.34e-01   6.24e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45600  -4.6488e+00   2.77e-04   1.03e-08   2.34e-01   6.27e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>45800  -4.6487e+00   2.77e-04   9.91e-09   2.34e-01   6.29e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46000  -4.6486e+00   2.77e-04   9.57e-09   2.34e-01   6.32e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46200  -4.6485e+00   2.77e-04   9.23e-09   2.34e-01   6.34e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46400  -4.6484e+00   2.76e-04   8.92e-09   2.34e-01   6.37e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46600  -4.6483e+00   2.76e-04   8.62e-09   2.34e-01   6.40e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46800  -4.6482e+00   2.76e-04   8.33e-09   2.34e-01   6.42e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47000  -4.6485e+00   2.75e-04   1.51e-07   2.34e-01   6.45e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47200  -4.6485e+00   2.72e-04   1.07e-07   2.34e-01   6.47e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47400  -4.6479e+00   2.69e-04   8.23e-08   2.34e-01   6.50e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47600  -4.6474e+00   2.67e-04   6.62e-08   2.34e-01   6.52e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>47800  -4.6470e+00   2.65e-04   5.45e-08   2.34e-01   6.55e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48000  -4.6466e+00   2.63e-04   4.61e-08   2.34e-01   6.58e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48200  -4.6463e+00   2.61e-04   3.99e-08   2.34e-01   6.60e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48400  -4.6459e+00   2.59e-04   3.51e-08   2.34e-01   6.63e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48600  -4.6456e+00   2.58e-04   3.13e-08   2.34e-01   6.66e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>48800  -4.6454e+00   2.57e-04   2.83e-08   2.34e-01   6.68e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49000  -4.6451e+00   2.57e-04   2.59e-08   2.34e-01   6.71e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49200  -4.6449e+00   2.57e-04   2.39e-08   2.34e-01   6.73e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49400  -4.6447e+00   2.57e-04   2.32e-08   2.34e-01   6.76e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49600  -4.6445e+00   2.57e-04   2.26e-08   2.34e-01   6.79e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49800  -4.6443e+00   2.56e-04   2.20e-08   2.34e-01   6.81e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50000  -4.6441e+00   2.56e-04   2.15e-08   2.34e-01   6.84e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50200  -4.6440e+00   2.56e-04   2.09e-08   2.34e-01   6.87e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50400  -4.6438e+00   2.55e-04   2.04e-08   2.34e-01   6.89e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50600  -4.6437e+00   2.55e-04   1.99e-08   2.34e-01   6.92e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50800  -4.6435e+00   2.55e-04   1.94e-08   2.34e-01   6.94e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51000  -4.6434e+00   2.55e-04   1.90e-08   2.34e-01   6.97e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51200  -4.6433e+00   2.54e-04   1.85e-08   2.34e-01   7.00e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51400  -4.6431e+00   2.54e-04   1.81e-08   2.34e-01   7.02e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51600  -4.6430e+00   2.54e-04   1.77e-08   2.34e-01   7.05e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>51800  -4.6429e+00   2.53e-04   1.73e-08   2.34e-01   7.07e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52000  -4.6435e+00   2.53e-04   9.66e-08   2.34e-01   7.10e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52200  -4.6442e+00   2.54e-04   6.55e-08   2.34e-01   7.12e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52400  -4.6445e+00   2.53e-04   5.23e-08   2.34e-01   7.15e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52600  -4.6446e+00   2.52e-04   4.44e-08   2.34e-01   7.18e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52800  -4.6447e+00   2.51e-04   3.89e-08   2.34e-01   7.20e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53000  -4.6446e+00   2.50e-04   3.47e-08   2.34e-01   7.23e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53200  -4.6446e+00   2.49e-04   3.13e-08   2.34e-01   7.25e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53400  -4.6445e+00   2.49e-04   2.86e-08   2.34e-01   7.28e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53600  -4.6444e+00   2.48e-04   2.62e-08   2.34e-01   7.31e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>53800  -4.6443e+00   2.47e-04   2.48e-08   2.34e-01   7.33e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54000  -4.6442e+00   2.46e-04   2.41e-08   2.34e-01   7.36e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54200  -4.6441e+00   2.45e-04   2.35e-08   2.34e-01   7.38e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54400  -4.6440e+00   2.45e-04   2.28e-08   2.34e-01   7.41e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54600  -4.6438e+00   2.44e-04   2.22e-08   2.34e-01   7.44e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>54800  -4.6437e+00   2.44e-04   2.15e-08   2.34e-01   7.46e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55000  -4.6436e+00   2.43e-04   2.09e-08   2.34e-01   7.49e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55200  -4.6435e+00   2.42e-04   2.02e-08   2.34e-01   7.51e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55400  -4.6433e+00   2.42e-04   1.95e-08   2.34e-01   7.54e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55600  -4.6433e+00   2.41e-04   1.28e-08   2.34e-01   7.57e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55800  -4.6436e+00   2.41e-04   9.86e-09   2.34e-01   7.59e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56000  -4.6438e+00   2.41e-04   8.52e-09   2.34e-01   7.62e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56200  -4.6439e+00   2.40e-04   7.90e-09   2.34e-01   7.64e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56400  -4.6440e+00   2.40e-04   7.31e-09   2.34e-01   7.67e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56600  -4.6440e+00   2.40e-04   6.73e-09   2.34e-01   7.69e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>56800  -4.6440e+00   2.40e-04   6.20e-09   2.34e-01   7.72e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57000  -4.6439e+00   2.39e-04   5.70e-09   2.34e-01   7.75e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57200  -4.6439e+00   2.37e-04   1.30e-07   1.19e+00   7.81e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57400  -4.6436e+00   2.35e-04   8.93e-08   1.19e+00   7.84e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57600  -4.6435e+00   2.34e-04   7.10e-08   1.19e+00   7.87e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>57800  -4.6449e+00   2.34e-04   3.96e-06   1.19e+00   7.89e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58000  -4.6463e+00   2.32e-04   1.09e-06   1.19e+00   7.92e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58200  -4.6444e+00   2.34e-04   4.44e-07   1.19e+00   7.95e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58400  -4.6435e+00   2.37e-04   7.84e-07   1.19e+00   7.97e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58600  -4.6469e+00   2.39e-04   8.83e-08   1.57e-01   8.04e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>58800  -4.6492e+00   2.44e-04   4.74e-08   1.57e-01   8.07e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59000  -4.6498e+00   2.46e-04   3.17e-08   1.57e-01   8.09e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59200  -4.6496e+00   2.48e-04   2.38e-08   1.57e-01   8.12e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59400  -4.6491e+00   2.49e-04   1.92e-08   1.57e-01   8.14e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59600  -4.6486e+00   2.49e-04   1.63e-08   1.57e-01   8.17e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>59800  -4.6480e+00   2.50e-04   1.42e-08   1.57e-01   8.19e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60000  -4.6474e+00   2.50e-04   1.26e-08   1.57e-01   8.22e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60200  -4.6469e+00   2.51e-04   1.14e-08   1.57e-01   8.25e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60400  -4.6464e+00   2.51e-04   1.03e-08   1.57e-01   8.27e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60600  -4.6460e+00   2.52e-04   9.42e-09   1.57e-01   8.30e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60800  -4.6456e+00   2.52e-04   8.66e-09   1.57e-01   8.32e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61000  -4.6453e+00   2.52e-04   7.47e-09   1.57e-01   8.35e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61200  -4.6450e+00   2.53e-04   6.91e-09   1.57e-01   8.38e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61400  -4.6447e+00   2.54e-04   6.47e-09   1.57e-01   8.40e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61600  -4.6440e+00   2.54e-04   1.32e-07   7.92e-01   8.47e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>61800  -4.6432e+00   2.55e-04   1.07e-07   7.92e-01   8.50e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62000  -4.6434e+00   2.55e-04   1.56e-07   7.92e-01   8.52e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62200  -4.6429e+00   2.52e-04   1.53e-06   7.92e-01   8.55e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62400  -4.6406e+00   2.35e-04   7.07e-07   7.92e-01   8.57e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62600  -4.6379e+00   2.21e-04   3.88e-07   7.92e-01   8.60e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>62800  -4.6371e+00   2.08e-04   3.71e-06   7.92e-01   8.63e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63000  -4.6406e+00   1.78e-04   8.30e-07   7.92e-01   8.65e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63200  -4.6397e+00   1.80e-04   6.64e-07   7.92e-01   8.68e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63400  -4.6389e+00   1.79e-04   5.45e-07   7.92e-01   8.70e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63600  -4.6384e+00   1.76e-04   4.76e-07   7.92e-01   8.73e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63800  -4.6379e+00   1.74e-04   4.22e-07   7.92e-01   8.76e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64000  -4.6373e+00   1.71e-04   3.77e-07   7.92e-01   8.78e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64200  -4.6368e+00   1.69e-04   3.41e-07   7.92e-01   8.81e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64400  -4.6361e+00   1.58e-04   8.39e-07   7.92e-01   8.83e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64600  -4.6350e+00   1.45e-04   5.84e-07   7.92e-01   8.86e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>64800  -4.6342e+00   1.41e-04   4.57e-07   7.92e-01   8.89e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65000  -4.6334e+00   1.37e-04   3.74e-07   7.92e-01   8.91e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65200  -4.6329e+00   1.34e-04   3.19e-07   7.92e-01   8.94e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65400  -4.6326e+00   1.31e-04   2.89e-07   7.92e-01   8.96e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65600  -4.6316e+00   1.21e-04   1.04e-06   7.92e-01   8.99e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65800  -4.6292e+00   1.16e-04   4.71e-07   7.92e-01   9.02e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66000  -4.6272e+00   1.12e-04   3.02e-07   7.92e-01   9.04e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66200  -4.6257e+00   1.10e-04   2.38e-07   7.92e-01   9.07e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66400  -4.6256e+00   1.09e-04   3.06e-07   7.92e-01   9.09e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66600  -4.6252e+00   1.08e-04   2.00e-07   7.92e-01   9.12e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>66800  -4.6244e+00   1.06e-04   1.64e-07   7.92e-01   9.15e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67000  -4.6238e+00   1.05e-04   1.55e-07   7.92e-01   9.17e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67200  -4.6234e+00   1.04e-04   1.40e-07   7.92e-01   9.20e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67400  -4.6230e+00   1.03e-04   1.25e-07   7.92e-01   9.22e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67600  -4.6227e+00   1.03e-04   1.12e-07   7.92e-01   9.25e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>67800  -4.6224e+00   1.02e-04   1.01e-07   7.92e-01   9.28e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68000  -4.6221e+00   1.02e-04   9.29e-08   7.92e-01   9.30e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68200  -4.6218e+00   1.01e-04   8.75e-08   7.92e-01   9.33e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68400  -4.6216e+00   1.01e-04   8.23e-08   7.92e-01   9.35e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68600  -4.6217e+00   9.98e-05   4.77e-07   7.92e-01   9.38e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>68800  -4.6227e+00   9.69e-05   1.51e-07   7.92e-01   9.41e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69000  -4.6228e+00   9.59e-05   7.30e-07   7.92e-01   9.43e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69200  -4.6236e+00   9.48e-05   1.61e-07   7.92e-01   9.46e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69400  -4.6233e+00   9.36e-05   8.87e-08   7.92e-01   9.48e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69600  -4.6229e+00   9.28e-05   7.39e-08   7.92e-01   9.51e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>69800  -4.6226e+00   9.20e-05   6.24e-08   7.92e-01   9.53e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70000  -4.6224e+00   9.12e-05   5.33e-08   7.92e-01   9.56e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70200  -4.6222e+00   9.07e-05   4.60e-08   7.92e-01   9.59e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70400  -4.6220e+00   9.02e-05   4.11e-08   7.92e-01   9.61e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70600  -4.6218e+00   8.98e-05   3.68e-08   7.92e-01   9.64e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>70800  -4.6217e+00   8.95e-05   3.30e-08   7.92e-01   9.66e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71000  -4.6216e+00   8.92e-05   5.44e-07   7.92e-01   9.69e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71200  -4.6219e+00   8.79e-05   9.31e-08   7.92e-01   9.72e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71400  -4.6219e+00   8.77e-05   5.00e-08   7.92e-01   9.74e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71600  -4.6220e+00   8.75e-05   4.18e-08   7.92e-01   9.77e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>71800  -4.6220e+00   8.71e-05   3.78e-08   7.92e-01   9.79e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72000  -4.6220e+00   8.68e-05   3.48e-08   7.92e-01   9.82e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72200  -4.6220e+00   8.64e-05   3.23e-08   7.92e-01   9.85e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72400  -4.6219e+00   8.61e-05   3.01e-08   7.92e-01   9.87e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72600  -4.6218e+00   8.58e-05   2.82e-08   7.92e-01   9.90e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>72800  -4.6218e+00   8.56e-05   2.65e-08   7.92e-01   9.92e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73000  -4.6217e+00   8.53e-05   2.49e-08   7.92e-01   9.95e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73200  -4.6217e+00   8.51e-05   2.35e-08   7.92e-01   9.98e+02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73400  -4.6216e+00   8.48e-05   2.22e-08   7.92e-01   1.00e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73600  -4.6215e+00   8.47e-05   2.10e-08   7.92e-01   1.00e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73800  -4.6215e+00   8.48e-05   1.98e-08   7.92e-01   1.01e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74000  -4.6214e+00   8.49e-05   1.88e-08   7.92e-01   1.01e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74200  -4.6214e+00   8.50e-05   1.78e-08   7.92e-01   1.01e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74400  -4.6213e+00   8.51e-05   1.69e-08   7.92e-01   1.01e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74600  -4.6213e+00   8.52e-05   1.61e-08   7.92e-01   1.02e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>74800  -4.6212e+00   8.53e-05   1.53e-08   7.92e-01   1.02e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75000  -4.6212e+00   8.53e-05   1.46e-08   7.92e-01   1.02e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75200  -4.6211e+00   8.54e-05   1.39e-08   7.92e-01   1.02e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75400  -4.6211e+00   8.54e-05   1.32e-08   7.92e-01   1.03e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75600  -4.6211e+00   8.55e-05   1.26e-08   7.92e-01   1.03e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75800  -4.6210e+00   8.55e-05   1.21e-08   7.92e-01   1.03e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76000  -4.6210e+00   8.55e-05   1.15e-08   7.92e-01   1.03e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76200  -4.6209e+00   8.55e-05   1.11e-08   7.92e-01   1.04e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76400  -4.6209e+00   8.55e-05   1.10e-08   7.92e-01   1.04e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76600  -4.6209e+00   8.55e-05   1.09e-08   7.92e-01   1.04e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>76800  -4.6208e+00   8.55e-05   1.08e-08   7.92e-01   1.04e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77000  -4.6208e+00   8.55e-05   1.07e-08   7.92e-01   1.05e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77200  -4.6208e+00   8.55e-05   1.06e-08   7.92e-01   1.05e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77400  -4.6207e+00   8.55e-05   1.05e-08   7.92e-01   1.05e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77600  -4.6207e+00   8.54e-05   1.04e-08   7.92e-01   1.05e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>77800  -4.6207e+00   8.54e-05   1.03e-08   7.92e-01   1.06e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78000  -4.6206e+00   8.54e-05   1.02e-08   7.92e-01   1.06e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78200  -4.6206e+00   8.54e-05   1.01e-08   7.92e-01   1.06e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78400  -4.6206e+00   8.53e-05   9.94e-09   7.92e-01   1.07e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78600  -4.6205e+00   8.53e-05   9.78e-09   7.92e-01   1.07e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>78800  -4.6205e+00   8.53e-05   9.67e-09   7.92e-01   1.07e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79000  -4.6205e+00   8.52e-05   9.56e-09   7.92e-01   1.07e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79200  -4.6205e+00   8.52e-05   9.45e-09   7.92e-01   1.08e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79400  -4.6204e+00   8.51e-05   9.32e-09   7.92e-01   1.08e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79600  -4.6204e+00   8.51e-05   9.19e-09   7.92e-01   1.08e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>79800  -4.6204e+00   8.50e-05   9.10e-09   7.92e-01   1.08e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80000  -4.6216e+00   8.55e-05   2.06e-07   7.92e-01   1.09e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80200  -4.6211e+00   8.46e-05   1.05e-07   7.92e-01   1.09e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80400  -4.6209e+00   8.37e-05   8.00e-08   7.92e-01   1.09e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80600  -4.6208e+00   8.36e-05   6.48e-08   7.92e-01   1.09e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>80800  -4.6207e+00   8.35e-05   5.46e-08   7.92e-01   1.10e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81000  -4.6207e+00   8.34e-05   4.71e-08   7.92e-01   1.10e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81200  -4.6206e+00   8.32e-05   4.14e-08   7.92e-01   1.10e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81400  -4.6206e+00   8.31e-05   3.70e-08   7.92e-01   1.10e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81600  -4.6206e+00   8.30e-05   3.34e-08   7.92e-01   1.11e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>81800  -4.6205e+00   8.28e-05   3.05e-08   7.92e-01   1.11e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82000  -4.6205e+00   8.27e-05   2.81e-08   7.92e-01   1.11e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82200  -4.6205e+00   8.26e-05   2.61e-08   7.92e-01   1.11e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82400  -4.6204e+00   8.25e-05   2.44e-08   7.92e-01   1.12e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82600  -4.6204e+00   8.24e-05   2.35e-08   7.92e-01   1.12e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>82800  -4.6204e+00   8.23e-05   2.28e-08   7.92e-01   1.12e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83000  -4.6203e+00   8.22e-05   2.20e-08   7.92e-01   1.12e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83200  -4.6203e+00   8.21e-05   2.13e-08   7.92e-01   1.13e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83400  -4.6203e+00   8.20e-05   2.06e-08   7.92e-01   1.13e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83600  -4.6202e+00   8.19e-05   1.99e-08   7.92e-01   1.13e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>83800  -4.6202e+00   8.19e-05   1.92e-08   7.92e-01   1.14e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84000  -4.6202e+00   8.18e-05   1.86e-08   7.92e-01   1.14e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84200  -4.6201e+00   8.17e-05   1.79e-08   7.92e-01   1.14e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84400  -4.6201e+00   8.16e-05   1.73e-08   7.92e-01   1.14e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84600  -4.6201e+00   8.16e-05   1.67e-08   7.92e-01   1.15e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>84800  -4.6210e+00   7.60e-05   5.62e-07   7.92e-01   1.15e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85000  -4.6185e+00   7.30e-05   3.19e-07   7.92e-01   1.15e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85200  -4.6166e+00   7.25e-05   2.35e-07   7.92e-01   1.15e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85400  -4.6153e+00   7.22e-05   1.85e-07   7.92e-01   1.16e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85600  -4.6145e+00   7.20e-05   1.37e-07   7.92e-01   1.16e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>85800  -4.6139e+00   7.18e-05   1.06e-07   7.92e-01   1.16e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86000  -4.6134e+00   7.15e-05   8.39e-08   7.92e-01   1.16e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86200  -4.6130e+00   7.11e-05   6.99e-08   7.92e-01   1.17e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86400  -4.6127e+00   7.08e-05   6.28e-08   7.92e-01   1.17e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86600  -4.6124e+00   7.04e-05   5.66e-08   7.92e-01   1.17e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>86800  -4.6122e+00   7.01e-05   5.12e-08   7.92e-01   1.17e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87000  -4.6120e+00   6.97e-05   4.66e-08   7.92e-01   1.18e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87200  -4.6119e+00   6.93e-05   4.25e-08   7.92e-01   1.18e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87400  -4.6118e+00   6.90e-05   6.55e-08   7.92e-01   1.18e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87600  -4.6117e+00   6.85e-05   4.12e-08   7.92e-01   1.18e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>87800  -4.6116e+00   6.82e-05   3.72e-08   7.92e-01   1.19e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88000  -4.6122e+00   6.68e-05   1.83e-07   7.92e-01   1.19e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88200  -4.6125e+00   6.62e-05   1.42e-07   7.92e-01   1.19e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88400  -4.6124e+00   6.55e-05   1.27e-07   7.92e-01   1.19e+03s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>88600  -4.6123e+00   6.49e-05   1.19e-07   7.92e-01   1.20e+03s
+Solver interrupted
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">risk</span><span class="p">),</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">Lmax</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Uncomment to solve the problem.</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># WARNING: this will take many minutes to run.</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100_000</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/problems/problem.py:493,</span> in <span class="ni">Problem.solve</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">491</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">492</span>     <span class="n">solve_func</span> <span class="o">=</span> <span class="n">Problem</span><span class="o">.</span><span class="n">_solve</span>
+<span class="ne">--&gt; </span><span class="mi">493</span> <span class="k">return</span> <span class="n">solve_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/problems/problem.py:1064,</span> in <span class="ni">Problem._solve</span><span class="nt">(self, solver, warm_start, verbose, gp, qcp, requires_grad, enforce_dpp, ignore_dpp, canon_backend, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1060</span>     <span class="n">s</span><span class="o">.</span><span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1061</span>             <span class="s1">&#39;Invoking solver </span><span class="si">%s</span><span class="s1">  to obtain a solution.&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1062</span>             <span class="n">solving_chain</span><span class="o">.</span><span class="n">reductions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+<span class="g g-Whitespace">   </span><span class="mi">1063</span> <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1064</span> <span class="n">solution</span> <span class="o">=</span> <span class="n">solving_chain</span><span class="o">.</span><span class="n">solve_via_data</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1065</span>     <span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1066</span> <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1067</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solve_time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/reductions/solvers/solving_chain.py:410,</span> in <span class="ni">SolvingChain.solve_via_data</span><span class="nt">(self, problem, data, warm_start, verbose, solver_opts)</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span> <span class="k">def</span> <span class="nf">solve_via_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span>                    <span class="n">solver_opts</span><span class="o">=</span><span class="p">{}):</span>
+<span class="g g-Whitespace">    </span><span class="mi">376</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Solves the problem using the data output by the an apply invocation.</span>
+<span class="g g-Whitespace">    </span><span class="mi">377</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span><span class="sd">     The semantics are:</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">408</span><span class="sd">         a Solution object.</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">410</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">solve_via_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">411</span>                                       <span class="n">solver_opts</span><span class="p">,</span> <span class="n">problem</span><span class="o">.</span><span class="n">_solver_cache</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/reductions/solvers/qp_solvers/osqp_qpif.py:106,</span> in <span class="ni">OSQP.solve_via_data</span><span class="nt">(self, data, warm_start, verbose, solver_opts, solver_cache)</span>
+<span class="g g-Whitespace">    </span><span class="mi">103</span>     <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span>         <span class="k">raise</span> <span class="n">SolverError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">106</span> <span class="n">results</span> <span class="o">=</span> <span class="n">solver</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span> <span class="k">if</span> <span class="n">solver_cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span>     <span class="n">solver_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()]</span> <span class="o">=</span> <span class="p">(</span><span class="n">solver</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/osqp/interface.py:235,</span> in <span class="ni">OSQP.solve</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span><span class="sd"> Solve QP Problem</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span> <span class="c1"># Solve QP</span>
+<span class="ne">--&gt; </span><span class="mi">235</span> <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">237</span> <span class="c1"># TODO(bart): this will be unnecessary when the derivative will be in C</span>
+<span class="g g-Whitespace">    </span><span class="mi">238</span> <span class="bp">self</span><span class="o">.</span><span class="n">_derivative_cache</span><span class="p">[</span><span class="s1">&#39;results&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span>
+
+<span class="ne">ValueError</span>: OSQP solve error!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Factor model solve time = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prob_factor</span><span class="o">.</span><span class="n">solver_stats</span><span class="o">.</span><span class="n">solve_time</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Single model solve time = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prob</span><span class="o">.</span><span class="n">solver_stats</span><span class="o">.</span><span class="n">solve_time</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/applications/notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="optimal_ad.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Optimal advertising</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="quantile_regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Quantile regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-allocation-vector">Portfolio allocation vector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-returns">Asset returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-markowitz-portfolio-optimization">Classical (Markowitz) portfolio optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-constraints">Portfolio constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variations">Variations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-covariance-model">Factor covariance model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization-with-factor-covariance-model">Portfolio optimization with factor covariance model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By CVX
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

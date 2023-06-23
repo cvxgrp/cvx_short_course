@@ -26,12 +26,12 @@ Traceback (most recent call last):
     error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
   File "/opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/nbclient/client.py", line 852, in _async_handle_timeout
     raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 600 seconds.
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 1200 seconds.
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['# Recover the original image using total variation in-painting.', 'import cvxpy as cp', '', '', 'U = cp.Variable(shape=(rows, cols))']
+['from cvxpy.atoms.affine.wraps import psd_wrap', '', '# Standard portfolio optimization with data from factor model.', 'risk = cp.quad_form(w, psd_wrap(F.dot(Sigma_tilde).dot(F.T) + D))', 'prob = cp.Problem(']
 ...
-['prob = cp.Problem(obj, constraints)', '', '# Use SCS to solve the problem.', 'prob.solve(verbose=True, solver=cp.SCS)', 'print("optimal objective value: {}".format(obj.value))']
+[')', '', '# Uncomment to solve the problem.', '# WARNING: this will take many minutes to run.', 'prob.solve(verbose=True, max_iter=100_000)']
 -------------------
 
