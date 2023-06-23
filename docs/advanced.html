@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>CVXPY tutorial &#8212; CVX Short Course</title>
+    <title>Advanced features &#8212; CVX Short Course</title>
   
   
   
@@ -62,10 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/advanced';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Introduction" href="intro/index.html" />
+    <link rel="next" title="Slides" href="scipy22_slides/index.html" />
+    <link rel="prev" title="Worst-case risk analysis" href="applications/notebooks/worst_case_analysis.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -131,7 +132,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item">
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="index.html">
   
   
   
@@ -150,13 +151,13 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
                     CVXPY tutorial
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="intro/index.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="intro/notebooks/SVM.html">Support vector machine classifier with <span class="math notranslate nohighlight">\(\ell_1\)</span>-regularization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="intro/notebooks/control.html">Control</a></li>
@@ -174,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="applications/notebooks/worst_case_analysis.html">Worst-case risk analysis</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="advanced.html">Advanced features</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Advanced features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scipy22_slides/index.html">Slides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="local.html">Local execution</a></li>
 </ul>
@@ -248,7 +249,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/cvxgrp/cvx_short_course/issues/new?title=Issue%20on%20page%20%2Fdocs/index.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/cvxgrp/cvx_short_course/issues/new?title=Issue%20on%20page%20%2Fdocs/advanced.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -278,7 +279,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/docs/index.md" target="_blank"
+      <li><a href="../_sources/docs/advanced.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -358,7 +359,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>CVXPY tutorial</h1>
+    <h1>Advanced features</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -372,16 +373,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="cvxpy-tutorial">
-<h1>CVXPY tutorial<a class="headerlink" href="#cvxpy-tutorial" title="Permalink to this heading">#</a></h1>
-<p>CVXPY is an open source Python-embedded modeling language for convex optimization problems.
-It lets you express your problem in a natural way that follows the math,
-rather than in the restrictive standard form required by solvers.
-This tutorial will cover the basics of convex optimization, and how to use CVXPY to specify
-and solve convex optimization problems, with an emphasis on real-world applications.
-No prior knowledge of convex optimization is assumed.</p>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="advanced-features">
+<h1>Advanced features<a class="headerlink" href="#advanced-features" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Quasiconvex programming.</p></li>
+<li><p>Log-log convex programming.</p></li>
+<li><p>Differentiation through problems.</p></li>
+<li><p>Code generation.</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
@@ -415,12 +414,21 @@ No prior knowledge of convex optimization is assumed.</p>
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="applications/notebooks/worst_case_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Worst-case risk analysis</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="intro/index.html"
+       href="scipy22_slides/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction</p>
+        <p class="prev-next-title">Slides</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
