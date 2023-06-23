@@ -7,6 +7,6 @@ chapters:
     sections:
       - glob: docs/intro/notebooks/*
 
-  #- file: docs/applications/index
-  #  sections:
-  #    - glob: docs/applications/notebooks/*
+  - file: docs/applications/index
+    sections:
+      - glob: docs/applications/notebooks/*
