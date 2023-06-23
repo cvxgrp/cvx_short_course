@@ -11,8 +11,7 @@ execute:
   timeout: 600               # 10 minutes timeout
   allow_errors: true
   exclude_patterns:
-    - _build
-    - .DS_Store
+    #- _build
     - "*.ipynb_checkpoints"
     - "exercises/notebooks/*.ipynb"
     - "hello/notebooks/*.ipynb"
@@ -42,15 +41,15 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
-  use_edit_page_button: true
+  #use_edit_page_button: true
   extra_navbar: Powered by <a href="https://jupyterbook.org">Jupyter Book</a>  # Will be displayed underneath the left navbar.
 
 
 # https://jupyterbook.org/en/stable/interactive/launchbuttons.html
 
-launch_buttons:
-  notebook_interface: "classic" # "jupyterlab" or "classic"
-  binderhub_url: "https://mybinder.org"
+#launch_buttons:
+#  notebook_interface: "classic" # "jupyterlab" or "classic"
+#  binderhub_url: "https://mybinder.org"
   # jupyterhub_url: "your-hub-url"
   # colab_url: "https://colab.research.google.com"
 
