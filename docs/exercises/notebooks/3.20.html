@@ -1,0 +1,1129 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Optimal vehicle speed scheduling &#8212; CVX Short Course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/exercises/notebooks/3.20';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="DCP analysis" href="DCP_analysis.html" />
+    <link rel="prev" title="Flux balance analysis in systems biology" href="17.3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    CVXPY tutorial
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Convex optimization overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python_intro/index.html">Introduction to Python</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/basics.html">Python basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/cvxprob.html">CVXPY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/data_structures.html">Data structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/namespace.html">Python namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/numpy_example.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/plotting.html">Plotting</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro/index.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/SVM.html">Support vector machine classifier with <span class="math notranslate nohighlight">\(\ell_1\)</span>-regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/control.html">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/tv_inpainting.html">Total variation in-painting</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../constructive.html">Constructive convex analysis</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../dcp/index.html">DCP exercises</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../dcp/notebooks/DCP.html">DCP analysis in CVXPY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dcp/notebooks/trade_off_curves.html">Trade off curves</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/index.html">Applications</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/huber_regression.html">Huber regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/model_fitting.html">Model fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/optimal_ad.html">Optimal advertising</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/portfolio_optimization.html">Portfolio optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/quantile_regression.html">Quantile regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/worst_case_analysis.html">Worst-case risk analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../advanced.html">Advanced features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scipy22_slides/index.html">Slides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13.20.html">Risk budget allocation.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13.21.html">Portfolio Rebalancing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13.22.html">Portfolio optimization using multiple risk models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13.3.html">Simple portfolio optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="16.9.html">Energy storage trade-offs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="17.3.html">Flux balance analysis in systems biology</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Optimal vehicle speed scheduling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DCP_analysis.html">DCP analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lasso.html">LASSO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello_world.html">Hello, world!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sum_k_largest.html">A toy mixed-norm regression problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusions.html">Conclusions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../local.html">Local execution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course/issues/new?title=Issue%20on%20page%20%2Fdocs/exercises/notebooks/3.20.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/exercises/notebooks/3.20.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Optimal vehicle speed scheduling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a">(a)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b">(b)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="optimal-vehicle-speed-scheduling">
+<h1>Optimal vehicle speed scheduling<a class="headerlink" href="#optimal-vehicle-speed-scheduling" title="Permalink to this heading">#</a></h1>
+<p>A vehicle (say, an airplane) travels along a fixed path of <span class="math notranslate nohighlight">\(n\)</span>
+segments, between <span class="math notranslate nohighlight">\(n+1\)</span> waypoints labeled <span class="math notranslate nohighlight">\(0, \ldots, n\)</span>. Segment <span class="math notranslate nohighlight">\(i\)</span> starts at waypoint <span class="math notranslate nohighlight">\(i-1\)</span> and
+terminates at waypoint <span class="math notranslate nohighlight">\(i\)</span>. The vehicle starts at time <span class="math notranslate nohighlight">\(t=0\)</span> at waypoint <span class="math notranslate nohighlight">\(0\)</span>. It travels over each
+segment at a constant (nonnegative) speed; <span class="math notranslate nohighlight">\(s_i\)</span> is the speed on segment <span class="math notranslate nohighlight">\(i\)</span>. We have lower and upper
+limits on the speeds: <span class="math notranslate nohighlight">\(s^\mathrm{min} \preceq s \preceq s^\mathrm{max}\)</span>. The vehicle does not stop at the waypoints; it simply
+proceeds to the next segment. The travel distance of segment <span class="math notranslate nohighlight">\(i\)</span> is <span class="math notranslate nohighlight">\(d_i\)</span> (which is positive), so the
+travel time over segment <span class="math notranslate nohighlight">\(i\)</span> is <span class="math notranslate nohighlight">\(d_i/s_i\)</span>. We let <span class="math notranslate nohighlight">\(\tau_i\)</span>, <span class="math notranslate nohighlight">\(i = 1, \ldots, n\)</span>, denote the time at which the vehicle
+arrives at waypoint <span class="math notranslate nohighlight">\(i\)</span>. The vehicle is required to arrive at waypoint <span class="math notranslate nohighlight">\(i\)</span>, for <span class="math notranslate nohighlight">\(i=1, \ldots, n\)</span>, between
+times <span class="math notranslate nohighlight">\(\tau_i^\mathrm{min}\)</span> and <span class="math notranslate nohighlight">\(\tau_i^\mathrm{max}\)</span>, which are given. The vehicle consumes fuel over segment <span class="math notranslate nohighlight">\(i\)</span> at a rate that
+depends on its speed, <span class="math notranslate nohighlight">\(\Phi(s_i)\)</span>, where <span class="math notranslate nohighlight">\(\Phi\)</span> is positive, increasing, and convex, and has units of kg/s.</p>
+<p>You are given the data <span class="math notranslate nohighlight">\(d\)</span> (segment travel distances), <span class="math notranslate nohighlight">\(s^\mathrm{min}\)</span> and <span class="math notranslate nohighlight">\(s^\mathrm{max}\)</span> (speed bounds), <span class="math notranslate nohighlight">\(\tau^\mathrm{min}\)</span> and <span class="math notranslate nohighlight">\(\tau^\mathrm{max}\)</span>
+(waypoint arrival time bounds), and the fuel use function <span class="math notranslate nohighlight">\(\Phi: \mathbf{R} \rightarrow \mathbf{R}\)</span>. You are to choose the speeds
+<span class="math notranslate nohighlight">\(s_1, \ldots, s_n\)</span> so as to minimize the total fuel consumed in kg.</p>
+<section id="a">
+<h2>(a)<a class="headerlink" href="#a" title="Permalink to this heading">#</a></h2>
+<p>Assume that the fuel use function is given by <span class="math notranslate nohighlight">\(\Phi(s_i) = a s_i^2 + b s_i + c\)</span>. Show how to pose this as a convex optimization problem. If you introduce new variables, or
+change variables, you must explain how to recover the optimal speeds from the solution of
+your problem. If convexity of the objective or any constraint function in your formulation is
+not obvious, explain why it is convex.</p>
+</section>
+<section id="b">
+<h2>(b)<a class="headerlink" href="#b" title="Permalink to this heading">#</a></h2>
+<p>Carry out the method of part (a) on the problem instance with data below (the parameters <span class="math notranslate nohighlight">\(a\)</span>,
+<span class="math notranslate nohighlight">\(b\)</span>, and <span class="math notranslate nohighlight">\(c\)</span> for <span class="math notranslate nohighlight">\(\Phi\)</span> are defined in the data file). What is the optimal fuel consumption? Plot the optimal
+speed versus segment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data for vehicle speed scheduling problem.</span>
+<span class="c1"># contains quantities: n, a, b, c, d, smin, smax, tau_min, tau_max</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="mf">1.9501</span><span class="p">,</span>
+        <span class="mf">1.2311</span><span class="p">,</span>
+        <span class="mf">1.6068</span><span class="p">,</span>
+        <span class="mf">1.4860</span><span class="p">,</span>
+        <span class="mf">1.8913</span><span class="p">,</span>
+        <span class="mf">1.7621</span><span class="p">,</span>
+        <span class="mf">1.4565</span><span class="p">,</span>
+        <span class="mf">1.0185</span><span class="p">,</span>
+        <span class="mf">1.8214</span><span class="p">,</span>
+        <span class="mf">1.4447</span><span class="p">,</span>
+        <span class="mf">1.6154</span><span class="p">,</span>
+        <span class="mf">1.7919</span><span class="p">,</span>
+        <span class="mf">1.9218</span><span class="p">,</span>
+        <span class="mf">1.7382</span><span class="p">,</span>
+        <span class="mf">1.1763</span><span class="p">,</span>
+        <span class="mf">1.4057</span><span class="p">,</span>
+        <span class="mf">1.9355</span><span class="p">,</span>
+        <span class="mf">1.9169</span><span class="p">,</span>
+        <span class="mf">1.4103</span><span class="p">,</span>
+        <span class="mf">1.8936</span><span class="p">,</span>
+        <span class="mf">1.0579</span><span class="p">,</span>
+        <span class="mf">1.3529</span><span class="p">,</span>
+        <span class="mf">1.8132</span><span class="p">,</span>
+        <span class="mf">1.0099</span><span class="p">,</span>
+        <span class="mf">1.1389</span><span class="p">,</span>
+        <span class="mf">1.2028</span><span class="p">,</span>
+        <span class="mf">1.1987</span><span class="p">,</span>
+        <span class="mf">1.6038</span><span class="p">,</span>
+        <span class="mf">1.2722</span><span class="p">,</span>
+        <span class="mf">1.1988</span><span class="p">,</span>
+        <span class="mf">1.0153</span><span class="p">,</span>
+        <span class="mf">1.7468</span><span class="p">,</span>
+        <span class="mf">1.4451</span><span class="p">,</span>
+        <span class="mf">1.9318</span><span class="p">,</span>
+        <span class="mf">1.4660</span><span class="p">,</span>
+        <span class="mf">1.4186</span><span class="p">,</span>
+        <span class="mf">1.8462</span><span class="p">,</span>
+        <span class="mf">1.5252</span><span class="p">,</span>
+        <span class="mf">1.2026</span><span class="p">,</span>
+        <span class="mf">1.6721</span><span class="p">,</span>
+        <span class="mf">1.8381</span><span class="p">,</span>
+        <span class="mf">1.0196</span><span class="p">,</span>
+        <span class="mf">1.6813</span><span class="p">,</span>
+        <span class="mf">1.3795</span><span class="p">,</span>
+        <span class="mf">1.8318</span><span class="p">,</span>
+        <span class="mf">1.5028</span><span class="p">,</span>
+        <span class="mf">1.7095</span><span class="p">,</span>
+        <span class="mf">1.4289</span><span class="p">,</span>
+        <span class="mf">1.3046</span><span class="p">,</span>
+        <span class="mf">1.1897</span><span class="p">,</span>
+        <span class="mf">1.1934</span><span class="p">,</span>
+        <span class="mf">1.6822</span><span class="p">,</span>
+        <span class="mf">1.3028</span><span class="p">,</span>
+        <span class="mf">1.5417</span><span class="p">,</span>
+        <span class="mf">1.1509</span><span class="p">,</span>
+        <span class="mf">1.6979</span><span class="p">,</span>
+        <span class="mf">1.3784</span><span class="p">,</span>
+        <span class="mf">1.8600</span><span class="p">,</span>
+        <span class="mf">1.8537</span><span class="p">,</span>
+        <span class="mf">1.5936</span><span class="p">,</span>
+        <span class="mf">1.4966</span><span class="p">,</span>
+        <span class="mf">1.8998</span><span class="p">,</span>
+        <span class="mf">1.8216</span><span class="p">,</span>
+        <span class="mf">1.6449</span><span class="p">,</span>
+        <span class="mf">1.8180</span><span class="p">,</span>
+        <span class="mf">1.6602</span><span class="p">,</span>
+        <span class="mf">1.3420</span><span class="p">,</span>
+        <span class="mf">1.2897</span><span class="p">,</span>
+        <span class="mf">1.3412</span><span class="p">,</span>
+        <span class="mf">1.5341</span><span class="p">,</span>
+        <span class="mf">1.7271</span><span class="p">,</span>
+        <span class="mf">1.3093</span><span class="p">,</span>
+        <span class="mf">1.8385</span><span class="p">,</span>
+        <span class="mf">1.5681</span><span class="p">,</span>
+        <span class="mf">1.3704</span><span class="p">,</span>
+        <span class="mf">1.7027</span><span class="p">,</span>
+        <span class="mf">1.5466</span><span class="p">,</span>
+        <span class="mf">1.4449</span><span class="p">,</span>
+        <span class="mf">1.6946</span><span class="p">,</span>
+        <span class="mf">1.6213</span><span class="p">,</span>
+        <span class="mf">1.7948</span><span class="p">,</span>
+        <span class="mf">1.9568</span><span class="p">,</span>
+        <span class="mf">1.5226</span><span class="p">,</span>
+        <span class="mf">1.8801</span><span class="p">,</span>
+        <span class="mf">1.1730</span><span class="p">,</span>
+        <span class="mf">1.9797</span><span class="p">,</span>
+        <span class="mf">1.2714</span><span class="p">,</span>
+        <span class="mf">1.2523</span><span class="p">,</span>
+        <span class="mf">1.8757</span><span class="p">,</span>
+        <span class="mf">1.7373</span><span class="p">,</span>
+        <span class="mf">1.1365</span><span class="p">,</span>
+        <span class="mf">1.0118</span><span class="p">,</span>
+        <span class="mf">1.8939</span><span class="p">,</span>
+        <span class="mf">1.1991</span><span class="p">,</span>
+        <span class="mf">1.2987</span><span class="p">,</span>
+        <span class="mf">1.6614</span><span class="p">,</span>
+        <span class="mf">1.2844</span><span class="p">,</span>
+        <span class="mf">1.4692</span><span class="p">,</span>
+        <span class="mf">1.0648</span><span class="p">,</span>
+        <span class="mf">1.9883</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">smin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="mf">0.7828</span><span class="p">,</span>
+        <span class="mf">0.6235</span><span class="p">,</span>
+        <span class="mf">0.7155</span><span class="p">,</span>
+        <span class="mf">0.5340</span><span class="p">,</span>
+        <span class="mf">0.6329</span><span class="p">,</span>
+        <span class="mf">0.4259</span><span class="p">,</span>
+        <span class="mf">0.7798</span><span class="p">,</span>
+        <span class="mf">0.9604</span><span class="p">,</span>
+        <span class="mf">0.7298</span><span class="p">,</span>
+        <span class="mf">0.8405</span><span class="p">,</span>
+        <span class="mf">0.4091</span><span class="p">,</span>
+        <span class="mf">0.5798</span><span class="p">,</span>
+        <span class="mf">0.9833</span><span class="p">,</span>
+        <span class="mf">0.8808</span><span class="p">,</span>
+        <span class="mf">0.6611</span><span class="p">,</span>
+        <span class="mf">0.7678</span><span class="p">,</span>
+        <span class="mf">0.9942</span><span class="p">,</span>
+        <span class="mf">0.2592</span><span class="p">,</span>
+        <span class="mf">0.8029</span><span class="p">,</span>
+        <span class="mf">0.2503</span><span class="p">,</span>
+        <span class="mf">0.6154</span><span class="p">,</span>
+        <span class="mf">0.5050</span><span class="p">,</span>
+        <span class="mf">1.0744</span><span class="p">,</span>
+        <span class="mf">0.2150</span><span class="p">,</span>
+        <span class="mf">0.9680</span><span class="p">,</span>
+        <span class="mf">1.1708</span><span class="p">,</span>
+        <span class="mf">1.1901</span><span class="p">,</span>
+        <span class="mf">0.9889</span><span class="p">,</span>
+        <span class="mf">0.6387</span><span class="p">,</span>
+        <span class="mf">0.6983</span><span class="p">,</span>
+        <span class="mf">0.4140</span><span class="p">,</span>
+        <span class="mf">0.8435</span><span class="p">,</span>
+        <span class="mf">0.5200</span><span class="p">,</span>
+        <span class="mf">1.1601</span><span class="p">,</span>
+        <span class="mf">0.9266</span><span class="p">,</span>
+        <span class="mf">0.6120</span><span class="p">,</span>
+        <span class="mf">0.9446</span><span class="p">,</span>
+        <span class="mf">0.4679</span><span class="p">,</span>
+        <span class="mf">0.6399</span><span class="p">,</span>
+        <span class="mf">1.1334</span><span class="p">,</span>
+        <span class="mf">0.8833</span><span class="p">,</span>
+        <span class="mf">0.4126</span><span class="p">,</span>
+        <span class="mf">1.0392</span><span class="p">,</span>
+        <span class="mf">0.8288</span><span class="p">,</span>
+        <span class="mf">0.3338</span><span class="p">,</span>
+        <span class="mf">0.4071</span><span class="p">,</span>
+        <span class="mf">0.8072</span><span class="p">,</span>
+        <span class="mf">0.8299</span><span class="p">,</span>
+        <span class="mf">0.5705</span><span class="p">,</span>
+        <span class="mf">0.7751</span><span class="p">,</span>
+        <span class="mf">0.6514</span><span class="p">,</span>
+        <span class="mf">0.2439</span><span class="p">,</span>
+        <span class="mf">0.2272</span><span class="p">,</span>
+        <span class="mf">0.5127</span><span class="p">,</span>
+        <span class="mf">0.2129</span><span class="p">,</span>
+        <span class="mf">0.5840</span><span class="p">,</span>
+        <span class="mf">0.8831</span><span class="p">,</span>
+        <span class="mf">0.2928</span><span class="p">,</span>
+        <span class="mf">0.2353</span><span class="p">,</span>
+        <span class="mf">0.8124</span><span class="p">,</span>
+        <span class="mf">0.8085</span><span class="p">,</span>
+        <span class="mf">0.2158</span><span class="p">,</span>
+        <span class="mf">0.2164</span><span class="p">,</span>
+        <span class="mf">0.3901</span><span class="p">,</span>
+        <span class="mf">0.7869</span><span class="p">,</span>
+        <span class="mf">0.2576</span><span class="p">,</span>
+        <span class="mf">0.5676</span><span class="p">,</span>
+        <span class="mf">0.8315</span><span class="p">,</span>
+        <span class="mf">0.9176</span><span class="p">,</span>
+        <span class="mf">0.8927</span><span class="p">,</span>
+        <span class="mf">0.2841</span><span class="p">,</span>
+        <span class="mf">0.6544</span><span class="p">,</span>
+        <span class="mf">0.6418</span><span class="p">,</span>
+        <span class="mf">0.5533</span><span class="p">,</span>
+        <span class="mf">0.3536</span><span class="p">,</span>
+        <span class="mf">0.8756</span><span class="p">,</span>
+        <span class="mf">0.8992</span><span class="p">,</span>
+        <span class="mf">0.9275</span><span class="p">,</span>
+        <span class="mf">0.6784</span><span class="p">,</span>
+        <span class="mf">0.7548</span><span class="p">,</span>
+        <span class="mf">0.3210</span><span class="p">,</span>
+        <span class="mf">0.6508</span><span class="p">,</span>
+        <span class="mf">0.9159</span><span class="p">,</span>
+        <span class="mf">1.0928</span><span class="p">,</span>
+        <span class="mf">0.4731</span><span class="p">,</span>
+        <span class="mf">0.4548</span><span class="p">,</span>
+        <span class="mf">1.0656</span><span class="p">,</span>
+        <span class="mf">0.4324</span><span class="p">,</span>
+        <span class="mf">1.0049</span><span class="p">,</span>
+        <span class="mf">1.1084</span><span class="p">,</span>
+        <span class="mf">0.4319</span><span class="p">,</span>
+        <span class="mf">0.4393</span><span class="p">,</span>
+        <span class="mf">0.2498</span><span class="p">,</span>
+        <span class="mf">0.2784</span><span class="p">,</span>
+        <span class="mf">0.8408</span><span class="p">,</span>
+        <span class="mf">0.3909</span><span class="p">,</span>
+        <span class="mf">1.0439</span><span class="p">,</span>
+        <span class="mf">0.3739</span><span class="p">,</span>
+        <span class="mf">0.3708</span><span class="p">,</span>
+        <span class="mf">1.1943</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">smax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="mf">1.9624</span><span class="p">,</span>
+        <span class="mf">1.6036</span><span class="p">,</span>
+        <span class="mf">1.6439</span><span class="p">,</span>
+        <span class="mf">1.5641</span><span class="p">,</span>
+        <span class="mf">1.7194</span><span class="p">,</span>
+        <span class="mf">1.9090</span><span class="p">,</span>
+        <span class="mf">1.3193</span><span class="p">,</span>
+        <span class="mf">1.3366</span><span class="p">,</span>
+        <span class="mf">1.9470</span><span class="p">,</span>
+        <span class="mf">2.8803</span><span class="p">,</span>
+        <span class="mf">2.5775</span><span class="p">,</span>
+        <span class="mf">1.4087</span><span class="p">,</span>
+        <span class="mf">1.6039</span><span class="p">,</span>
+        <span class="mf">2.9266</span><span class="p">,</span>
+        <span class="mf">1.4369</span><span class="p">,</span>
+        <span class="mf">2.3595</span><span class="p">,</span>
+        <span class="mf">3.2280</span><span class="p">,</span>
+        <span class="mf">1.8890</span><span class="p">,</span>
+        <span class="mf">2.8436</span><span class="p">,</span>
+        <span class="mf">0.5701</span><span class="p">,</span>
+        <span class="mf">1.1894</span><span class="p">,</span>
+        <span class="mf">2.4425</span><span class="p">,</span>
+        <span class="mf">2.2347</span><span class="p">,</span>
+        <span class="mf">2.2957</span><span class="p">,</span>
+        <span class="mf">2.7378</span><span class="p">,</span>
+        <span class="mf">2.8455</span><span class="p">,</span>
+        <span class="mf">2.1823</span><span class="p">,</span>
+        <span class="mf">1.6209</span><span class="p">,</span>
+        <span class="mf">1.2499</span><span class="p">,</span>
+        <span class="mf">1.3805</span><span class="p">,</span>
+        <span class="mf">1.5589</span><span class="p">,</span>
+        <span class="mf">2.8554</span><span class="p">,</span>
+        <span class="mf">1.8005</span><span class="p">,</span>
+        <span class="mf">3.0920</span><span class="p">,</span>
+        <span class="mf">2.1482</span><span class="p">,</span>
+        <span class="mf">1.8267</span><span class="p">,</span>
+        <span class="mf">2.1459</span><span class="p">,</span>
+        <span class="mf">1.5924</span><span class="p">,</span>
+        <span class="mf">2.7431</span><span class="p">,</span>
+        <span class="mf">1.4445</span><span class="p">,</span>
+        <span class="mf">1.7781</span><span class="p">,</span>
+        <span class="mf">0.8109</span><span class="p">,</span>
+        <span class="mf">2.7256</span><span class="p">,</span>
+        <span class="mf">2.4290</span><span class="p">,</span>
+        <span class="mf">2.5997</span><span class="p">,</span>
+        <span class="mf">1.8125</span><span class="p">,</span>
+        <span class="mf">1.9073</span><span class="p">,</span>
+        <span class="mf">1.5275</span><span class="p">,</span>
+        <span class="mf">2.1209</span><span class="p">,</span>
+        <span class="mf">2.5419</span><span class="p">,</span>
+        <span class="mf">1.7032</span><span class="p">,</span>
+        <span class="mf">0.5636</span><span class="p">,</span>
+        <span class="mf">1.3669</span><span class="p">,</span>
+        <span class="mf">2.3200</span><span class="p">,</span>
+        <span class="mf">2.1006</span><span class="p">,</span>
+        <span class="mf">2.7239</span><span class="p">,</span>
+        <span class="mf">2.8726</span><span class="p">,</span>
+        <span class="mf">1.3283</span><span class="p">,</span>
+        <span class="mf">1.7769</span><span class="p">,</span>
+        <span class="mf">2.5750</span><span class="p">,</span>
+        <span class="mf">1.4963</span><span class="p">,</span>
+        <span class="mf">2.3254</span><span class="p">,</span>
+        <span class="mf">1.6548</span><span class="p">,</span>
+        <span class="mf">1.9537</span><span class="p">,</span>
+        <span class="mf">1.5557</span><span class="p">,</span>
+        <span class="mf">1.6551</span><span class="p">,</span>
+        <span class="mf">2.7307</span><span class="p">,</span>
+        <span class="mf">1.8018</span><span class="p">,</span>
+        <span class="mf">2.5287</span><span class="p">,</span>
+        <span class="mf">1.9765</span><span class="p">,</span>
+        <span class="mf">1.8387</span><span class="p">,</span>
+        <span class="mf">2.3525</span><span class="p">,</span>
+        <span class="mf">1.7362</span><span class="p">,</span>
+        <span class="mf">1.6805</span><span class="p">,</span>
+        <span class="mf">1.9640</span><span class="p">,</span>
+        <span class="mf">2.8508</span><span class="p">,</span>
+        <span class="mf">1.9424</span><span class="p">,</span>
+        <span class="mf">2.0780</span><span class="p">,</span>
+        <span class="mf">2.1677</span><span class="p">,</span>
+        <span class="mf">2.1863</span><span class="p">,</span>
+        <span class="mf">2.0541</span><span class="p">,</span>
+        <span class="mf">1.9734</span><span class="p">,</span>
+        <span class="mf">2.7687</span><span class="p">,</span>
+        <span class="mf">2.3715</span><span class="p">,</span>
+        <span class="mf">1.1449</span><span class="p">,</span>
+        <span class="mf">2.1560</span><span class="p">,</span>
+        <span class="mf">3.3310</span><span class="p">,</span>
+        <span class="mf">2.3456</span><span class="p">,</span>
+        <span class="mf">2.7120</span><span class="p">,</span>
+        <span class="mf">2.3783</span><span class="p">,</span>
+        <span class="mf">0.9611</span><span class="p">,</span>
+        <span class="mf">2.0690</span><span class="p">,</span>
+        <span class="mf">1.2805</span><span class="p">,</span>
+        <span class="mf">0.8585</span><span class="p">,</span>
+        <span class="mf">2.2744</span><span class="p">,</span>
+        <span class="mf">2.3369</span><span class="p">,</span>
+        <span class="mf">2.6918</span><span class="p">,</span>
+        <span class="mf">2.6728</span><span class="p">,</span>
+        <span class="mf">2.5941</span><span class="p">,</span>
+        <span class="mf">1.6120</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">tau_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="mf">1.0809</span><span class="p">,</span>
+        <span class="mf">2.7265</span><span class="p">,</span>
+        <span class="mf">3.5118</span><span class="p">,</span>
+        <span class="mf">5.3038</span><span class="p">,</span>
+        <span class="mf">5.4516</span><span class="p">,</span>
+        <span class="mf">7.1648</span><span class="p">,</span>
+        <span class="mf">9.2674</span><span class="p">,</span>
+        <span class="mf">12.1543</span><span class="p">,</span>
+        <span class="mf">14.4058</span><span class="p">,</span>
+        <span class="mf">16.6258</span><span class="p">,</span>
+        <span class="mf">17.9214</span><span class="p">,</span>
+        <span class="mf">19.8242</span><span class="p">,</span>
+        <span class="mf">22.2333</span><span class="p">,</span>
+        <span class="mf">22.4849</span><span class="p">,</span>
+        <span class="mf">25.3213</span><span class="p">,</span>
+        <span class="mf">28.0691</span><span class="p">,</span>
+        <span class="mf">29.8751</span><span class="p">,</span>
+        <span class="mf">30.6358</span><span class="p">,</span>
+        <span class="mf">33.2561</span><span class="p">,</span>
+        <span class="mf">34.7963</span><span class="p">,</span>
+        <span class="mf">36.9943</span><span class="p">,</span>
+        <span class="mf">38.2610</span><span class="p">,</span>
+        <span class="mf">41.1451</span><span class="p">,</span>
+        <span class="mf">41.3613</span><span class="p">,</span>
+        <span class="mf">43.0215</span><span class="p">,</span>
+        <span class="mf">43.8974</span><span class="p">,</span>
+        <span class="mf">46.4713</span><span class="p">,</span>
+        <span class="mf">47.4786</span><span class="p">,</span>
+        <span class="mf">49.5192</span><span class="p">,</span>
+        <span class="mf">49.6795</span><span class="p">,</span>
+        <span class="mf">50.7495</span><span class="p">,</span>
+        <span class="mf">52.2444</span><span class="p">,</span>
+        <span class="mf">53.5477</span><span class="p">,</span>
+        <span class="mf">55.2351</span><span class="p">,</span>
+        <span class="mf">57.0850</span><span class="p">,</span>
+        <span class="mf">57.4250</span><span class="p">,</span>
+        <span class="mf">60.1198</span><span class="p">,</span>
+        <span class="mf">62.3834</span><span class="p">,</span>
+        <span class="mf">64.7568</span><span class="p">,</span>
+        <span class="mf">67.2016</span><span class="p">,</span>
+        <span class="mf">69.2116</span><span class="p">,</span>
+        <span class="mf">69.8143</span><span class="p">,</span>
+        <span class="mf">70.6335</span><span class="p">,</span>
+        <span class="mf">72.5122</span><span class="p">,</span>
+        <span class="mf">74.1228</span><span class="p">,</span>
+        <span class="mf">74.3013</span><span class="p">,</span>
+        <span class="mf">74.5682</span><span class="p">,</span>
+        <span class="mf">75.3821</span><span class="p">,</span>
+        <span class="mf">76.6093</span><span class="p">,</span>
+        <span class="mf">78.0315</span><span class="p">,</span>
+        <span class="mf">80.7584</span><span class="p">,</span>
+        <span class="mf">82.5472</span><span class="p">,</span>
+        <span class="mf">83.5340</span><span class="p">,</span>
+        <span class="mf">84.9686</span><span class="p">,</span>
+        <span class="mf">86.7601</span><span class="p">,</span>
+        <span class="mf">87.2445</span><span class="p">,</span>
+        <span class="mf">89.7329</span><span class="p">,</span>
+        <span class="mf">92.6013</span><span class="p">,</span>
+        <span class="mf">94.3879</span><span class="p">,</span>
+        <span class="mf">94.4742</span><span class="p">,</span>
+        <span class="mf">96.9105</span><span class="p">,</span>
+        <span class="mf">98.7409</span><span class="p">,</span>
+        <span class="mf">100.8453</span><span class="p">,</span>
+        <span class="mf">101.1219</span><span class="p">,</span>
+        <span class="mf">102.3966</span><span class="p">,</span>
+        <span class="mf">103.5233</span><span class="p">,</span>
+        <span class="mf">104.0218</span><span class="p">,</span>
+        <span class="mf">106.5212</span><span class="p">,</span>
+        <span class="mf">109.0372</span><span class="p">,</span>
+        <span class="mf">110.3920</span><span class="p">,</span>
+        <span class="mf">113.2618</span><span class="p">,</span>
+        <span class="mf">113.7033</span><span class="p">,</span>
+        <span class="mf">116.3131</span><span class="p">,</span>
+        <span class="mf">118.6214</span><span class="p">,</span>
+        <span class="mf">119.9539</span><span class="p">,</span>
+        <span class="mf">121.8157</span><span class="p">,</span>
+        <span class="mf">124.6708</span><span class="p">,</span>
+        <span class="mf">126.5908</span><span class="p">,</span>
+        <span class="mf">127.3328</span><span class="p">,</span>
+        <span class="mf">128.3909</span><span class="p">,</span>
+        <span class="mf">128.9545</span><span class="p">,</span>
+        <span class="mf">130.4264</span><span class="p">,</span>
+        <span class="mf">131.6542</span><span class="p">,</span>
+        <span class="mf">133.0448</span><span class="p">,</span>
+        <span class="mf">134.8776</span><span class="p">,</span>
+        <span class="mf">135.0912</span><span class="p">,</span>
+        <span class="mf">136.0340</span><span class="p">,</span>
+        <span class="mf">137.8591</span><span class="p">,</span>
+        <span class="mf">138.3842</span><span class="p">,</span>
+        <span class="mf">140.2473</span><span class="p">,</span>
+        <span class="mf">140.9852</span><span class="p">,</span>
+        <span class="mf">142.7472</span><span class="p">,</span>
+        <span class="mf">144.2654</span><span class="p">,</span>
+        <span class="mf">145.6597</span><span class="p">,</span>
+        <span class="mf">147.2840</span><span class="p">,</span>
+        <span class="mf">150.1110</span><span class="p">,</span>
+        <span class="mf">151.1363</span><span class="p">,</span>
+        <span class="mf">152.3417</span><span class="p">,</span>
+        <span class="mf">153.2647</span><span class="p">,</span>
+        <span class="mf">154.4994</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">tau_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="mf">4.6528</span><span class="p">,</span>
+        <span class="mf">6.5147</span><span class="p">,</span>
+        <span class="mf">7.5178</span><span class="p">,</span>
+        <span class="mf">9.7478</span><span class="p">,</span>
+        <span class="mf">9.0641</span><span class="p">,</span>
+        <span class="mf">10.3891</span><span class="p">,</span>
+        <span class="mf">13.1540</span><span class="p">,</span>
+        <span class="mf">16.0878</span><span class="p">,</span>
+        <span class="mf">17.4352</span><span class="p">,</span>
+        <span class="mf">20.9539</span><span class="p">,</span>
+        <span class="mf">22.3695</span><span class="p">,</span>
+        <span class="mf">23.3875</span><span class="p">,</span>
+        <span class="mf">25.7569</span><span class="p">,</span>
+        <span class="mf">26.9019</span><span class="p">,</span>
+        <span class="mf">29.8890</span><span class="p">,</span>
+        <span class="mf">33.0415</span><span class="p">,</span>
+        <span class="mf">33.8218</span><span class="p">,</span>
+        <span class="mf">35.4414</span><span class="p">,</span>
+        <span class="mf">37.1583</span><span class="p">,</span>
+        <span class="mf">39.4054</span><span class="p">,</span>
+        <span class="mf">41.6520</span><span class="p">,</span>
+        <span class="mf">41.5935</span><span class="p">,</span>
+        <span class="mf">44.9329</span><span class="p">,</span>
+        <span class="mf">45.4028</span><span class="p">,</span>
+        <span class="mf">47.4577</span><span class="p">,</span>
+        <span class="mf">48.0358</span><span class="p">,</span>
+        <span class="mf">50.3929</span><span class="p">,</span>
+        <span class="mf">51.3692</span><span class="p">,</span>
+        <span class="mf">52.6947</span><span class="p">,</span>
+        <span class="mf">53.5665</span><span class="p">,</span>
+        <span class="mf">54.4821</span><span class="p">,</span>
+        <span class="mf">55.8495</span><span class="p">,</span>
+        <span class="mf">58.2514</span><span class="p">,</span>
+        <span class="mf">59.7541</span><span class="p">,</span>
+        <span class="mf">61.9845</span><span class="p">,</span>
+        <span class="mf">61.5409</span><span class="p">,</span>
+        <span class="mf">63.1482</span><span class="p">,</span>
+        <span class="mf">66.5758</span><span class="p">,</span>
+        <span class="mf">69.3892</span><span class="p">,</span>
+        <span class="mf">72.1558</span><span class="p">,</span>
+        <span class="mf">72.6555</span><span class="p">,</span>
+        <span class="mf">74.2216</span><span class="p">,</span>
+        <span class="mf">74.6777</span><span class="p">,</span>
+        <span class="mf">77.3780</span><span class="p">,</span>
+        <span class="mf">78.5495</span><span class="p">,</span>
+        <span class="mf">77.7574</span><span class="p">,</span>
+        <span class="mf">78.4675</span><span class="p">,</span>
+        <span class="mf">78.7265</span><span class="p">,</span>
+        <span class="mf">81.5470</span><span class="p">,</span>
+        <span class="mf">81.7429</span><span class="p">,</span>
+        <span class="mf">83.8565</span><span class="p">,</span>
+        <span class="mf">87.0579</span><span class="p">,</span>
+        <span class="mf">88.3237</span><span class="p">,</span>
+        <span class="mf">88.5409</span><span class="p">,</span>
+        <span class="mf">90.2625</span><span class="p">,</span>
+        <span class="mf">92.1100</span><span class="p">,</span>
+        <span class="mf">92.9949</span><span class="p">,</span>
+        <span class="mf">97.4829</span><span class="p">,</span>
+        <span class="mf">98.7916</span><span class="p">,</span>
+        <span class="mf">99.1695</span><span class="p">,</span>
+        <span class="mf">100.3291</span><span class="p">,</span>
+        <span class="mf">102.6510</span><span class="p">,</span>
+        <span class="mf">104.0075</span><span class="p">,</span>
+        <span class="mf">105.8242</span><span class="p">,</span>
+        <span class="mf">106.5207</span><span class="p">,</span>
+        <span class="mf">107.1619</span><span class="p">,</span>
+        <span class="mf">107.7716</span><span class="p">,</span>
+        <span class="mf">111.2568</span><span class="p">,</span>
+        <span class="mf">112.7815</span><span class="p">,</span>
+        <span class="mf">113.5394</span><span class="p">,</span>
+        <span class="mf">116.6615</span><span class="p">,</span>
+        <span class="mf">116.8022</span><span class="p">,</span>
+        <span class="mf">120.4465</span><span class="p">,</span>
+        <span class="mf">121.8652</span><span class="p">,</span>
+        <span class="mf">123.9981</span><span class="p">,</span>
+        <span class="mf">125.0498</span><span class="p">,</span>
+        <span class="mf">129.2106</span><span class="p">,</span>
+        <span class="mf">130.3409</span><span class="p">,</span>
+        <span class="mf">131.9796</span><span class="p">,</span>
+        <span class="mf">131.4842</span><span class="p">,</span>
+        <span class="mf">133.1503</span><span class="p">,</span>
+        <span class="mf">135.3247</span><span class="p">,</span>
+        <span class="mf">135.2318</span><span class="p">,</span>
+        <span class="mf">137.8225</span><span class="p">,</span>
+        <span class="mf">138.0808</span><span class="p">,</span>
+        <span class="mf">138.2218</span><span class="p">,</span>
+        <span class="mf">139.5026</span><span class="p">,</span>
+        <span class="mf">142.7253</span><span class="p">,</span>
+        <span class="mf">141.5105</span><span class="p">,</span>
+        <span class="mf">143.7757</span><span class="p">,</span>
+        <span class="mf">145.9842</span><span class="p">,</span>
+        <span class="mf">146.1712</span><span class="p">,</span>
+        <span class="mf">148.2622</span><span class="p">,</span>
+        <span class="mf">149.2407</span><span class="p">,</span>
+        <span class="mf">151.6295</span><span class="p">,</span>
+        <span class="mf">155.0270</span><span class="p">,</span>
+        <span class="mf">155.6694</span><span class="p">,</span>
+        <span class="mf">156.6739</span><span class="p">,</span>
+        <span class="mf">156.5266</span><span class="p">,</span>
+        <span class="mf">157.6903</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
+
+<span class="c1"># TODO: your code here</span>
+<span class="c1"># store the optimal speeds in s</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;speed over segment&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$i$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$s_i$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/exercises/notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="17.3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Flux balance analysis in systems biology</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="DCP_analysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">DCP analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a">(a)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b">(b)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By CVX
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
