@@ -3,11 +3,25 @@
 format: jb-book
 root: docs/index
 chapters:
+  - file: docs/overview
+
+  - file: docs/python_intro/index
+    sections:
+        - glob: docs/python_intro/notebooks/*
+
+  #- file: docs/hello/index
+  #      sections:
+  #        - glob: docs/hello/notebooks/*
+
   - file: docs/intro/index
     sections:
       - glob: docs/intro/notebooks/*
 
   - file: docs/constructive
+
+  - file: docs/dcp/index
+    sections:
+      - glob: docs/dcp/notebooks/*
 
   - file: docs/applications/index
     sections:
@@ -16,6 +30,10 @@ chapters:
   - file: docs/advanced
 
   - file: docs/scipy22_slides/index
+
+  - file: docs/exercises/index
+    sections:
+      - glob: docs/exercises/notebooks/*
 
   - file: docs/conclusions
 
