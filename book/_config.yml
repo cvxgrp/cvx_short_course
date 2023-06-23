@@ -33,7 +33,8 @@ parse:
 repository:
   url: https://github.com/cvxgrp/cvx_short_course  # Online location of your book
   path_to_book: book  # Optional path to your book, relative to the repository root
-  branch: master  # Which branch of the repository should be used when creating links (optional)
+  branch: 15-remove-expensive-binder-caching
+  #branch: master  # Which branch of the repository should be used when creating links (optional)
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
