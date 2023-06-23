@@ -34,4 +34,4 @@ dcp.pdf
 exercises/*_sltn.ipynb
 
 book/_build
-
+.venv

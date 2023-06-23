@@ -3,7 +3,7 @@
 
 title: CVX Short Course
 author: CVX
-logo: static/logo.jpeg
+#logo: static/logo.jpeg
 only_build_toc_files: true
 
 execute:
@@ -28,11 +28,14 @@ parse:
     - linkify
     - dollarmath
     - amsmath
+  myst_substitutions:
+    book_url: https://www.cvxgrp.org/cvx_short_course
 
 
 # Information about where the book exists on the web
 repository:
-  url: https://cvxgrp.grp/cvx_short_course  # Online location of your book
+  url: https://github.com/cvxgrp/cvx_short_course
+  #url: https://cvxgrp.grp/cvx_short_course  # Online location of your book
   path_to_book: book  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 
@@ -41,7 +44,7 @@ repository:
 html:
   use_issues_button: true
   use_repository_button: true
-  use_edit_page_button: true
+  #use_edit_page_button: true
   extra_navbar: Powered by <a href="https://jupyterbook.org">Jupyter Book</a>  # Will be displayed underneath the left navbar.
 
 

@@ -1,3 +1,5 @@
 cvxpy
 matplotlib
 dask
+Pillow
+
