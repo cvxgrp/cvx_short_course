@@ -454,46 +454,46 @@ Note that the norm of the discretized gradient is <em>not</em> squared.</p>
                                      CVXPY                                     
                                      v1.3.1                                    
 ===============================================================================
-(CVXPY) Jun 23 07:32:46 PM: Your problem has 262144 variables, 1 constraints, and 0 parameters.
+(CVXPY) Jun 23 07:51:10 PM: Your problem has 262144 variables, 1 constraints, and 0 parameters.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:32:46 PM: It is compliant with the following grammars: DCP, DQCP
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:51:10 PM: It is compliant with the following grammars: DCP, DQCP
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:32:46 PM: (If you need to solve this problem multiple times, but with different data, consider using parameters.)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:51:10 PM: (If you need to solve this problem multiple times, but with different data, consider using parameters.)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:32:46 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:51:10 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
                                   Compilation                                  
 -------------------------------------------------------------------------------
-(CVXPY) Jun 23 07:32:46 PM: Compiling problem (target solver=SCS).
+(CVXPY) Jun 23 07:51:10 PM: Compiling problem (target solver=SCS).
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:32:46 PM: Reduction chain: Dcp2Cone -&gt; CvxAttr2Constr -&gt; ConeMatrixStuffing -&gt; SCS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:51:10 PM: Reduction chain: Dcp2Cone -&gt; CvxAttr2Constr -&gt; ConeMatrixStuffing -&gt; SCS
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:32:46 PM: Applying reduction Dcp2Cone
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:51:10 PM: Applying reduction Dcp2Cone
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:32:46 PM: Applying reduction CvxAttr2Constr
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:51:10 PM: Applying reduction CvxAttr2Constr
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:32:46 PM: Applying reduction ConeMatrixStuffing
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:51:10 PM: Applying reduction ConeMatrixStuffing
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:32:47 PM: Applying reduction SCS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:51:11 PM: Applying reduction SCS
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:32:47 PM: Finished problem compilation (took 1.469e+00 seconds).
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:51:11 PM: Finished problem compilation (took 1.203e+00 seconds).
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
                                 Numerical solver                               
 -------------------------------------------------------------------------------
-(CVXPY) Jun 23 07:32:47 PM: Invoking solver SCS  to obtain a solution.
+(CVXPY) Jun 23 07:51:11 PM: Invoking solver SCS  to obtain a solution.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>------------------------------------------------------------------
@@ -516,89 +516,67 @@ lin-sys:  sparse-direct-amd-qdldl
 ------------------------------------------------------------------
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     0| 2.55e+01  1.00e+00  6.66e+06 -3.33e+06  1.00e-01  5.53e+00 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     0| 2.55e+01  1.00e+00  6.66e+06 -3.33e+06  1.00e-01  4.41e+00 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   250| 7.19e-02  2.86e-03  2.61e-03  1.03e+04  1.00e-01  4.49e+01 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   250| 7.19e-02  2.86e-03  2.61e-03  1.03e+04  1.00e-01  3.47e+01 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   500| 1.10e-02  2.17e-03  6.12e-04  1.10e+04  3.17e-01  8.71e+01 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   500| 1.10e-02  2.17e-03  6.12e-04  1.10e+04  3.17e-01  6.72e+01 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   750| 6.40e-03  1.04e-03  2.14e-04  1.10e+04  3.17e-01  1.26e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   750| 6.40e-03  1.04e-03  2.14e-04  1.10e+04  3.17e-01  9.70e+01 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000| 3.59e-03  5.17e-04  1.26e-05  1.10e+04  3.17e-01  1.65e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000| 3.59e-03  5.17e-04  1.26e-05  1.10e+04  3.17e-01  1.27e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1250| 2.70e-03  3.71e-04  8.97e-06  1.10e+04  3.17e-01  2.04e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1250| 2.70e-03  3.71e-04  8.97e-06  1.10e+04  3.17e-01  1.56e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1500| 1.98e-03  3.96e-04  5.01e-06  1.10e+04  3.17e-01  2.43e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1500| 1.98e-03  3.96e-04  5.01e-06  1.10e+04  3.17e-01  1.85e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1750| 1.56e-03  9.95e-05  5.02e-06  1.10e+04  3.17e-01  2.82e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1750| 1.56e-03  9.95e-05  5.02e-06  1.10e+04  3.17e-01  2.15e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2000| 1.39e-03  8.32e-05  5.14e-06  1.10e+04  3.17e-01  3.21e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2000| 1.39e-03  8.32e-05  5.14e-06  1.10e+04  3.17e-01  2.44e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2250| 1.13e+00  2.80e-01  2.21e-06  1.10e+04  3.17e-01  3.60e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2250| 1.13e+00  2.80e-01  2.21e-06  1.10e+04  3.17e-01  2.73e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2500| 1.36e-03  5.27e-05  3.95e-06  1.10e+04  3.17e-01  3.99e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2500| 1.36e-03  5.27e-05  3.95e-06  1.10e+04  3.17e-01  3.02e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2750| 1.35e-03  7.23e-05  3.65e-06  1.10e+04  3.17e-01  4.37e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2750| 1.35e-03  7.23e-05  3.65e-06  1.10e+04  3.17e-01  3.31e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3000| 7.92e-04  2.34e-04  3.85e-06  1.10e+04  3.17e-01  4.76e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3000| 7.92e-04  2.34e-04  3.85e-06  1.10e+04  3.17e-01  3.60e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3250| 6.69e-04  1.48e-05  3.80e-06  1.10e+04  3.17e-01  5.15e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3250| 6.69e-04  1.48e-05  3.80e-06  1.10e+04  3.17e-01  3.89e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3500| 6.28e-04  9.53e-05  3.97e-05  1.10e+04  1.00e+00  5.57e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3500| 6.28e-04  9.53e-05  3.97e-05  1.10e+04  1.00e+00  4.21e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3750| 3.94e-04  7.09e-05  3.92e-05  1.10e+04  1.00e+00  5.96e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3750| 3.94e-04  7.09e-05  3.92e-05  1.10e+04  1.00e+00  4.50e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Failure:interrupted
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4000| 2.98e-04  1.31e-04  3.89e-05  1.10e+04  1.00e+00  4.80e+02 
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">SolverError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1"># Use SCS to solve the problem.</span>
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">solver</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">SCS</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;optimal objective value: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/problems/problem.py:493,</span> in <span class="ni">Problem.solve</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">491</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">492</span>     <span class="n">solve_func</span> <span class="o">=</span> <span class="n">Problem</span><span class="o">.</span><span class="n">_solve</span>
-<span class="ne">--&gt; </span><span class="mi">493</span> <span class="k">return</span> <span class="n">solve_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/problems/problem.py:1068,</span> in <span class="ni">Problem._solve</span><span class="nt">(self, solver, warm_start, verbose, gp, qcp, requires_grad, enforce_dpp, ignore_dpp, canon_backend, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1066</span> <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1067</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solve_time</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
-<span class="ne">-&gt; </span><span class="mi">1068</span> <span class="bp">self</span><span class="o">.</span><span class="n">unpack_results</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="n">solving_chain</span><span class="p">,</span> <span class="n">inverse_data</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1069</span> <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1070</span>     <span class="nb">print</span><span class="p">(</span><span class="n">_FOOTER</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.12/x64/lib/python3.10/site-packages/cvxpy/problems/problem.py:1393,</span> in <span class="ni">Problem.unpack_results</span><span class="nt">(self, solution, chain, inverse_data)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1391</span>     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">INF_OR_UNB_MESSAGE</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1392</span> <span class="k">if</span> <span class="n">solution</span><span class="o">.</span><span class="n">status</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1393</span>     <span class="k">raise</span> <span class="n">error</span><span class="o">.</span><span class="n">SolverError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1394</span>             <span class="s2">&quot;Solver &#39;</span><span class="si">%s</span><span class="s2">&#39; failed. &quot;</span> <span class="o">%</span> <span class="n">chain</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="o">+</span>
-<span class="g g-Whitespace">   </span><span class="mi">1395</span>             <span class="s2">&quot;Try another solver, or solve with verbose=True for more &quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1396</span>             <span class="s2">&quot;information.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1398</span> <span class="bp">self</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">solution</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1399</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solver_stats</span> <span class="o">=</span> <span class="n">SolverStats</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_solution</span><span class="o">.</span><span class="n">attr</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1400</span>                                  <span class="n">chain</span><span class="o">.</span><span class="n">solver</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
-
-<span class="ne">SolverError</span>: Solver &#39;SCS&#39; failed. Try another solver, or solve with verbose=True for more information.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4250| 2.41e-04  5.76e-05  3.88e-05  1.10e+04  1.00e+00  5.08e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4500| 2.14e-04  1.64e-05  3.86e-05  1.10e+04  1.00e+00  5.37e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  4750| 1.99e-04  3.76e-05  3.83e-05  1.10e+04  1.00e+00  5.66e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  5000| 1.86e-04  4.16e-05  3.84e-05  1.10e+04  1.00e+00  5.95e+02 
 </pre></div>
 </div>
 </div>
