@@ -454,46 +454,46 @@ Note that the norm of the discretized gradient is <em>not</em> squared.</p>
                                      CVXPY                                     
                                      v1.3.1                                    
 ===============================================================================
-(CVXPY) Jun 23 06:16:14 PM: Your problem has 262144 variables, 1 constraints, and 0 parameters.
+(CVXPY) Jun 23 07:01:53 PM: Your problem has 262144 variables, 1 constraints, and 0 parameters.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:16:14 PM: It is compliant with the following grammars: DCP, DQCP
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:01:53 PM: It is compliant with the following grammars: DCP, DQCP
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:16:14 PM: (If you need to solve this problem multiple times, but with different data, consider using parameters.)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:01:53 PM: (If you need to solve this problem multiple times, but with different data, consider using parameters.)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:16:14 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:01:53 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
                                   Compilation                                  
 -------------------------------------------------------------------------------
-(CVXPY) Jun 23 06:16:14 PM: Compiling problem (target solver=SCS).
+(CVXPY) Jun 23 07:01:53 PM: Compiling problem (target solver=SCS).
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:16:14 PM: Reduction chain: Dcp2Cone -&gt; CvxAttr2Constr -&gt; ConeMatrixStuffing -&gt; SCS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:01:53 PM: Reduction chain: Dcp2Cone -&gt; CvxAttr2Constr -&gt; ConeMatrixStuffing -&gt; SCS
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:16:14 PM: Applying reduction Dcp2Cone
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:01:53 PM: Applying reduction Dcp2Cone
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:16:14 PM: Applying reduction CvxAttr2Constr
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:01:53 PM: Applying reduction CvxAttr2Constr
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:16:14 PM: Applying reduction ConeMatrixStuffing
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:01:53 PM: Applying reduction ConeMatrixStuffing
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:16:15 PM: Applying reduction SCS
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:01:54 PM: Applying reduction SCS
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 06:16:16 PM: Finished problem compilation (took 1.520e+00 seconds).
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 23 07:01:55 PM: Finished problem compilation (took 1.525e+00 seconds).
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
                                 Numerical solver                               
 -------------------------------------------------------------------------------
-(CVXPY) Jun 23 06:16:16 PM: Invoking solver SCS  to obtain a solution.
+(CVXPY) Jun 23 07:01:55 PM: Invoking solver SCS  to obtain a solution.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>------------------------------------------------------------------
@@ -516,49 +516,52 @@ lin-sys:  sparse-direct-amd-qdldl
 ------------------------------------------------------------------
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     0| 2.55e+01  1.00e+00  6.66e+06 -3.33e+06  1.00e-01  5.62e+00 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     0| 2.55e+01  1.00e+00  6.66e+06 -3.33e+06  1.00e-01  5.73e+00 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   250| 7.19e-02  2.86e-03  2.61e-03  1.03e+04  1.00e-01  4.63e+01 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   250| 7.19e-02  2.86e-03  2.61e-03  1.03e+04  1.00e-01  4.76e+01 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   500| 1.10e-02  2.17e-03  6.12e-04  1.10e+04  3.17e-01  8.88e+01 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   500| 1.10e-02  2.17e-03  6.12e-04  1.10e+04  3.17e-01  9.02e+01 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   750| 6.40e-03  1.04e-03  2.14e-04  1.10e+04  3.17e-01  1.29e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   750| 6.40e-03  1.04e-03  2.14e-04  1.10e+04  3.17e-01  1.31e+02 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1000| 3.59e-03  5.17e-04  1.26e-05  1.10e+04  3.17e-01  1.69e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1250| 2.70e-03  3.71e-04  8.97e-06  1.10e+04  3.17e-01  2.11e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1250| 2.70e-03  3.71e-04  8.97e-06  1.10e+04  3.17e-01  2.09e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1500| 1.98e-03  3.96e-04  5.01e-06  1.10e+04  3.17e-01  2.54e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1500| 1.98e-03  3.96e-04  5.01e-06  1.10e+04  3.17e-01  2.48e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1750| 1.56e-03  9.95e-05  5.02e-06  1.10e+04  3.17e-01  2.96e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1750| 1.56e-03  9.95e-05  5.02e-06  1.10e+04  3.17e-01  2.87e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2000| 1.39e-03  8.32e-05  5.14e-06  1.10e+04  3.17e-01  3.39e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2000| 1.39e-03  8.32e-05  5.14e-06  1.10e+04  3.17e-01  3.25e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2250| 1.13e+00  2.80e-01  2.21e-06  1.10e+04  3.17e-01  3.82e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2250| 1.13e+00  2.80e-01  2.21e-06  1.10e+04  3.17e-01  3.63e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2500| 1.36e-03  5.27e-05  3.95e-06  1.10e+04  3.17e-01  4.23e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2500| 1.36e-03  5.27e-05  3.95e-06  1.10e+04  3.17e-01  4.01e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2750| 1.35e-03  7.23e-05  3.65e-06  1.10e+04  3.17e-01  4.63e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  2750| 1.35e-03  7.23e-05  3.65e-06  1.10e+04  3.17e-01  4.39e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3000| 7.92e-04  2.34e-04  3.85e-06  1.10e+04  3.17e-01  5.04e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3000| 7.92e-04  2.34e-04  3.85e-06  1.10e+04  3.17e-01  4.77e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3250| 6.69e-04  1.48e-05  3.80e-06  1.10e+04  3.17e-01  5.45e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3250| 6.69e-04  1.48e-05  3.80e-06  1.10e+04  3.17e-01  5.15e+02 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3500| 6.28e-04  9.53e-05  3.97e-05  1.10e+04  1.00e+00  5.88e+02 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3500| 6.28e-04  9.53e-05  3.97e-05  1.10e+04  1.00e+00  5.56e+02 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  3750| 3.94e-04  7.09e-05  3.92e-05  1.10e+04  1.00e+00  5.94e+02 
 </pre></div>
 </div>
 </div>
