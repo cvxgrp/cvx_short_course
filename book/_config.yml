@@ -45,3 +45,6 @@ html:
   use_issues_button: true
   use_repository_button: true
   extra_navbar: Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+
+launch_buttons:
+  binderhub_url: "https://mybinder.org"  # The URL for your BinderHub (e.g., https://mybinder.org)
