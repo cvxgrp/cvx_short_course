@@ -470,15 +470,16 @@ there are <span class="math notranslate nohighlight">\(M\)</span> different poss
 in the convex hull of <span class="math notranslate nohighlight">\(\Sigma^{(1)}, \ldots, \Sigma^{(M)}\)</span>.)</p>
 <p>We will choose the portfolio weights in order to maximize
 the expected return, adjusted by the worst-case risk, \ie,
-as the solution <span class="math notranslate nohighlight">\(w^\star\)</span> of the problem
-$<span class="math notranslate nohighlight">\(
+as the solution <span class="math notranslate nohighlight">\(w^\star\)</span> of the problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{array}{ll}
 \mbox{maximize} &amp; \mu^T w - \gamma \max_{k=1, \ldots, M} w^T \Sigma^{(k)} w\\
 \mbox{subject to}
     &amp; \mathbb{1}^Tw = 1,
     \end{array}
-\)</span><span class="math notranslate nohighlight">\(
-with variable \)</span>w<span class="math notranslate nohighlight">\(, where \)</span>\gamma&gt;0$ is a given risk-aversion parameter.
+\end{split}\]</div>
+<p>with variable <span class="math notranslate nohighlight">\(w\)</span>, where <span class="math notranslate nohighlight">\(\gamma&gt;0\)</span> is a given risk-aversion parameter.
 We call this the mean-worst-case-risk portfolio problem.</p>
 <section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h2>

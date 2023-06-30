@@ -438,22 +438,29 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="lasso">
 <h1>LASSO<a class="headerlink" href="#lasso" title="Permalink to this heading">#</a></h1>
-<p>We wish to recover a sparse vector <span class="math notranslate nohighlight">\(x \in \mathbf{R}^n\)</span> from measurements <span class="math notranslate nohighlight">\(y \in \mathbf{R}^m\)</span>. Our measurement model tells us that
-$<span class="math notranslate nohighlight">\(
+<p>We wish to recover a sparse vector <span class="math notranslate nohighlight">\(x \in \mathbf{R}^n\)</span> from measurements <span class="math notranslate nohighlight">\(y \in \mathbf{R}^m\)</span>. Our measurement model tells us that</p>
+<div class="math notranslate nohighlight">
+\[
 y = Ax + v,
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>A \in \mathbf{R}^{m \times n}<span class="math notranslate nohighlight">\( is a known matrix and \)</span>v \in \mathbf{R}^m<span class="math notranslate nohighlight">\( is unknown measurement error.
-For our demonstration the entries of \)</span>v<span class="math notranslate nohighlight">\( are sampled from the normal distribution with mean zero and
-standard deviation \)</span>\sigma<span class="math notranslate nohighlight">\( (by default, \)</span>\sigma = 1$).</p>
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(A \in \mathbf{R}^{m \times n}\)</span> is a known matrix and <span class="math notranslate nohighlight">\(v \in \mathbf{R}^m\)</span> is unknown measurement error.
+For our demonstration the entries of <span class="math notranslate nohighlight">\(v\)</span> are sampled from the normal distribution with mean zero and
+standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> (by default, <span class="math notranslate nohighlight">\(\sigma = 1\)</span>).</p>
 <p>We can first try to recover <span class="math notranslate nohighlight">\(x\)</span> by solving the optimization problem</p>
-<p>\begin{array}{ll} \mbox{minimize} &amp; ||Ax - y||^2_2 + \gamma ||x||^2_2.\
-\end{array}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ll} \mbox{minimize} &amp; ||Ax - y||^2_2 + \gamma ||x||^2_2.\\
+\end{array}
+\end{split}\]</div>
 <p>This problem is called ridge regression.</p>
 <p>The code below defines <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(m\)</span>, <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(x\)</span>, and <span class="math notranslate nohighlight">\(y\)</span>. Use CVXPY to estimate <span class="math notranslate nohighlight">\(x\)</span> from <span class="math notranslate nohighlight">\(y\)</span> using ridge regression. Try multiple
 values of <span class="math notranslate nohighlight">\(\gamma\)</span>. Use the plotting code to compare the estimated <span class="math notranslate nohighlight">\(x\)</span> with the true <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <p>A more effective approach is to solve the LASSO problem</p>
-<p>\begin{array}{ll} \mbox{minimize} &amp; ||Ax - y||^2_2 + \gamma |x|_1.\
-\end{array}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ll} \mbox{minimize} &amp; ||Ax - y||^2_2 + \gamma \|x\|_1.\\
+\end{array}
+\end{split}\]</div>
 <p>How many measurements <span class="math notranslate nohighlight">\(m\)</span> are needed to find an accurate <span class="math notranslate nohighlight">\(x\)</span> with ridge regression? How about with the LASSO?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
