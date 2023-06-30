@@ -457,10 +457,14 @@ We model the evolution of the state as a linear dynamical system, i.e.,</p>
 \[ x_{t+1} = Ax_t + Bu_t \]</div>
 <p>where <span class="math notranslate nohighlight">\(A \in {\bf R}^{n\times n}\)</span> and <span class="math notranslate nohighlight">\(B \in {\bf R}^{n\times m}\)</span> are known matrices.</p>
 <p>Our goal is to find the optimal actions <span class="math notranslate nohighlight">\(u_0,\ldots,u_{T-1}\)</span> by solving the optimization problems</p>
-<p>\begin{array}{ll} \mbox{minimize} &amp; \sum_{t=0}^{T-1} \ell (x_t,u_t) + \ell_T(x_T)\
-\mbox{subject to} &amp; x_{t+1} = Ax_t + Bu_t\%, \quad t=0, \ldots, T-1\
-&amp; (x_t,u_t) \in \mathcal C, \quad x_T\in \mathcal C_T,</p>
-<p>\end{array}</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ll} \mbox{minimize} &amp; \sum_{t=0}^{T-1} \ell (x_t,u_t) + \ell_T(x_T)\\
+\mbox{subject to} &amp; x_{t+1} = Ax_t + Bu_t\\%, \quad t=0, \ldots, T-1\\
+&amp; (x_t,u_t) \in \mathcal C, \quad x_T\in \mathcal C_T,
+%, \quad \quad t=0, \ldots, T
+\end{array}
+\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\ell: {\bf R}^n \times {\bf R}^m\to {\bf R}\)</span> is the stage cost, <span class="math notranslate nohighlight">\(\ell_T\)</span> is the terminal cost,
 <span class="math notranslate nohighlight">\(\mathcal C\)</span> is the state/action constraints, and <span class="math notranslate nohighlight">\(\mathcal C_T\)</span> is the terminal constraint.
 The optimization problem is convex if the costs and constraints are convex.</p>
