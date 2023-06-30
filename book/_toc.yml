@@ -2,40 +2,49 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 format: jb-book
 root: docs/index
-chapters:
-  - file: docs/overview
+parts:
+  - caption: "Overview"
+    chapters:
+      - file: docs/overview
 
-  - file: docs/python_intro/index
-    sections:
-        - glob: docs/python_intro/notebooks/*
+      - file: docs/python_intro/index
+        sections:
+            - glob: docs/python_intro/notebooks/*
 
-  #- file: docs/hello/index
-  #      sections:
-  #        - glob: docs/hello/notebooks/*
+      - file: docs/intro/index
+        sections:
+          - glob: docs/intro/notebooks/*
 
-  - file: docs/intro/index
-    sections:
-      - glob: docs/intro/notebooks/*
+  - caption: "Constructive Convex Analysis"
+    chapters:
+    - file: docs/constructive
 
-  - file: docs/constructive
+    - file: docs/dcp/index
+      sections:
+        - glob: docs/dcp/notebooks/*
 
-  - file: docs/dcp/index
-    sections:
-      - glob: docs/dcp/notebooks/*
+    - file: docs/applications/index
+      sections:
+        - glob: docs/applications/notebooks/*
 
-  - file: docs/applications/index
-    sections:
-      - glob: docs/applications/notebooks/*
+  - caption: "Advanced Topics"
+    chapters:
+    - file: docs/advanced
+      sections:
+      - file: docs/scipy22_slides/index
 
-  - file: docs/advanced
+  - caption: "Exercises"
+    chapters:
+    - file: docs/exercises/index
+      sections:
+        - glob: docs/exercises/notebooks/*
 
-  - file: docs/scipy22_slides/index
+  - caption: "Conclusions"
+    chapters:
+    - file: docs/conclusions
 
-  - file: docs/exercises/index
-    sections:
-      - glob: docs/exercises/notebooks/*
+  - caption: "Appendix"
+    chapters:
+    - file: docs/local
 
-  - file: docs/conclusions
-
-  - file: docs/local
 
