@@ -458,50 +458,53 @@ defined as <span class="math notranslate nohighlight">\(w_t = h_t/(\mathbb{1}^Th
 we assume that <span class="math notranslate nohighlight">\(\mathbb{1}^T h_t&gt;0\)</span>, <em>i.e.</em>, the total
 portfolio value is positive.</p>
 <p>The <em>target portfolio weight vector</em>
-<span class="math notranslate nohighlight">\(w^\star\)</span> is defined as the solution of the problem
-$<span class="math notranslate nohighlight">\(
+<span class="math notranslate nohighlight">\(w^\star\)</span> is defined as the solution of the problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
     \begin{array}{ll}
     \mbox{maximize}   &amp; \mu^T w - \frac{\gamma}{2} w^T \Sigma w \\
     \mbox{subject to}
     &amp; \mathbb{1}^Tw = 1,
     \end{array}
-\)</span><span class="math notranslate nohighlight">\(
-where \)</span>w\in \mathbb{R}^n<span class="math notranslate nohighlight">\( is the variable, \)</span>\mu<span class="math notranslate nohighlight">\( is the mean return,
-\)</span>\Sigma\in \mathbb{S}_{++}^n<span class="math notranslate nohighlight">\( is the return covariance, and \)</span>\gamma&gt;0<span class="math notranslate nohighlight">\( is the 
-risk aversion parameter.  The data \)</span>\mu<span class="math notranslate nohighlight">\(, \)</span>\Sigma<span class="math notranslate nohighlight">\(, and \)</span>\gamma$ are given.
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(w\in \mathbb{R}^n\)</span> is the variable, <span class="math notranslate nohighlight">\(\mu\)</span> is the mean return,
+<span class="math notranslate nohighlight">\(\Sigma\in \mathbb{S}_{++}^n\)</span> is the return covariance, and <span class="math notranslate nohighlight">\(\gamma&gt;0\)</span> is the
+risk aversion parameter.  The data <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\Sigma\)</span>, and <span class="math notranslate nohighlight">\(\gamma\)</span> are given.
 In words, the target weights maximize the risk-adjusted expected return.</p>
 <p>At the beginning of each period <span class="math notranslate nohighlight">\(t\)</span> we are allowed to rebalance the
 portfolio by buying and selling assets.
 We call the post-trade portfolio weights <span class="math notranslate nohighlight">\(\tilde{w}_t\)</span>.
-They are found by solving the (rebalancing) problem
-$<span class="math notranslate nohighlight">\(
+They are found by solving the (rebalancing) problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
     \begin{array}{ll}
     \mbox{maximize}   &amp; \mu^T w - \frac{\gamma}{2} w^T \Sigma w - \kappa^T |w-w_t|\\
     \mbox{subject to}
     &amp; \mathbb{1}^Tw = 1,
     \end{array}
-\)</span><span class="math notranslate nohighlight">\(
-with variable \)</span>w \in \mathbb{R}^n<span class="math notranslate nohighlight">\(,
-where \)</span>\kappa\in\mathbb{R}^n_+<span class="math notranslate nohighlight">\( is the vector of (so-called linear) transaction costs
+\end{split}\]</div>
+<p>with variable <span class="math notranslate nohighlight">\(w \in \mathbb{R}^n\)</span>,
+where <span class="math notranslate nohighlight">\(\kappa\in\mathbb{R}^n_+\)</span> is the vector of (so-called linear) transaction costs
 for the assets. (For example, these could model bid/ask spread.)
 Thus, we choose the post-trade weights to maximize the risk-adjusted expected
 return, minus the transactions costs associated with rebalancing the portfolio.
-Note that the pre-trade weight vector \)</span>w_t<span class="math notranslate nohighlight">\(
+Note that the pre-trade weight vector <span class="math notranslate nohighlight">\(w_t\)</span>
 is known at the time we solve the problem.
-If we have \)</span>\tilde w_t = w_t<span class="math notranslate nohighlight">\(, it means that no rebalancing is done at 
-the beginning of period \)</span>t<span class="math notranslate nohighlight">\(; we simply hold our current portfolio.
-(This happens if \)</span>w_t = w^\star$, for example.)</p>
+If we have <span class="math notranslate nohighlight">\(\tilde w_t = w_t\)</span>, it means that no rebalancing is done at
+the beginning of period <span class="math notranslate nohighlight">\(t\)</span>; we simply hold our current portfolio.
+(This happens if <span class="math notranslate nohighlight">\(w_t = w^\star\)</span>, for example.)</p>
 <p>After holding the rebalanced portfolio over the investment period,
 the dollar value of our portfolio becomes <span class="math notranslate nohighlight">\(h_{t+1} = \text{diag}(r_t) \tilde h_t\)</span>,
 where <span class="math notranslate nohighlight">\(r_t \in \mathbb{R}^n_{++}\)</span> is the (random) vector of asset returns
 over period <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(\tilde h_t\)</span> is the post-trade portfolio
 given in dollar values (which you do not need to know).
-The next weight vector is then given by
-$<span class="math notranslate nohighlight">\(
+The next weight vector is then given by</p>
+<div class="math notranslate nohighlight">
+\[
     w_{t+1} = 
     \frac{\text{diag}{(r_t)}\tilde{w}_t}{r_t^T\tilde{w}_t}.
-\)</span><span class="math notranslate nohighlight">\(
-(If \)</span>r_t^T \tilde w_t \leq 0$, which means our portfolio has negative
+\]</div>
+<p>(If <span class="math notranslate nohighlight">\(r_t^T \tilde w_t \leq 0\)</span>, which means our portfolio has negative
 value after the investment period, we have gone bust, and all trading stops.)</p>
 <p>The standard model is that <span class="math notranslate nohighlight">\(r_t\)</span> are IID random variables with
 mean and covariance <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\Sigma\)</span>,
@@ -517,11 +520,12 @@ to compute <span class="math notranslate nohighlight">\(w_{t+1}\)</span>
 (The sequence of weights is random, so the results won’t be the
 same each time you run your script.   But they should look similar.)</p>
 <p>Report the fraction of periods in which the solution has only zero (or negligible)
-trades, defined as
-$<span class="math notranslate nohighlight">\(
+trades, defined as</p>
+<div class="math notranslate nohighlight">
+\[
 \|\tilde w_t - w_t \|_\infty \leq 10^{-3}.
-\)</span><span class="math notranslate nohighlight">\(
-Plot the sequence \)</span>\tilde w_t<span class="math notranslate nohighlight">\( for \)</span>t = 1, 2,\ldots, T$.</p>
+\]</div>
+<p>Plot the sequence <span class="math notranslate nohighlight">\(\tilde w_t\)</span> for <span class="math notranslate nohighlight">\(t = 1, 2,\ldots, T\)</span>.</p>
 <p>We provide below the data,
 a function to generate a (random) vector <span class="math notranslate nohighlight">\(r_t\)</span> of market returns, and
 the code to plot the sequence <span class="math notranslate nohighlight">\(\tilde w_t\)</span>. (The plotting code also

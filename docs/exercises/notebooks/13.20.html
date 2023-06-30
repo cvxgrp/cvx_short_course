@@ -454,25 +454,27 @@ with asset return covariance matrix <span class="math notranslate nohighlight">\
 We define the <em>risk</em> of the investments as the standard deviation
 of the total return, <span class="math notranslate nohighlight">\(R(x) = (x^T\Sigma x)^{1/2}\)</span>.</p>
 <p>We define the (relative) <em>risk contribution</em> of asset <span class="math notranslate nohighlight">\(i\)</span>
-(in the portfolio <span class="math notranslate nohighlight">\(x\)</span>) as
-$<span class="math notranslate nohighlight">\(
+(in the portfolio <span class="math notranslate nohighlight">\(x\)</span>) as</p>
+<div class="math notranslate nohighlight">
+\[
 \rho_i = \frac{\partial \log R(x)}{\partial \log x_i} =
 \frac{\partial R(x)}{R(x)} \frac{x_i}{\partial x_i}, \quad i=1, \ldots, n.
-\)</span><span class="math notranslate nohighlight">\(
-Thus \)</span>\rho_i<span class="math notranslate nohighlight">\( gives the fractional increase in risk per fractional increase
-in investment \)</span>i<span class="math notranslate nohighlight">\(.
-We can express the risk contributions as
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>Thus <span class="math notranslate nohighlight">\(\rho_i\)</span> gives the fractional increase in risk per fractional increase
+in investment <span class="math notranslate nohighlight">\(i\)</span>.
+We can express the risk contributions as</p>
+<div class="math notranslate nohighlight">
+\[
 \rho_i = \frac{x_i (\Sigma x)_i} {x^T\Sigma x}, \quad i=1, \ldots, n,
-\)</span><span class="math notranslate nohighlight">\(
-from which we see that \)</span>\sum_{i=1}^n \rho_i = 1<span class="math notranslate nohighlight">\(.
-For general \)</span>x<span class="math notranslate nohighlight">\(, we can have \)</span>\rho_i &lt;0<span class="math notranslate nohighlight">\(, which means that a small increase
-in investment \)</span>i<span class="math notranslate nohighlight">\( decreases the risk.
-Desirable investment choices have \)</span>\rho_i&gt;0<span class="math notranslate nohighlight">\(, in which case we can
-interpret \)</span>\rho_i<span class="math notranslate nohighlight">\( as the fraction of the total risk contributed by
-the investment in asset \)</span>i<span class="math notranslate nohighlight">\(.
+\]</div>
+<p>from which we see that <span class="math notranslate nohighlight">\(\sum_{i=1}^n \rho_i = 1\)</span>.
+For general <span class="math notranslate nohighlight">\(x\)</span>, we can have <span class="math notranslate nohighlight">\(\rho_i &lt;0\)</span>, which means that a small increase
+in investment <span class="math notranslate nohighlight">\(i\)</span> decreases the risk.
+Desirable investment choices have <span class="math notranslate nohighlight">\(\rho_i&gt;0\)</span>, in which case we can
+interpret <span class="math notranslate nohighlight">\(\rho_i\)</span> as the fraction of the total risk contributed by
+the investment in asset <span class="math notranslate nohighlight">\(i\)</span>.
 Note that the risk contributions are homogeneous of degree zero, i.e.,
-scaling \)</span>x<span class="math notranslate nohighlight">\( by a positive constant does not affect \)</span>\rho_i$.</p>
+scaling <span class="math notranslate nohighlight">\(x\)</span> by a positive constant does not affect <span class="math notranslate nohighlight">\(\rho_i\)</span>.</p>
 <p>In the <em>risk budget allocation problem</em>, we are given <span class="math notranslate nohighlight">\(\Sigma\)</span> and a
 set of desired risk contributions <span class="math notranslate nohighlight">\(\rho_i^\mathrm{des}&gt;0\)</span> with
 <span class="math notranslate nohighlight">\(\bf{1}^T \rho^\mathrm{des}=1\)</span>; the goal is to find an investment mix
