@@ -558,12 +558,6 @@ We can get the same risk-return trade-off by fixing return and minimizing risk.<
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1845/3491241395.py:10: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
-  ret_data[i] = ret.value
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -592,7 +586,7 @@ We can get the same risk-return trade-off by fixing return and minimizing risk.<
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/5ff1366ed739114a50948a9647159e1d0bd89df105fe3b83a63fa418fcda8338.svg" src="../../../_images/5ff1366ed739114a50948a9647159e1d0bd89df105fe3b83a63fa418fcda8338.svg" /></div>
+<img alt="../../../_images/3dbfc67b21580c20ebffcda75a937a77d2200513f11a05445a469e0136c2947a.svg" src="../../../_images/3dbfc67b21580c20ebffcda75a937a77d2200513f11a05445a469e0136c2947a.svg" /></div>
 </div>
 <p>We plot below the return distributions for the two risk aversion values marked on the trade-off curve.
 Notice that the probability of a loss is near 0 for the low risk value and far above 0 for the high risk value.</p>
@@ -621,7 +615,7 @@ Notice that the probability of a loss is near 0 for the low risk value and far a
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/93997ea2ccde28d34184642bfb78e0d25ed11c9a0d27d5d5bb52cfacdd4fa319.svg" src="../../../_images/93997ea2ccde28d34184642bfb78e0d25ed11c9a0d27d5d5bb52cfacdd4fa319.svg" /></div>
+<img alt="../../../_images/d25134638a603c63bcd5e32e08aad749d2bf698fdb75917f852ec9a35f672873.svg" src="../../../_images/d25134638a603c63bcd5e32e08aad749d2bf698fdb75917f852ec9a35f672873.svg" /></div>
 </div>
 <section id="portfolio-constraints">
 <h3>Portfolio constraints<a class="headerlink" href="#portfolio-constraints" title="Permalink to this heading">#</a></h3>
@@ -664,12 +658,6 @@ Notice that more leverage increases returns and allows greater risk.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1845/231315309.py:14: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
-  ret_data[k, i] = ret.value
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -687,7 +675,7 @@ Notice that more leverage increases returns and allows greater risk.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/57613389b6dbb63d3b877c1398a9be97aca14dca6dc526f2450bcf516cfbec7a.svg" src="../../../_images/57613389b6dbb63d3b877c1398a9be97aca14dca6dc526f2450bcf516cfbec7a.svg" /></div>
+<img alt="../../../_images/705c108b56deb7d7e534a7acca03c6b5a2245bfa7f348eac167086fae07281b5.svg" src="../../../_images/705c108b56deb7d7e534a7acca03c6b5a2245bfa7f348eac167086fae07281b5.svg" /></div>
 </div>
 <p>We next examine the points on each trade-off curve where <span class="math notranslate nohighlight">\(w^T\Sigma w = 2\)</span>.
 We plot the amount of each asset held in each portfolio as bar graphs. (Negative holdings indicate a short position.)
@@ -733,7 +721,7 @@ Notice that some assets are held in a long position for the low leverage portfol
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/98cbfd07f419cdad4637ce8b28404c8753ba3b15ac60ea2790404db15339b04d.svg" src="../../../_images/98cbfd07f419cdad4637ce8b28404c8753ba3b15ac60ea2790404db15339b04d.svg" /></div>
+<img alt="../../../_images/9f1b63ff94134f15e21f15e7b91432cd89bb598d0d1884658b364bf770f0f354.svg" src="../../../_images/9f1b63ff94134f15e21f15e7b91432cd89bb598d0d1884658b364bf770f0f354.svg" /></div>
 </div>
 </section>
 </section>
@@ -763,13 +751,10 @@ We could include transaction costs (from a previous portfolio <span class="math 
 <section id="portfolio-optimization-with-factor-covariance-model">
 <h2>Portfolio optimization with factor covariance model<a class="headerlink" href="#portfolio-optimization-with-factor-covariance-model" title="Permalink to this heading">#</a></h2>
 <p>Using the factor covariance model, we frame the portfolio optimization problem as</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{array}{ll} \mbox{maximize} &amp; \mu^T w - \gamma \left(f^T \tilde \Sigma f  + w^TDw \right) \\
-\mbox{subject to} &amp; {\bf 1}^T w = 1, \quad f=F^Tw\\
+<p>\begin{array}{ll} \mbox{maximize} &amp; \mu^T w - \gamma \left(f^T \tilde \Sigma f  + w^TDw \right) \
+\mbox{subject to} &amp; {\bf 1}^T w = 1, \quad f=F^Tw\
 &amp; w \in {\cal W}, \quad f \in {\cal F},
-\end{array}
-\end{split}\]</div>
+\end{array}</p>
 <p>where the variables are the allocations <span class="math notranslate nohighlight">\(w \in {\bf R}^n\)</span> and factor exposures <span class="math notranslate nohighlight">\(f\in {\bf R}^k\)</span> and <span class="math notranslate nohighlight">\(\cal F\)</span> gives the factor exposure constraints.</p>
 <p>Using the factor covariance model in the optimization problem has a computational advantage. The solve time is <span class="math notranslate nohighlight">\(O(nk^2)\)</span> versus <span class="math notranslate nohighlight">\(O(n^3)\)</span> for the standard problem.</p>
 </section>
@@ -783,8 +768,8 @@ We collected the timings on a MacBook Air with an Intel Core i7 processor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data for factor model.</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">m</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">50</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="n">Sigma_tilde</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
@@ -819,60 +804,34 @@ We collected the timings on a MacBook Air with an Intel Core i7 processor.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============================================================================
                                      CVXPY                                     
-                                     v1.3.2                                    
+                                     v1.2.1                                    
 ===============================================================================
-(CVXPY) Jul 01 06:38:47 AM: Your problem has 530 variables, 3 constraints, and 2 parameters.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: It is compliant with the following grammars: DCP, DQCP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+(CVXPY) Jun 04 10:33:10 AM: Your problem has 3050 variables, 3 constraints, and 2 parameters.
+(CVXPY) Jun 04 10:33:10 AM: It is compliant with the following grammars: DCP, DQCP
+(CVXPY) Jun 04 10:33:10 AM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+-------------------------------------------------------------------------------
                                   Compilation                                  
 -------------------------------------------------------------------------------
-(CVXPY) Jul 01 06:38:47 AM: Compiling problem (target solver=OSQP).
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Applying reduction FlipObjective
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Applying reduction CvxAttr2Constr
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Applying reduction Qp2SymbolicQp
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Applying reduction QpMatrixStuffing
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Applying reduction OSQP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Finished problem compilation (took 3.400e-02 seconds).
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+(CVXPY) Jun 04 10:33:10 AM: Compiling problem (target solver=OSQP).
+(CVXPY) Jun 04 10:33:11 AM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
+(CVXPY) Jun 04 10:33:11 AM: Applying reduction FlipObjective
+(CVXPY) Jun 04 10:33:11 AM: Applying reduction CvxAttr2Constr
+(CVXPY) Jun 04 10:33:11 AM: Applying reduction Qp2SymbolicQp
+(CVXPY) Jun 04 10:33:11 AM: Applying reduction QpMatrixStuffing
+(CVXPY) Jun 04 10:33:11 AM: Applying reduction OSQP
+(CVXPY) Jun 04 10:33:11 AM: Finished problem compilation (took 6.259e-02 seconds).
+(CVXPY) Jun 04 10:33:11 AM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
+-------------------------------------------------------------------------------
                                 Numerical solver                               
 -------------------------------------------------------------------------------
-(CVXPY) Jul 01 06:38:47 AM: Invoking solver OSQP  to obtain a solution.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------
-           OSQP v0.6.3  -  Operator Splitting QP Solver
+(CVXPY) Jun 04 10:33:11 AM: Invoking solver OSQP  to obtain a solution.
+-----------------------------------------------------------------
+           OSQP v0.6.2  -  Operator Splitting QP Solver
               (c) Bartolomeo Stellato,  Goran Banjac
         University of Oxford  -  Stanford University 2021
 -----------------------------------------------------------------
-problem:  variables n = 1530, constraints m = 1532
-          nnz(P) + nnz(A) = 19995
+problem:  variables n = 9050, constraints m = 9052
+          nnz(P) + nnz(A) = 178325
 settings: linear system solver = qdldl,
           eps_abs = 1.0e-05, eps_rel = 1.0e-05,
           eps_prim_inf = 1.0e-04, eps_dual_inf = 1.0e-04,
@@ -883,36 +842,34 @@ settings: linear system solver = qdldl,
           warm start: on, polish: on, time_limit: off
 
 iter   objective    pri res    dua res    rho        time
-   1  -3.6551e+02   4.56e+00   3.21e+02   1.00e-01   5.67e-03s
- 200  -3.4789e+00   1.30e-03   7.83e-04   1.00e-01   2.05e-02s
- 400  -3.4589e+00   2.90e-04   8.95e-04   8.43e-01   3.62e-02s
- 600  -3.4496e+00   3.63e-05   1.93e-04   8.43e-01   5.15e-02s
- 750  -3.4491e+00   8.92e-06   3.32e-05   8.43e-01   6.22e-02s
-plsh  -3.4490e+00   1.15e-14   3.30e-14   --------   6.58e-02s
+   1  -2.1363e+03   7.63e+00   3.73e+02   1.00e-01   7.06e-02s
+ 200  -4.2091e+00   2.19e-03   7.84e-03   3.56e-01   4.62e-01s
+ 400  -4.6228e+00   3.07e-04   5.76e-04   3.56e-01   7.46e-01s
+ 600  -4.6427e+00   2.23e-04   8.76e-04   3.56e-01   1.00e+00s
+ 800  -4.6215e+00   1.14e-04   4.97e-04   3.56e-01   1.30e+00s
+1000  -4.6214e+00   8.78e-05   1.06e-04   3.56e-01   1.54e+00s
+1200  -4.6204e+00   8.58e-05   9.26e-06   3.56e-01   1.81e+00s
+1400  -4.6138e+00   6.70e-05   2.37e-04   3.56e-01   2.14e+00s
+1600  -4.6067e+00   2.86e-05   1.19e-04   3.56e-01   2.43e+00s
+1675  -4.6051e+00   1.91e-05   3.72e-05   3.56e-01   2.52e+00s
 
 status:               solved
-solution polish:      successful
-number of iterations: 750
-optimal objective:    -3.4490
-run time:             6.58e-02s
-optimal rho estimate: 5.23e-01
+solution polish:      unsuccessful
+number of iterations: 1675
+optimal objective:    -4.6051
+run time:             2.59e+00s
+optimal rho estimate: 3.20e-01
 
 -------------------------------------------------------------------------------
                                     Summary                                    
 -------------------------------------------------------------------------------
-(CVXPY) Jul 01 06:38:47 AM: Problem status: optimal
+(CVXPY) Jun 04 10:33:13 AM: Problem status: optimal
+(CVXPY) Jun 04 10:33:13 AM: Optimal value: 4.605e+00
+(CVXPY) Jun 04 10:33:13 AM: Compilation took 6.259e-02 seconds
+(CVXPY) Jun 04 10:33:13 AM: Solver (including time spent in interface) took 2.592e+00 seconds
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Optimal value: 3.449e+00
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Compilation took 3.400e-02 seconds
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Solver (including time spent in interface) took 6.869e-02 seconds
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.4489690223852425
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.605102865930337
 </pre></div>
 </div>
 </div>
@@ -929,74 +886,43 @@ optimal rho estimate: 5.23e-01
 
 <span class="c1"># Uncomment to solve the problem.</span>
 <span class="c1"># WARNING: this will take many minutes to run.</span>
-<span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100_000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============================================================================
                                      CVXPY                                     
-                                     v1.3.2                                    
+                                     v1.2.1                                    
 ===============================================================================
-(CVXPY) Jul 01 06:38:47 AM: Your problem has 500 variables, 2 constraints, and 2 parameters.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: It is compliant with the following grammars: DCP, DQCP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+(CVXPY) Jun 04 10:33:13 AM: Your problem has 3000 variables, 2 constraints, and 2 parameters.
+(CVXPY) Jun 04 10:33:13 AM: It is compliant with the following grammars: DCP, DQCP
+(CVXPY) Jun 04 10:33:13 AM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+-------------------------------------------------------------------------------
                                   Compilation                                  
 -------------------------------------------------------------------------------
-(CVXPY) Jul 01 06:38:47 AM: Compiling problem (target solver=OSQP).
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Applying reduction FlipObjective
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Applying reduction CvxAttr2Constr
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Applying reduction Qp2SymbolicQp
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Applying reduction QpMatrixStuffing
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Applying reduction OSQP
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: Finished problem compilation (took 1.163e-01 seconds).
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:47 AM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+(CVXPY) Jun 04 10:33:13 AM: Compiling problem (target solver=OSQP).
+(CVXPY) Jun 04 10:33:13 AM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
+(CVXPY) Jun 04 10:33:13 AM: Applying reduction FlipObjective
+(CVXPY) Jun 04 10:33:13 AM: Applying reduction CvxAttr2Constr
+(CVXPY) Jun 04 10:33:13 AM: Applying reduction Qp2SymbolicQp
+(CVXPY) Jun 04 10:33:13 AM: Applying reduction QpMatrixStuffing
+(CVXPY) Jun 04 10:33:17 AM: Applying reduction OSQP
+(CVXPY) Jun 04 10:33:17 AM: Finished problem compilation (took 3.845e+00 seconds).
+(CVXPY) Jun 04 10:33:17 AM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
+-------------------------------------------------------------------------------
                                 Numerical solver                               
 -------------------------------------------------------------------------------
-(CVXPY) Jul 01 06:38:47 AM: Invoking solver OSQP  to obtain a solution.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           OSQP v0.6.3  -  Operator Splitting QP Solver
+(CVXPY) Jun 04 10:33:17 AM: Invoking solver OSQP  to obtain a solution.
+-----------------------------------------------------------------
+           OSQP v0.6.2  -  Operator Splitting QP Solver
               (c) Bartolomeo Stellato,  Goran Banjac
         University of Oxford  -  Stanford University 2021
 -----------------------------------------------------------------
-problem:  variables n = 1000, constraints m = 1002
-          nnz(P) + nnz(A) = 128250
+problem:  variables n = 6000, constraints m = 6002
+          nnz(P) + nnz(A) = 4519500
 settings: linear system solver = qdldl,
-          
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eps_abs = 1.0e-05, eps_rel = 1.0e-05,
+          eps_abs = 1.0e-05, eps_rel = 1.0e-05,
           eps_prim_inf = 1.0e-04, eps_dual_inf = 1.0e-04,
           rho = 1.00e-01 (adaptive),
           sigma = 1.00e-06, alpha = 1.60, max_iter = 100000
@@ -1005,240 +931,189 @@ settings: linear system solver = qdldl,
           warm start: on, polish: on, time_limit: off
 
 iter   objective    pri res    dua res    rho        time
-   1  -1.3716e+03   6.81e+01   5.29e+03   1.00e-01   5.28e-02s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 200  -8.2075e+00   2.80e-02   9.98e-05   1.00e-01   1.15e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 400  -4.5188e+00   9.91e-03   1.73e-05   1.00e-01   1.73e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 600  -3.7398e+00   5.54e-03   4.55e-06   1.00e-01   2.36e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 800  -3.5119e+00   4.49e-03   4.78e-06   1.00e-01   2.88e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000  -3.5161e+00   4.03e-03   2.32e-06   1.00e-01   3.43e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1200  -3.5228e+00   3.76e-03   1.49e-06   1.00e-01   3.96e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1400  -3.5227e+00   3.67e-03   1.00e-06   1.00e-01   4.49e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1600  -3.5333e+00   1.24e-03   2.03e-05   5.01e-01   5.23e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1800  -3.4994e+00   9.01e-04   4.95e-06   5.01e-01   5.77e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000  -3.4771e+00   6.82e-04   8.88e-06   5.01e-01   6.29e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2200  -3.4726e+00   6.57e-04   9.78e-07   5.01e-01   6.87e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2400  -3.4730e+00   6.33e-04   3.84e-07   5.01e-01   7.51e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2600  -3.4713e+00   6.23e-04   2.16e-06   5.01e-01   8.05e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2800  -3.4711e+00   6.00e-04   1.60e-06   5.01e-01   8.60e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000  -3.4707e+00   5.77e-04   1.31e-06   5.01e-01   9.14e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3200  -3.4703e+00   4.60e-04   1.39e-06   5.01e-01   9.77e-01s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3400  -3.4689e+00   4.29e-04   8.37e-07   5.01e-01   1.03e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3600  -3.4679e+00   4.09e-04   8.11e-07   5.01e-01   1.09e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3800  -3.4671e+00   3.90e-04   7.67e-07   5.01e-01   1.14e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4000  -3.4662e+00   3.72e-04   7.25e-07   5.01e-01   1.19e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4200  -3.4655e+00   3.55e-04   6.87e-07   5.01e-01   1.25e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4400  -3.4647e+00   3.39e-04   6.53e-07   5.01e-01   1.30e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4600  -3.4640e+00   3.24e-04   6.21e-07   5.01e-01   1.36e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4800  -3.4634e+00   3.09e-04   5.92e-07   5.01e-01   1.41e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5000  -3.4627e+00   2.95e-04   9.91e-07   5.01e-01   1.47e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5200  -3.4626e+00   2.80e-04   5.79e-07   5.01e-01   1.52e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5400  -3.4620e+00   2.64e-04   5.10e-07   5.01e-01   1.58e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5600  -3.4614e+00   2.51e-04   4.67e-07   5.01e-01   1.63e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5800  -3.4608e+00   2.38e-04   4.37e-07   5.01e-01   1.68e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6000  -3.4603e+00   2.27e-04   4.12e-07   5.01e-01   1.74e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6200  -3.4598e+00   2.16e-04   3.90e-07   5.01e-01   1.79e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6400  -3.4594e+00   2.06e-04   3.45e-07   5.01e-01   1.84e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6600  -3.4590e+00   1.97e-04   3.05e-07   5.01e-01   1.90e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6800  -3.4586e+00   1.89e-04   2.70e-07   5.01e-01   1.95e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7000  -3.4582e+00   1.82e-04   2.40e-07   5.01e-01   2.01e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7200  -3.4579e+00   1.74e-04   2.13e-07   5.01e-01   2.07e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7400  -3.4576e+00   1.67e-04   1.57e-07   5.01e-01   2.12e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7600  -3.4572e+00   1.62e-04   1.35e-07   5.01e-01   2.18e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7800  -3.4569e+00   1.57e-04   1.21e-07   5.01e-01   2.23e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8000  -3.4566e+00   1.53e-04   1.06e-07   5.01e-01   2.29e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8200  -3.4560e+00   1.40e-04   6.94e-07   5.01e-01   2.35e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8400  -3.4553e+00   1.38e-04   3.80e-07   5.01e-01   2.41e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8600  -3.4548e+00   1.36e-04   2.55e-07   5.01e-01   2.46e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8800  -3.4545e+00   1.33e-04   1.89e-07   5.01e-01   2.52e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9000  -3.4542e+00   1.29e-04   1.49e-07   5.01e-01   2.57e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9200  -3.4539e+00   1.26e-04   1.31e-07   5.01e-01   2.62e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9400  -3.4537e+00   1.22e-04   1.24e-07   5.01e-01   2.68e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9600  -3.4535e+00   1.19e-04   1.18e-07   5.01e-01   2.73e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9800  -3.4525e+00   9.37e-05   8.19e-07   5.01e-01   2.79e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000  -3.4518e+00   7.93e-05   4.56e-07   5.01e-01   2.84e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10200  -3.4515e+00   7.11e-05   3.48e-07   5.01e-01   2.90e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10400  -3.4512e+00   6.82e-05   2.76e-07   5.01e-01   2.95e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10600  -3.4510e+00   6.51e-05   2.23e-07   5.01e-01   3.01e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10800  -3.4508e+00   6.20e-05   1.85e-07   5.01e-01   3.07e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11000  -3.4507e+00   5.88e-05   1.56e-07   5.01e-01   3.12e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11200  -3.4506e+00   5.57e-05   1.35e-07   5.01e-01   3.17e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11400  -3.4505e+00   5.27e-05   1.22e-07   5.01e-01   3.23e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11600  -3.4504e+00   5.00e-05   1.11e-07   5.01e-01   3.28e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11800  -3.4503e+00   4.78e-05   1.03e-07   5.01e-01   3.34e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12000  -3.4502e+00   4.57e-05   9.50e-08   5.01e-01   3.40e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12200  -3.4502e+00   4.37e-05   9.14e-08   5.01e-01   3.45e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12400  -3.4501e+00   4.19e-05   8.82e-08   5.01e-01   3.51e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12600  -3.4500e+00   4.00e-05   8.48e-08   5.01e-01   3.57e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12800  -3.4500e+00   3.83e-05   8.13e-08   5.01e-01   3.62e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13000  -3.4499e+00   3.67e-05   7.78e-08   5.01e-01   3.67e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13200  -3.4499e+00   3.51e-05   7.43e-08   5.01e-01   3.73e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13400  -3.4498e+00   3.35e-05   7.09e-08   5.01e-01   3.78e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13600  -3.4498e+00   3.21e-05   6.76e-08   5.01e-01   3.84e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13800  -3.4498e+00   3.07e-05   6.45e-08   5.01e-01   3.90e+00s
-13925  -3.4497e+00   2.98e-05   6.25e-08   5.01e-01   3.93e+00s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>status:               solved
-solution polish:      unsuccessful
-number of iterations: 13925
-optimal objective:    -3.4497
-run time:             3.96e+00s
-optimal rho estimate: 8.41e-01
-
--------------------------------------------------------------------------------
-                                    Summary                                    
--------------------------------------------------------------------------------
-(CVXPY) Jul 01 06:38:51 AM: Problem status: optimal
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:51 AM: Optimal value: 3.450e+00
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:51 AM: Compilation took 1.163e-01 seconds
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 01 06:38:51 AM: Solver (including time spent in interface) took 3.967e+00 seconds
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.4497260387471402
+   1  -1.1774e+04   2.65e+02   1.51e+04   1.00e-01   5.67e+00s
+ 200  -4.1080e+02   2.42e-01   8.86e-04   1.00e-01   7.92e+00s
+ 400  -1.9413e+02   1.13e-01   2.51e-04   1.00e-01   1.05e+01s
+ 600  -1.2345e+02   6.40e-02   1.09e-04   1.00e-01   1.28e+01s
+ 800  -8.7560e+01   4.67e-02   5.29e-05   1.00e-01   1.51e+01s
+1000  -6.5202e+01   3.49e-02   2.99e-05   1.00e-01   1.73e+01s
+1200  -5.0118e+01   2.68e-02   1.91e-05   1.00e-01   1.96e+01s
+1400  -3.9737e+01   2.09e-02   1.41e-05   1.00e-01   2.18e+01s
+1600  -3.2445e+01   1.72e-02   1.06e-05   1.00e-01   2.41e+01s
+1800  -2.6947e+01   1.42e-02   8.27e-06   1.00e-01   2.63e+01s
+2000  -2.2700e+01   1.17e-02   6.57e-06   1.00e-01   2.93e+01s
+2200  -1.9294e+01   9.74e-03   5.29e-06   1.00e-01   3.15e+01s
+2400  -1.6616e+01   8.26e-03   4.32e-06   1.00e-01   3.38e+01s
+2600  -1.4460e+01   7.01e-03   3.56e-06   1.00e-01   3.60e+01s
+2800  -1.2704e+01   5.95e-03   2.93e-06   1.00e-01   3.83e+01s
+3000  -1.1267e+01   5.06e-03   2.43e-06   1.00e-01   4.05e+01s
+3200  -1.0092e+01   4.25e-03   2.00e-06   1.00e-01   4.27e+01s
+3400  -9.1244e+00   3.58e-03   1.66e-06   1.00e-01   4.53e+01s
+3600  -8.3286e+00   3.04e-03   1.38e-06   1.00e-01   4.75e+01s
+3800  -7.6760e+00   2.60e-03   1.14e-06   1.00e-01   4.97e+01s
+4000  -7.1409e+00   2.26e-03   9.40e-07   1.00e-01   5.20e+01s
+4200  -6.7000e+00   2.04e-03   7.81e-07   1.00e-01   5.42e+01s
+4400  -6.3366e+00   1.85e-03   6.50e-07   1.00e-01   5.64e+01s
+4600  -6.0382e+00   1.69e-03   5.41e-07   1.00e-01   5.87e+01s
+4800  -5.7969e+00   1.58e-03   4.54e-07   1.00e-01   6.10e+01s
+5000  -5.5953e+00   1.46e-03   3.83e-07   1.00e-01   6.34e+01s
+5200  -5.4277e+00   1.37e-03   3.24e-07   1.00e-01   6.58e+01s
+5400  -5.2885e+00   1.28e-03   2.73e-07   1.00e-01   6.81e+01s
+5600  -5.1729e+00   1.20e-03   2.30e-07   1.00e-01   7.03e+01s
+5800  -5.0768e+00   1.13e-03   1.94e-07   1.00e-01   7.26e+01s
+6000  -4.9968e+00   1.08e-03   1.63e-07   1.00e-01   7.49e+01s
+6200  -4.9301e+00   1.02e-03   1.37e-07   1.00e-01   7.71e+01s
+6400  -4.8746e+00   9.80e-04   1.18e-07   1.00e-01   7.98e+01s
+6600  -4.8281e+00   9.40e-04   1.09e-07   1.00e-01   8.20e+01s
+6800  -4.7893e+00   9.04e-04   1.01e-07   1.00e-01   8.43e+01s
+7000  -4.7568e+00   8.72e-04   9.40e-08   1.00e-01   8.66e+01s
+7200  -4.7295e+00   8.44e-04   8.75e-08   1.00e-01   8.88e+01s
+7400  -4.7372e+00   8.63e-04   2.54e-07   1.00e-01   9.11e+01s
+7600  -4.7339e+00   8.57e-04   1.41e-07   1.00e-01   9.33e+01s
+7800  -4.7278e+00   8.25e-04   8.93e-08   1.00e-01   9.58e+01s
+8000  -4.7195e+00   7.99e-04   5.47e-08   1.00e-01   9.82e+01s
+8200  -4.7100e+00   7.75e-04   4.25e-08   1.00e-01   1.00e+02s
+8400  -4.7002e+00   7.59e-04   3.67e-08   1.00e-01   1.03e+02s
+8600  -4.6909e+00   7.51e-04   3.23e-08   1.00e-01   1.05e+02s
+8800  -4.6824e+00   7.42e-04   3.05e-08   1.00e-01   1.07e+02s
+9000  -4.6749e+00   7.35e-04   2.86e-08   1.00e-01   1.09e+02s
+9200  -4.6684e+00   7.27e-04   2.66e-08   1.00e-01   1.12e+02s
+9400  -4.6627e+00   7.21e-04   2.47e-08   1.00e-01   1.14e+02s
+9600  -4.6577e+00   7.17e-04   2.29e-08   1.00e-01   1.16e+02s
+9800  -4.6534e+00   7.13e-04   2.15e-08   1.00e-01   1.19e+02s
+10000  -4.6496e+00   7.10e-04   2.03e-08   1.00e-01   1.21e+02s
+10200  -4.6463e+00   7.06e-04   1.91e-08   1.00e-01   1.23e+02s
+10400  -4.6434e+00   7.03e-04   1.81e-08   1.00e-01   1.25e+02s
+10600  -4.6335e+00   6.88e-04   3.27e-07   5.04e-01   1.33e+02s
+10800  -4.6280e+00   6.75e-04   2.51e-07   5.04e-01   1.35e+02s
+11000  -4.6248e+00   6.64e-04   1.95e-07   5.04e-01   1.37e+02s
+11200  -4.6228e+00   6.55e-04   1.54e-07   5.04e-01   1.39e+02s
+11400  -4.6218e+00   6.45e-04   8.79e-08   5.04e-01   1.41e+02s
+11600  -4.6207e+00   6.44e-04   9.50e-08   5.04e-01   1.44e+02s
+11800  -4.6198e+00   6.43e-04   9.48e-08   5.04e-01   1.46e+02s
+12000  -4.6190e+00   6.42e-04   9.17e-08   5.04e-01   1.49e+02s
+12200  -4.6182e+00   6.41e-04   8.76e-08   5.04e-01   1.51e+02s
+12400  -4.6175e+00   6.39e-04   8.33e-08   5.04e-01   1.53e+02s
+12600  -4.6175e+00   6.20e-04   3.63e-07   5.04e-01   1.55e+02s
+12800  -4.6158e+00   6.17e-04   2.08e-07   5.04e-01   1.57e+02s
+13000  -4.6153e+00   6.13e-04   1.47e-07   5.04e-01   1.60e+02s
+13200  -4.6148e+00   6.10e-04   1.09e-07   5.04e-01   1.62e+02s
+13400  -4.6454e+00   5.54e-04   2.45e-06   5.04e-01   1.64e+02s
+13600  -4.6464e+00   5.27e-04   7.63e-07   5.04e-01   1.67e+02s
+13800  -4.6382e+00   5.07e-04   5.38e-07   5.04e-01   1.69e+02s
+14000  -4.6332e+00   4.89e-04   4.15e-07   5.04e-01   1.71e+02s
+14200  -4.6304e+00   4.65e-04   3.03e-07   5.04e-01   1.73e+02s
+14400  -4.6286e+00   4.52e-04   2.31e-07   5.04e-01   1.76e+02s
+14600  -4.6274e+00   4.41e-04   1.90e-07   5.04e-01   1.78e+02s
+14800  -4.6263e+00   4.36e-04   1.57e-07   5.04e-01   1.80e+02s
+15000  -4.6254e+00   4.31e-04   1.31e-07   5.04e-01   1.83e+02s
+15200  -4.6247e+00   4.27e-04   1.10e-07   5.04e-01   1.85e+02s
+15400  -4.6240e+00   4.24e-04   9.37e-08   5.04e-01   1.87e+02s
+15600  -4.6234e+00   4.22e-04   8.00e-08   5.04e-01   1.89e+02s
+15800  -4.6229e+00   4.21e-04   6.87e-08   5.04e-01   1.92e+02s
+16000  -4.6224e+00   4.21e-04   5.93e-08   5.04e-01   1.94e+02s
+16200  -4.6220e+00   4.21e-04   5.14e-08   5.04e-01   1.96e+02s
+16400  -4.6217e+00   4.21e-04   4.48e-08   5.04e-01   1.99e+02s
+16600  -4.6213e+00   4.20e-04   3.92e-08   5.04e-01   2.01e+02s
+16800  -4.6210e+00   4.20e-04   3.44e-08   5.04e-01   2.03e+02s
+17000  -4.6208e+00   4.20e-04   2.84e-08   5.04e-01   2.05e+02s
+17200  -4.6207e+00   4.19e-04   2.37e-08   5.04e-01   2.08e+02s
+17400  -4.6205e+00   4.18e-04   2.00e-08   5.04e-01   2.10e+02s
+17600  -4.6203e+00   4.18e-04   1.82e-08   5.04e-01   2.12e+02s
+17800  -4.6202e+00   4.17e-04   1.72e-08   5.04e-01   2.15e+02s
+18000  -4.6200e+00   4.16e-04   1.64e-08   5.04e-01   2.17e+02s
+18200  -4.6256e+00   4.14e-04   9.55e-07   5.04e-01   2.19e+02s
+18400  -4.6227e+00   4.15e-04   3.35e-07   5.04e-01   2.21e+02s
+18600  -4.6224e+00   4.16e-04   1.95e-07   5.04e-01   2.24e+02s
+18800  -4.6226e+00   4.16e-04   1.27e-07   5.04e-01   2.26e+02s
+19000  -4.6229e+00   4.15e-04   8.84e-08   5.04e-01   2.28e+02s
+19200  -4.6231e+00   4.15e-04   6.51e-08   5.04e-01   2.31e+02s
+19400  -4.6233e+00   4.14e-04   5.14e-08   5.04e-01   2.33e+02s
+19600  -4.6235e+00   4.14e-04   4.14e-08   5.04e-01   2.35e+02s
+19800  -4.6236e+00   4.14e-04   3.39e-08   5.04e-01   2.37e+02s
+20000  -4.6236e+00   4.13e-04   2.83e-08   5.04e-01   2.40e+02s
+20200  -4.6237e+00   4.13e-04   2.40e-08   5.04e-01   2.42e+02s
+20400  -4.6279e+00   4.19e-04   1.10e-06   5.04e-01   2.44e+02s
+20600  -4.6328e+00   4.14e-04   4.43e-07   5.04e-01   2.47e+02s
+20800  -4.6348e+00   4.09e-04   3.19e-07   5.04e-01   2.49e+02s
+21000  -4.6360e+00   4.06e-04   2.50e-07   5.04e-01   2.51e+02s
+21200  -4.6368e+00   4.03e-04   2.00e-07   5.04e-01   2.53e+02s
+21400  -4.6375e+00   4.00e-04   1.62e-07   5.04e-01   2.56e+02s
+21600  -4.6380e+00   3.99e-04   1.40e-07   5.04e-01   2.58e+02s
+21800  -4.6386e+00   3.98e-04   1.18e-07   5.04e-01   2.60e+02s
+22000  -4.6392e+00   3.98e-04   1.00e-07   5.04e-01   2.62e+02s
+22200  -4.6396e+00   3.97e-04   9.12e-08   5.04e-01   2.65e+02s
+22400  -4.6402e+00   3.88e-04   1.72e-06   5.04e-01   2.67e+02s
+22600  -4.6481e+00   3.69e-04   6.62e-07   5.04e-01   2.69e+02s
+22800  -4.6513e+00   3.68e-04   3.75e-07   5.04e-01   2.72e+02s
+23000  -4.6578e+00   3.65e-04   1.26e-06   5.04e-01   2.74e+02s
+23200  -4.6606e+00   3.71e-04   3.81e-07   5.04e-01   2.76e+02s
+23400  -4.6574e+00   3.69e-04   1.74e-07   5.04e-01   2.78e+02s
+23600  -4.6563e+00   3.55e-04   3.46e-07   5.04e-01   2.81e+02s
+23800  -4.6543e+00   3.48e-04   1.62e-07   5.04e-01   2.83e+02s
+24000  -4.6534e+00   3.46e-04   9.43e-08   5.04e-01   2.85e+02s
+24200  -4.6530e+00   3.45e-04   7.96e-08   5.04e-01   2.87e+02s
+24400  -4.6575e+00   3.44e-04   6.80e-07   5.04e-01   2.90e+02s
+24600  -4.6604e+00   3.40e-04   4.12e-07   5.04e-01   2.92e+02s
+24800  -4.6596e+00   3.36e-04   2.92e-07   5.04e-01   2.94e+02s
+25000  -4.6582e+00   3.30e-04   2.22e-07   5.04e-01   2.97e+02s
+25200  -4.6570e+00   3.26e-04   1.74e-07   5.04e-01   2.99e+02s
+25400  -4.6560e+00   3.21e-04   1.40e-07   5.04e-01   3.01e+02s
+25600  -4.6552e+00   3.18e-04   1.21e-07   5.04e-01   3.03e+02s
+25800  -4.6545e+00   3.15e-04   1.09e-07   5.04e-01   3.07e+02s
+26000  -4.6540e+00   3.12e-04   9.83e-08   5.04e-01   3.10e+02s
+26200  -4.6536e+00   3.10e-04   8.83e-08   5.04e-01   3.13e+02s
+26400  -4.6644e+00   2.98e-04   8.13e-07   5.04e-01   3.15e+02s
+26600  -4.6618e+00   2.91e-04   3.47e-07   5.04e-01   3.18e+02s
+26800  -4.6579e+00   2.86e-04   2.42e-07   5.04e-01   3.20e+02s
+27000  -4.6555e+00   2.84e-04   2.09e-07   5.04e-01   3.22e+02s
+27200  -4.6539e+00   2.85e-04   1.89e-07   5.04e-01   3.25e+02s
+27400  -4.6529e+00   2.85e-04   1.70e-07   5.04e-01   3.28e+02s
+27600  -4.6522e+00   2.85e-04   1.53e-07   5.04e-01   3.31e+02s
+27800  -4.6517e+00   2.84e-04   1.38e-07   5.04e-01   3.33e+02s
+28000  -4.6513e+00   2.84e-04   1.24e-07   5.04e-01   3.36e+02s
+28200  -4.6510e+00   2.84e-04   1.12e-07   5.04e-01   3.39e+02s
+28400  -4.6507e+00   2.83e-04   1.01e-07   5.04e-01   3.41e+02s
+28600  -4.6504e+00   2.82e-04   9.15e-08   5.04e-01   3.44e+02s
+28800  -4.6502e+00   2.82e-04   8.31e-08   5.04e-01   3.46e+02s
+29000  -4.6499e+00   2.81e-04   7.57e-08   5.04e-01   3.48e+02s
+29200  -4.6497e+00   2.80e-04   6.92e-08   5.04e-01   3.51e+02s
+29400  -4.6495e+00   2.80e-04   6.34e-08   5.04e-01   3.54e+02s
+29600  -4.6493e+00   2.79e-04   5.82e-08   5.04e-01   3.56e+02s
+29800  -4.6491e+00   2.79e-04   5.35e-08   5.04e-01   3.58e+02s
+30000  -4.6489e+00   2.78e-04   4.94e-08   5.04e-01   3.61e+02s
+30200  -4.6487e+00   2.77e-04   4.57e-08   5.04e-01   3.64e+02s
+30400  -4.6485e+00   2.77e-04   4.23e-08   5.04e-01   3.68e+02s
+30600  -4.6483e+00   2.76e-04   3.93e-08   5.04e-01   3.70e+02s
+30800  -4.6487e+00   2.74e-04   5.85e-07   5.04e-01   3.72e+02s
+31000  -4.6476e+00   2.68e-04   3.31e-07   5.04e-01   3.75e+02s
+31200  -4.6467e+00   2.63e-04   2.20e-07   5.04e-01   3.77e+02s
+31400  -4.6460e+00   2.60e-04   1.63e-07   5.04e-01   3.79e+02s
+31600  -4.6454e+00   2.57e-04   1.29e-07   5.04e-01   3.81e+02s
+31800  -4.6449e+00   2.57e-04   1.09e-07   5.04e-01   3.84e+02s
+32000  -4.6444e+00   2.56e-04   1.03e-07   5.04e-01   3.86e+02s
+32200  -4.6441e+00   2.56e-04   9.75e-08   5.04e-01   3.88e+02s
+32400  -4.6437e+00   2.55e-04   9.23e-08   5.04e-01   3.91e+02s
+32600  -4.6434e+00   2.55e-04   8.76e-08   5.04e-01   3.93e+02s
+32800  -4.6431e+00   2.54e-04   8.33e-08   5.04e-01   3.95e+02s
+33000  -4.6428e+00   2.53e-04   7.93e-08   5.04e-01   3.98e+02s
+33200  -4.6443e+00   2.53e-04   2.76e-07   5.04e-01   4.00e+02s
+33400  -4.6446e+00   2.52e-04   1.90e-07   5.04e-01   4.03e+02s
+33600  -4.6446e+00   2.50e-04   1.48e-07   5.04e-01   4.05e+02s
+33800  -4.6444e+00   2.48e-04   1.22e-07   5.04e-01   4.07e+02s
+34000  -4.6442e+00   2.46e-04   1.11e-07   5.04e-01   4.10e+02s
+34200  -4.6439e+00   2.45e-04   1.05e-07   5.04e-01   4.12e+02s
+34400  -4.6437e+00   2.43e-04   9.84e-08   5.04e-01   4.14e+02s
+34600  -4.6434e+00   2.42e-04   9.15e-08   5.04e-01   4.16e+02s
+34800  -4.6435e+00   2.41e-04   4.91e-08   5.04e-01   4.19e+02s
+35000  -4.6439e+00   2.40e-04   3.71e-08   5.04e-01   4.21e+02s
+35200  -4.6440e+00   2.40e-04   3.12e-08   5.04e-01   4.24e+02s
+35400  -4.6439e+00   2.39e-04   2.61e-08   5.04e-01   4.26e+02s
+35600  -4.6439e+00   2.39e-04   2.20e-08   5.04e-01   4.29e+02s
+35800  -4.6439e+00   2.37e-04   2.52e-08   5.04e-01   4.31e+02s
+36000  -4.6438e+00   2.37e-04   2.04e-08   5.04e-01   4.33e+02s
+36200  -4.6437e+00   2.36e-04   1.75e-08   5.04e-01   4.36e+02s
+36400  -4.6436e+00   2.35e-04   1.55e-08   5.04e-01   4.38e+02s
 </pre></div>
 </div>
 </div>
@@ -1247,12 +1122,6 @@ optimal rho estimate: 8.41e-01
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Factor model solve time = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prob_factor</span><span class="o">.</span><span class="n">solver_stats</span><span class="o">.</span><span class="n">solve_time</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Single model solve time = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prob</span><span class="o">.</span><span class="n">solver_stats</span><span class="o">.</span><span class="n">solve_time</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Factor model solve time = 0.065771106
-Single model solve time = 3.958167328
 </pre></div>
 </div>
 </div>
