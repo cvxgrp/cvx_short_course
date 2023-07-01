@@ -751,10 +751,13 @@ We could include transaction costs (from a previous portfolio <span class="math 
 <section id="portfolio-optimization-with-factor-covariance-model">
 <h2>Portfolio optimization with factor covariance model<a class="headerlink" href="#portfolio-optimization-with-factor-covariance-model" title="Permalink to this heading">#</a></h2>
 <p>Using the factor covariance model, we frame the portfolio optimization problem as</p>
-<p>\begin{array}{ll} \mbox{maximize} &amp; \mu^T w - \gamma \left(f^T \tilde \Sigma f  + w^TDw \right) \
-\mbox{subject to} &amp; {\bf 1}^T w = 1, \quad f=F^Tw\
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ll} \mbox{maximize} &amp; \mu^T w - \gamma \left(f^T \tilde \Sigma f  + w^TDw \right) \\
+\mbox{subject to} &amp; {\bf 1}^T w = 1, \quad f=F^Tw\\
 &amp; w \in {\cal W}, \quad f \in {\cal F},
-\end{array}</p>
+\end{array}
+\end{split}\]</div>
 <p>where the variables are the allocations <span class="math notranslate nohighlight">\(w \in {\bf R}^n\)</span> and factor exposures <span class="math notranslate nohighlight">\(f\in {\bf R}^k\)</span> and <span class="math notranslate nohighlight">\(\cal F\)</span> gives the factor exposure constraints.</p>
 <p>Using the factor covariance model in the optimization problem has a computational advantage. The solve time is <span class="math notranslate nohighlight">\(O(nk^2)\)</span> versus <span class="math notranslate nohighlight">\(O(n^3)\)</span> for the standard problem.</p>
 </section>
@@ -886,7 +889,7 @@ optimal rho estimate: 3.20e-01
 
 <span class="c1"># Uncomment to solve the problem.</span>
 <span class="c1"># WARNING: this will take many minutes to run.</span>
-<span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100_000</span><span class="p">)</span>
+<span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
