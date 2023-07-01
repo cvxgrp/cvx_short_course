@@ -12,7 +12,7 @@ execute:
   allow_errors: true
   exclude_patterns:
     # those notebooks are extremely expensive
-    - docs/applications/notebooks/portfolio_optimization.ipynb
+    #- docs/applications/notebooks/portfolio_optimization.ipynb
     - docs/intro/notebooks/tv_inpainting.ipynb
     - "*.ipynb_checkpoints"
     - "exercises/notebooks/*.ipynb"
