@@ -1,4 +1,4 @@
 cvxpy
 matplotlib
 dask
-sciscipy
+scipy
