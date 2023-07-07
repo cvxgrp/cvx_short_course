@@ -12,11 +12,9 @@ execute:
   allow_errors: true
   exclude_patterns:
     # those notebooks are extremely expensive
-    - docs/applications/notebooks/portfolio_optimization.ipynb
     - docs/intro/notebooks/tv_inpainting.ipynb
-    - "*.ipynb_checkpoints"
+    # The exercises shall not be compiled, there code is incomplete and left as an exercise
     - "exercises/notebooks/*.ipynb"
-    - "hello/notebooks/*.ipynb"
 
 sphinx:
   config:

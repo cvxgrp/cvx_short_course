@@ -13,9 +13,8 @@ pip install -r requirements.txt  # to install the requirements in the current en
 ```
 
 In order to verify you have successfully installed cvxpy and its dependencies
-please run (from with the virtual environment) 
+please run (from within the virtual environment) 
 
 ```bash
 python test.py 
 ```
-
