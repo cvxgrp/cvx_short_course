@@ -6,3 +6,5 @@ rather than in the restrictive standard form required by solvers.
 This tutorial will cover the basics of convex optimization, and how to use CVXPY to specify 
 and solve convex optimization problems, with an emphasis on real-world applications. 
 No prior knowledge of convex optimization is assumed.
+
+HELLO WORLD
