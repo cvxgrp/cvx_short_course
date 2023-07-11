@@ -1,7 +1,9 @@
 name: deploy-book
 
 on:
-  push
+  push:
+    branches:
+      - main
 
 # This job installs dependencies, builds the book, and pushes it to `gh-pages`
 jobs:
@@ -20,14 +22,6 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install jupyter-book
-    
-    - uses: actions/cache@v3
-      name: Jupyter Cache
-      with:
-        path: book/_build/.jupyter_cache
-        key: ${{ runner.os }}-jupyter-${{ hashFiles('**/*') }}
-        restore-keys: |
-          ${{ runner.os }}-jupyter-
           
     # Build the book
     - name: Build the book
@@ -35,12 +29,11 @@ jobs:
         jupyter-book clean book
         jupyter-book build book
         touch book/_build/html/.nojekyll
-
-    # Push the book's HTML to draft
+                 
+    # Push the book's HTML to github-pages
     - name: GitHub Pages action
       uses: JamesIves/github-pages-deploy-action@v4.2.2
       with:
-          branch: draft # The branch the action should deploy to.
+          branch: gh-pages # The branch the action should deploy to.
           folder: book/_build/html # The folder the action should deploy.
-
           
