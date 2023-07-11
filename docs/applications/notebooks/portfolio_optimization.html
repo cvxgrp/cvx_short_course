@@ -1,0 +1,1455 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Portfolio optimization &#8212; CVX Short Course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/applications/notebooks/portfolio_optimization';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Quantile regression" href="quantile_regression.html" />
+    <link rel="prev" title="Optimal advertising" href="optimal_ad.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    CVXPY tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Convex optimization overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python_intro/index.html">Introduction to Python</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/basics.html">Python basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/cvxprob.html">CVXPY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/data_structures.html">Data structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/namespace.html">Python namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/numpy_example.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/plotting.html">Plotting</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro/index.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/SVM.html">Support vector machine classifier with <span class="math notranslate nohighlight">\(\ell_1\)</span>-regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/control.html">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/tv_inpainting.html">Total variation in-painting</a></li>
+
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Constructive Convex Analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../constructive.html">Constructive convex analysis</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../dcp/index.html">DCP exercises</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../dcp/notebooks/DCP.html">DCP analysis in CVXPY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dcp/notebooks/trade_off_curves.html">Trade off curves</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Applications</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="huber_regression.html">Huber regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_fitting.html">Model fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimal_ad.html">Optimal advertising</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Portfolio optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quantile_regression.html">Quantile regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="worst_case_analysis.html">Worst-case risk analysis</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../advanced.html">Advanced features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scipy22_slides/index.html">Slides</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../exercises/index.html">Exercises</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/13.20.html">Risk budget allocation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/13.21.html">Portfolio Rebalancing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/13.22.html">Portfolio optimization using multiple risk models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/13.3.html">Simple portfolio optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/16.9.html">Energy storage trade-offs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/17.3.html">Flux balance analysis in systems biology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/3.20.html">Optimal vehicle speed scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/DCP_analysis.html">DCP analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/Lasso.html">LASSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/hello_world.html">Hello, world!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exercises/notebooks/sum_k_largest.html">A toy mixed-norm regression problem</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Conclusions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../conclusions.html">Conclusions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../local.html">Local execution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/cvxgrp/cvx_short_course/master?urlpath=tree/book/docs/applications/notebooks/portfolio_optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course/edit/master/book/docs/applications/notebooks/portfolio_optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course/issues/new?title=Issue%20on%20page%20%2Fdocs/applications/notebooks/portfolio_optimization.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/applications/notebooks/portfolio_optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Portfolio optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-allocation-vector">Portfolio allocation vector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-returns">Asset returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-markowitz-portfolio-optimization">Classical (Markowitz) portfolio optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-constraints">Portfolio constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variations">Variations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-covariance-model">Factor covariance model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization-with-factor-covariance-model">Portfolio optimization with factor covariance model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="portfolio-optimization">
+<h1>Portfolio optimization<a class="headerlink" href="#portfolio-optimization" title="Permalink to this heading">#</a></h1>
+<section id="portfolio-allocation-vector">
+<h2>Portfolio allocation vector<a class="headerlink" href="#portfolio-allocation-vector" title="Permalink to this heading">#</a></h2>
+<p>In this example we show how to do portfolio optimization using CVXPY.
+We begin with the basic definitions.
+In portfolio optimization we have some amount of money to invest in any of <span class="math notranslate nohighlight">\(n\)</span> different assets.
+We choose what fraction <span class="math notranslate nohighlight">\(w_i\)</span> of our money to invest in each asset <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(i=1, \ldots, n\)</span>.</p>
+<p>We call <span class="math notranslate nohighlight">\(w\in {\bf R}^n\)</span> the <em>portfolio allocation vector</em>.
+We of course have the constraint that <span class="math notranslate nohighlight">\({\mathbf 1}^T w =1\)</span>.
+The allocation <span class="math notranslate nohighlight">\(w_i&lt;0\)</span> means a <em>short position</em> in asset <span class="math notranslate nohighlight">\(i\)</span>, or that we borrow shares to sell now that we must replace later.
+The allocation <span class="math notranslate nohighlight">\(w \geq 0\)</span> is a <em>long only</em> portfolio.
+The quantity</p>
+<div class="math notranslate nohighlight">
+\[
+\|w \|_1 = {\mathbf 1}^T w_+ + {\mathbf 1}^T w_-
+\]</div>
+<p>is known as <em>leverage</em>.</p>
+</section>
+<section id="asset-returns">
+<h2>Asset returns<a class="headerlink" href="#asset-returns" title="Permalink to this heading">#</a></h2>
+<p>We will only model investments held for one period. The initial prices are <span class="math notranslate nohighlight">\(p_i &gt; 0\)</span>. The end of period prices are <span class="math notranslate nohighlight">\(p_i^+ &gt;0\)</span>. The asset (fractional) returns are <span class="math notranslate nohighlight">\(r_i = (p_i^+-p_i)/p_i\)</span>. The porfolio (fractional) return is <span class="math notranslate nohighlight">\(R = r^Tw\)</span>.</p>
+<p>A common model is that <span class="math notranslate nohighlight">\(r\)</span> is a random variable with mean <span class="math notranslate nohighlight">\({\bf E}r = \mu\)</span> and covariance <span class="math notranslate nohighlight">\({\bf E{(r-\mu)(r-\mu)^T}} = \Sigma\)</span>.
+It follows that <span class="math notranslate nohighlight">\(R\)</span> is a random variable with <span class="math notranslate nohighlight">\({\bf E}R = \mu^T w\)</span> and <span class="math notranslate nohighlight">\({\bf var}(R) = w^T\Sigma w\)</span>.
+<span class="math notranslate nohighlight">\({\bf E}R\)</span> is the (mean) <em>return</em> of the portfolio. <span class="math notranslate nohighlight">\({\bf var}(R)\)</span> is the <em>risk</em> of the portfolio.
+(Risk is also sometimes given as <span class="math notranslate nohighlight">\({\bf std}(R) = \sqrt{{\bf var}(R)}\)</span>.)</p>
+<p>Portfolio optimization has two competing objectives: high return and low risk.</p>
+</section>
+<section id="classical-markowitz-portfolio-optimization">
+<h2>Classical (Markowitz) portfolio optimization<a class="headerlink" href="#classical-markowitz-portfolio-optimization" title="Permalink to this heading">#</a></h2>
+<p>Classical (Markowitz) portfolio optimization solves the optimization problem</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ll} \mbox{maximize} &amp; \mu^T w - \gamma w^T\Sigma w\\
+\mbox{subject to} &amp; {\bf 1}^T w = 1, \quad w \in {\cal W},
+\end{array}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(w \in {\bf R}^n\)</span> is the optimization variable, <span class="math notranslate nohighlight">\(\cal W\)</span> is a set of allowed portfolios (e.g., <span class="math notranslate nohighlight">\({\cal W} = {\bf R}_+^n\)</span> for a long only portfolio), and <span class="math notranslate nohighlight">\(\gamma &gt;0\)</span> is the <em>risk aversion parameter</em>.</p>
+<p>The objective <span class="math notranslate nohighlight">\(\mu^Tw - \gamma w^T\Sigma w\)</span> is the <em>risk-adjusted return</em>. Varying <span class="math notranslate nohighlight">\(\gamma\)</span> gives the optimal <em>risk-return trade-off</em>.
+We can get the same risk-return trade-off by fixing return and minimizing risk.</p>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<p>In the following code we compute and plot the optimal risk-return trade-off for <span class="math notranslate nohighlight">\(10\)</span> assets, restricting ourselves to a long only portfolio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data for long only portfolio optimization.</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">Sigma</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Long only portfolio optimization.</span>
+<span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
+
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">w</span>
+<span class="n">risk</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">quad_form</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">)</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">risk</span><span class="p">),</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">w</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute trade-off curve.</span>
+<span class="n">SAMPLES</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">risk_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">SAMPLES</span><span class="p">)</span>
+<span class="n">ret_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">SAMPLES</span><span class="p">)</span>
+<span class="n">gamma_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">SAMPLES</span><span class="p">):</span>
+    <span class="n">gamma</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">gamma_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    <span class="n">risk_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">risk</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">ret_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1931/3491241395.py:10: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+  ret_data[i] = ret.value
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot long only trade-off curve.</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;svg&#39;
+
+<span class="n">markers_on</span> <span class="o">=</span> <span class="p">[</span><span class="mi">29</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">risk_data</span><span class="p">,</span> <span class="n">ret_data</span><span class="p">,</span> <span class="s2">&quot;g-&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">marker</span> <span class="ow">in</span> <span class="n">markers_on</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">risk_data</span><span class="p">[</span><span class="n">marker</span><span class="p">],</span> <span class="n">ret_data</span><span class="p">[</span><span class="n">marker</span><span class="p">],</span> <span class="s2">&quot;bs&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s2">&quot;$\gamma = </span><span class="si">%.2f</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="n">gamma_vals</span><span class="p">[</span><span class="n">marker</span><span class="p">],</span>
+        <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">risk_data</span><span class="p">[</span><span class="n">marker</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.08</span><span class="p">,</span> <span class="n">ret_data</span><span class="p">[</span><span class="n">marker</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.03</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Sigma</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">mu</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;ro&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Standard deviation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Return&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/a4be253fffa50a239680917b7b8b84ab60ec6d0c2c920d3cd1abee0715fe021b.svg" src="../../../_images/a4be253fffa50a239680917b7b8b84ab60ec6d0c2c920d3cd1abee0715fe021b.svg" /></div>
+</div>
+<p>We plot below the return distributions for the two risk aversion values marked on the trade-off curve.
+Notice that the probability of a loss is near 0 for the low risk value and far above 0 for the high risk value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot return distributions for two points on the trade-off curve.</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">spstats</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">midx</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">markers_on</span><span class="p">):</span>
+    <span class="n">gamma</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">gamma_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span>
+        <span class="n">spstats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ret</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">risk</span><span class="o">.</span><span class="n">value</span><span class="p">),</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\gamma = </span><span class="si">%.2f</span><span class="s2">$&quot;</span> <span class="o">%</span> <span class="n">gamma</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Return&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/602c162d9d37d5cae179ec04cd6c6f8c41c375b97caebf34ad242a71db7bc6c0.svg" src="../../../_images/602c162d9d37d5cae179ec04cd6c6f8c41c375b97caebf34ad242a71db7bc6c0.svg" /></div>
+</div>
+<section id="portfolio-constraints">
+<h3>Portfolio constraints<a class="headerlink" href="#portfolio-constraints" title="Permalink to this heading">#</a></h3>
+<p>There are many other possible portfolio constraints besides the long only constraint. With no constraint (<span class="math notranslate nohighlight">\({\cal W} = {\bf R}^n\)</span>), the optimization problem has a simple analytical solution. We will look in detail at a <em>leverage limit</em>, or the constraint that <span class="math notranslate nohighlight">\(\|w \|_1 \leq L^\mathrm{max}\)</span>.</p>
+<p>Another interesting constraint is the <em>market neutral</em> constraint <span class="math notranslate nohighlight">\(m^T \Sigma w =0\)</span>, where <span class="math notranslate nohighlight">\(m_i\)</span> is the capitalization of asset <span class="math notranslate nohighlight">\(i\)</span>.
+<span class="math notranslate nohighlight">\(M = m^Tr\)</span> is the <em>market return</em>, and <span class="math notranslate nohighlight">\(m^T \Sigma w = {\bf cov}(M,R)\)</span>.
+The market neutral constraint ensures that the portfolio return is uncorrelated with the market return.</p>
+</section>
+<section id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>In the following code we compute and plot optimal risk-return trade-off curves for leverage limits of 1, 2, and 4.
+Notice that more leverage increases returns and allows greater risk.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Portfolio optimization with leverage limit.</span>
+<span class="n">Lmax</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">()</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span>
+    <span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">risk</span><span class="p">),</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">Lmax</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute trade-off curve for each leverage limit.</span>
+<span class="n">L_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">SAMPLES</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">risk_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">L_vals</span><span class="p">),</span> <span class="n">SAMPLES</span><span class="p">))</span>
+<span class="n">ret_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">L_vals</span><span class="p">),</span> <span class="n">SAMPLES</span><span class="p">))</span>
+<span class="n">gamma_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">SAMPLES</span><span class="p">)</span>
+<span class="n">w_vals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">L_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L_vals</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">SAMPLES</span><span class="p">):</span>
+        <span class="n">Lmax</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">L_val</span>
+        <span class="n">gamma</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">gamma_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="n">cp</span><span class="o">.</span><span class="n">SCS</span><span class="p">)</span>
+        <span class="n">risk_data</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">risk</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">ret_data</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1931/231315309.py:14: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+  ret_data[k, i] = ret.value
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot trade-off curves for each leverage limit.</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">L_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L_vals</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">risk_data</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:],</span> <span class="n">ret_data</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$L^{\max}$ = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">L_val</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">w_val</span> <span class="ow">in</span> <span class="n">w_vals</span><span class="p">:</span>
+    <span class="n">w</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">w_val</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">risk</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">ret</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;bs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Standard deviation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Return&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/dfb0524a98a1e3ffdb359c6c39292baccd9d8ed672bdfce9086efd81dd56de36.svg" src="../../../_images/dfb0524a98a1e3ffdb359c6c39292baccd9d8ed672bdfce9086efd81dd56de36.svg" /></div>
+</div>
+<p>We next examine the points on each trade-off curve where <span class="math notranslate nohighlight">\(w^T\Sigma w = 2\)</span>.
+We plot the amount of each asset held in each portfolio as bar graphs. (Negative holdings indicate a short position.)
+Notice that some assets are held in a long position for the low leverage portfolio but in a short position in the higher leverage portfolios.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Portfolio optimization with a leverage limit and a bound on risk.</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span><span class="p">),</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">Lmax</span><span class="p">,</span> <span class="n">risk</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute solution for different leverage limits.</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">L_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L_vals</span><span class="p">):</span>
+    <span class="n">Lmax</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">L_val</span>
+    <span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+    <span class="n">w_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot bar graph of holdings for different leverage limits.</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">]</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">mu</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">L_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">L_vals</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">idx</span> <span class="o">-</span> <span class="mf">0.375</span><span class="p">,</span>
+        <span class="n">w_vals</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">indices</span><span class="p">],</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
+        <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$L^{\max}$ = </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">L_val</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$w_i$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$i$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.375</span><span class="p">,</span> <span class="mi">10</span> <span class="o">+</span> <span class="mf">0.375</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/656cee878d9599ddf4a190f11f3b0177a7963a1b11ddf017360679d614a1575f.svg" src="../../../_images/656cee878d9599ddf4a190f11f3b0177a7963a1b11ddf017360679d614a1575f.svg" /></div>
+</div>
+</section>
+</section>
+<section id="variations">
+<h2>Variations<a class="headerlink" href="#variations" title="Permalink to this heading">#</a></h2>
+<p>There are many more variations of classical portfolio optimization. We might require that <span class="math notranslate nohighlight">\(\mu^T w \geq R^\mathrm{min}\)</span> and minimize <span class="math notranslate nohighlight">\(w^T \Sigma w\)</span> or <span class="math notranslate nohighlight">\(\|\Sigma ^{1/2} w\|_2\)</span>.
+We could include the (broker) cost of short positions as the penalty <span class="math notranslate nohighlight">\(s^T (w)_-\)</span> for some <span class="math notranslate nohighlight">\(s \geq 0\)</span>.
+We could include transaction costs (from a previous portfolio <span class="math notranslate nohighlight">\(w^\mathrm{prev}\)</span>) as the penalty</p>
+<div class="math notranslate nohighlight">
+\[
+\kappa ^T |w-w^\mathrm{prev}|^\eta, \quad
+\kappa \geq 0.
+\]</div>
+<p>Common values of <span class="math notranslate nohighlight">\(\eta\)</span> are <span class="math notranslate nohighlight">\(\eta =1, ~ 3/2, ~2\)</span>.</p>
+</section>
+<section id="factor-covariance-model">
+<h2>Factor covariance model<a class="headerlink" href="#factor-covariance-model" title="Permalink to this heading">#</a></h2>
+<p>A particularly common and useful variation is to model the covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> as a factor model</p>
+<div class="math notranslate nohighlight">
+\[
+\Sigma  =  F \tilde \Sigma F^T + D,
+\]</div>
+<p>where  <span class="math notranslate nohighlight">\(F \in {\bf R}^{n \times k}\)</span>, <span class="math notranslate nohighlight">\(k \ll n\)</span> is the <em>factor loading matrix</em>. <span class="math notranslate nohighlight">\(k\)</span> is the number of factors (or sectors) (typically 10s). <span class="math notranslate nohighlight">\(F_{ij}\)</span> is the loading of asset <span class="math notranslate nohighlight">\(i\)</span> to factor <span class="math notranslate nohighlight">\(j\)</span>.
+<span class="math notranslate nohighlight">\(D\)</span> is a diagonal matrix; <span class="math notranslate nohighlight">\(D_{ii}&gt;0\)</span> is the <em>idiosyncratic risk</em>. <span class="math notranslate nohighlight">\(\tilde \Sigma &gt; 0\)</span> is the <em>factor covariance matrix</em>.</p>
+<p><span class="math notranslate nohighlight">\(F^Tw \in {\bf R}^k\)</span> gives the portfolio <em>factor exposures</em>. A portfolio is <em>factor <span class="math notranslate nohighlight">\(j\)</span> neutral</em> if <span class="math notranslate nohighlight">\((F^Tw)_j=0\)</span>.</p>
+</section>
+<section id="portfolio-optimization-with-factor-covariance-model">
+<h2>Portfolio optimization with factor covariance model<a class="headerlink" href="#portfolio-optimization-with-factor-covariance-model" title="Permalink to this heading">#</a></h2>
+<p>Using the factor covariance model, we frame the portfolio optimization problem as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{ll} \mbox{maximize} &amp; \mu^T w - \gamma \left(f^T \tilde \Sigma f  + w^TDw \right) \\
+\mbox{subject to} &amp; {\bf 1}^T w = 1, \quad f=F^Tw\\
+&amp; w \in {\cal W}, \quad f \in {\cal F},
+\end{array}
+\end{split}\]</div>
+<p>where the variables are the allocations <span class="math notranslate nohighlight">\(w \in {\bf R}^n\)</span> and factor exposures <span class="math notranslate nohighlight">\(f\in {\bf R}^k\)</span> and <span class="math notranslate nohighlight">\(\cal F\)</span> gives the factor exposure constraints.</p>
+<p>Using the factor covariance model in the optimization problem has a computational advantage. The solve time is <span class="math notranslate nohighlight">\(O(nk^2)\)</span> versus <span class="math notranslate nohighlight">\(O(n^3)\)</span> for the standard problem.</p>
+</section>
+<section id="id2">
+<h2>Example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>In the following code we generate and solve a portfolio optimization problem with 30 factors and 3000 assets.
+We set the leverage limit <span class="math notranslate nohighlight">\(=2\)</span> and <span class="math notranslate nohighlight">\(\gamma=0.1\)</span>.</p>
+<p>We solve the problem both with the covariance given as a single matrix and as a factor model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data for factor model.</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Sigma_tilde</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="n">Sigma_tilde</span> <span class="o">=</span> <span class="n">Sigma_tilde</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sigma_tilde</span><span class="p">)</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">diags</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">))</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Factor model portfolio optimization.</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">nonneg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Lmax</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Parameter</span><span class="p">()</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">mu</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">w</span>
+<span class="n">risk</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">quad_form</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">Sigma_tilde</span><span class="p">)</span> <span class="o">+</span> <span class="n">cp</span><span class="o">.</span><span class="n">sum_squares</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D</span><span class="p">)</span> <span class="o">@</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">prob_factor</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span>
+    <span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">risk</span><span class="p">),</span>
+    <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">f</span> <span class="o">==</span> <span class="n">F</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">w</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">Lmax</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># Solve the factor model problem.</span>
+<span class="n">Lmax</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">gamma</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">prob_factor</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============================================================================
+                                     CVXPY                                     
+                                     v1.3.2                                    
+===============================================================================
+(CVXPY) Jul 07 11:12:55 PM: Your problem has 630 variables, 3 constraints, and 2 parameters.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: It is compliant with the following grammars: DCP, DQCP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+                                  Compilation                                  
+-------------------------------------------------------------------------------
+(CVXPY) Jul 07 11:12:55 PM: Compiling problem (target solver=OSQP).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Applying reduction FlipObjective
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Applying reduction CvxAttr2Constr
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Applying reduction Qp2SymbolicQp
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Applying reduction QpMatrixStuffing
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Applying reduction OSQP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Finished problem compilation (took 2.346e-02 seconds).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+                                Numerical solver                               
+-------------------------------------------------------------------------------
+(CVXPY) Jul 07 11:12:55 PM: Invoking solver OSQP  to obtain a solution.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------
+           OSQP v0.6.3  -  Operator Splitting QP Solver
+              (c) Bartolomeo Stellato,  Goran Banjac
+        University of Oxford  -  Stanford University 2021
+-----------------------------------------------------------------
+problem:  variables n = 1830, constraints m = 1832
+          nnz(P) + nnz(A) = 23895
+settings: linear system solver = qdldl,
+          eps_abs = 1.0e-05, eps_rel = 1.0e-05,
+          eps_prim_inf = 1.0e-04, eps_dual_inf = 1.0e-04,
+          rho = 1.00e-01 (adaptive),
+          sigma = 1.00e-06, alpha = 1.60, max_iter = 10000
+          check_termination: on (interval 25),
+          scaling: on, scaled_termination: off
+          warm start: on, polish: on, time_limit: off
+
+iter   objective    pri res    dua res    rho        time
+   1  -4.3898e+02   7.14e+00   3.28e+02   1.00e-01   7.11e-03s
+ 200  -4.0679e+00   2.07e-03   7.49e-04   1.00e-01   2.27e-02s
+ 400  -4.0680e+00   4.21e-04   6.77e-04   5.05e-01   3.90e-02s
+ 600  -4.0399e+00   1.04e-04   1.64e-04   5.05e-01   5.46e-02s
+ 800  -4.0344e+00   4.08e-05   1.19e-04   5.05e-01   7.02e-02s
+ 875  -4.0351e+00   2.76e-05   2.62e-05   5.05e-01   7.61e-02s
+
+status:               solved
+solution polish:      unsuccessful
+number of iterations: 875
+optimal objective:    -4.0351
+run time:             8.03e-02s
+optimal rho estimate: 6.34e-01
+
+-------------------------------------------------------------------------------
+                                    Summary                                    
+-------------------------------------------------------------------------------
+(CVXPY) Jul 07 11:12:55 PM: Problem status: optimal
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Optimal value: 4.035e+00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Compilation took 2.346e-02 seconds
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Solver (including time spent in interface) took 8.182e-02 seconds
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.035127190680671
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cvxpy.atoms.affine.wraps</span> <span class="kn">import</span> <span class="n">psd_wrap</span>
+
+<span class="c1"># Standard portfolio optimization with data from factor model.</span>
+<span class="n">risk</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">quad_form</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">psd_wrap</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Sigma_tilde</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">D</span><span class="p">))</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span>
+    <span class="n">cp</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">ret</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">risk</span><span class="p">),</span> <span class="p">[</span><span class="n">cp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">Lmax</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">prob</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100_000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>===============================================================================
+                                     CVXPY                                     
+                                     v1.3.2                                    
+===============================================================================
+(CVXPY) Jul 07 11:12:55 PM: Your problem has 600 variables, 2 constraints, and 2 parameters.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: It is compliant with the following grammars: DCP, DQCP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: CVXPY will first compile your problem; then, it will invoke a numerical solver to obtain a solution.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+                                  Compilation                                  
+-------------------------------------------------------------------------------
+(CVXPY) Jul 07 11:12:55 PM: Compiling problem (target solver=OSQP).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Reduction chain: FlipObjective -&gt; CvxAttr2Constr -&gt; Qp2SymbolicQp -&gt; QpMatrixStuffing -&gt; OSQP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Applying reduction FlipObjective
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Applying reduction CvxAttr2Constr
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Applying reduction Qp2SymbolicQp
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Applying reduction QpMatrixStuffing
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Applying reduction OSQP
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: Finished problem compilation (took 9.934e-02 seconds).
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:12:55 PM: (Subsequent compilations of this problem, using the same arguments, should take less time.)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------------------------------------------------------------------------------
+                                Numerical solver                               
+-------------------------------------------------------------------------------
+(CVXPY) Jul 07 11:12:55 PM: Invoking solver OSQP  to obtain a solution.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-----------------------------------------------------------------
+           OSQP v0.6.3  -  Operator Splitting QP Solver
+              (c) Bartolomeo Stellato,  Goran Banjac
+        University of Oxford  -  Stanford University 2021
+-----------------------------------------------------------------
+problem:  variables n = 1200, constraints m = 1202
+          nnz(P) + nnz(A) = 183900
+settings: linear system solver = qdldl,
+          eps_abs = 1.0e-05, eps_rel = 1.0e-05,
+          eps_prim_inf = 1.0e-04, eps_dual_inf = 1.0e-04,
+          rho = 1.00e-01 (adaptive),
+          sigma = 1.00e-06, alpha = 1.60, max_iter = 100000
+          check_termination: on (interval 25),
+          scaling: on, scaled_termination: off
+          warm start: on, polish: on, time_limit: off
+
+iter   objective    pri res    dua res    rho        time
+   1  -1.8064e+03   7.86e+01   4.95e+03   1.00e-01   6.87e-02s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 200  -2.9381e+01   7.60e-02   2.60e-04   1.00e-01   1.69e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 400  -1.3664e+01   3.22e-02   7.62e-05   1.00e-01   2.69e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 600  -8.4293e+00   1.81e-02   3.21e-05   1.00e-01   3.70e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 800  -6.2482e+00   1.09e-02   1.53e-05   1.00e-01   4.70e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000  -5.1966e+00   7.80e-03   7.36e-06   1.00e-01   5.71e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1200  -4.6819e+00   6.08e-03   3.70e-06   1.00e-01   6.72e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1400  -4.4246e+00   5.08e-03   1.96e-06   1.00e-01   7.72e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1600  -4.2907e+00   4.45e-03   1.11e-06   1.00e-01   8.73e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1800  -4.2168e+00   4.18e-03   6.81e-07   1.00e-01   9.74e-01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2000  -4.1406e+00   3.80e-03   2.16e-05   5.10e-01   1.11e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2200  -4.1575e+00   2.36e-03   1.11e-05   5.10e-01   1.21e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2400  -4.1021e+00   2.01e-03   1.66e-05   5.10e-01   1.31e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2600  -4.1081e+00   1.75e-03   2.84e-06   5.10e-01   1.41e+00s
+2800  -4.1103e+00   1.73e-03   6.02e-07   5.10e-01   1.51e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3000  -4.1054e+00   1.58e-03   7.73e-06   5.10e-01   1.61e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3200  -4.1026e+00   1.45e-03   4.15e-06   5.10e-01   1.71e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3400  -4.1038e+00   1.25e-03   1.93e-05   5.10e-01   1.81e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3600  -4.0936e+00   9.19e-04   5.72e-06   5.10e-01   1.91e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3800  -4.0887e+00   8.78e-04   3.79e-06   5.10e-01   2.01e+00s
+4000  -4.0848e+00   8.77e-04   2.82e-06   5.10e-01   2.12e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4200  -4.0863e+00   8.16e-04   2.36e-06   5.10e-01   2.22e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4400  -4.0854e+00   7.30e-04   2.40e-06   5.10e-01   2.32e+00s
+4600  -4.0858e+00   7.02e-04   9.78e-07   5.10e-01   2.42e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4800  -4.0860e+00   6.88e-04   5.74e-07   5.10e-01   2.52e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5000  -4.0857e+00   6.76e-04   4.10e-07   5.10e-01   2.62e+00s
+5200  -4.0852e+00   6.66e-04   3.36e-07   5.10e-01   2.72e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5400  -4.0848e+00   6.57e-04   2.77e-07   5.10e-01   2.82e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5600  -4.0875e+00   5.79e-04   1.34e-06   5.10e-01   2.92e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5800  -4.0823e+00   5.60e-04   7.75e-07   5.10e-01   3.02e+00s
+6000  -4.0792e+00   5.43e-04   5.54e-07   5.10e-01   3.12e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6200  -4.0770e+00   5.27e-04   4.39e-07   5.10e-01   3.22e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6400  -4.0752e+00   5.13e-04   3.83e-07   5.10e-01   3.32e+00s
+6600  -4.0740e+00   5.03e-04   3.87e-07   5.10e-01   3.42e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6800  -4.0731e+00   4.92e-04   3.09e-07   5.10e-01   3.52e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7000  -4.0722e+00   4.82e-04   2.81e-07   5.10e-01   3.62e+00s
+7200  -4.0714e+00   4.76e-04   2.47e-07   5.10e-01   3.72e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7400  -4.0707e+00   4.71e-04   2.16e-07   5.10e-01   3.82e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7600  -4.0701e+00   4.66e-04   1.89e-07   5.10e-01   3.92e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7800  -4.0696e+00   4.61e-04   1.67e-07   5.10e-01   4.02e+00s
+8000  -4.0692e+00   4.56e-04   1.47e-07   5.10e-01   4.12e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8200  -4.0687e+00   4.52e-04   1.31e-07   5.10e-01   4.23e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8400  -4.0683e+00   4.48e-04   1.18e-07   5.10e-01   4.33e+00s
+8600  -4.0680e+00   4.43e-04   1.07e-07   5.10e-01   4.43e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8800  -4.0676e+00   4.39e-04   9.71e-08   5.10e-01   4.53e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9000  -4.0673e+00   4.35e-04   8.91e-08   5.10e-01   4.63e+00s
+9200  -4.0670e+00   4.31e-04   8.24e-08   5.10e-01   4.73e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9400  -4.0667e+00   4.27e-04   7.68e-08   5.10e-01   4.83e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9600  -4.0664e+00   4.23e-04   7.20e-08   5.10e-01   4.93e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9800  -4.0662e+00   4.20e-04   6.80e-08   5.10e-01   5.03e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10000  -4.0659e+00   4.16e-04   6.46e-08   5.10e-01   5.13e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10200  -4.0562e+00   3.30e-04   1.03e-06   3.37e-01   5.30e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10400  -4.0537e+00   2.88e-04   7.68e-07   3.37e-01   5.40e+00s
+10600  -4.0519e+00   2.54e-04   6.13e-07   3.37e-01   5.50e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10800  -4.0503e+00   2.25e-04   4.96e-07   3.37e-01   5.60e+00s
+11000  -4.0489e+00   2.01e-04   4.06e-07   3.37e-01   5.70e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11200  -4.0477e+00   1.81e-04   3.35e-07   3.37e-01   5.80e+00s
+11400  -4.0466e+00   1.66e-04   2.79e-07   3.37e-01   5.90e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11600  -4.0457e+00   1.59e-04   2.33e-07   3.37e-01   6.00e+00s
+11800  -4.0448e+00   1.54e-04   1.95e-07   3.37e-01   6.10e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12000  -4.0441e+00   1.49e-04   1.65e-07   3.37e-01   6.20e+00s
+12200  -4.0435e+00   1.45e-04   1.41e-07   3.37e-01   6.30e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12400  -4.0429e+00   1.42e-04   1.21e-07   3.37e-01   6.40e+00s
+12600  -4.0424e+00   1.38e-04   1.04e-07   3.37e-01   6.50e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12800  -4.0419e+00   1.36e-04   8.98e-08   3.37e-01   6.60e+00s
+13000  -4.0415e+00   1.33e-04   7.80e-08   3.37e-01   6.70e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13200  -4.0412e+00   1.31e-04   6.80e-08   3.37e-01   6.81e+00s
+13400  -4.0408e+00   1.29e-04   5.95e-08   3.37e-01   6.91e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13600  -4.0406e+00   1.27e-04   5.22e-08   3.37e-01   7.01e+00s
+13800  -4.0403e+00   1.25e-04   4.60e-08   3.37e-01   7.11e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14000  -4.0401e+00   1.24e-04   4.07e-08   3.37e-01   7.21e+00s
+14200  -4.0398e+00   1.22e-04   3.62e-08   3.37e-01   7.31e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14400  -4.0397e+00   1.21e-04   3.23e-08   3.37e-01   7.41e+00s
+14600  -4.0395e+00   1.20e-04   2.89e-08   3.37e-01   7.51e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14800  -4.0393e+00   1.18e-04   2.60e-08   3.37e-01   7.61e+00s
+15000  -4.0392e+00   1.17e-04   2.35e-08   3.37e-01   7.71e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15200  -4.0391e+00   1.16e-04   2.13e-08   3.37e-01   7.81e+00s
+15400  -4.0389e+00   1.15e-04   1.94e-08   3.37e-01   7.91e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15600  -4.0388e+00   1.14e-04   1.77e-08   3.37e-01   8.01e+00s
+15800  -4.0384e+00   1.09e-04   3.04e-07   1.69e+00   8.15e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16000  -4.0381e+00   1.05e-04   2.28e-07   1.69e+00   8.25e+00s
+16200  -4.0379e+00   1.01e-04   1.86e-07   1.69e+00   8.35e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16400  -4.0377e+00   9.71e-05   1.61e-07   1.69e+00   8.45e+00s
+16600  -4.0376e+00   9.34e-05   1.45e-07   1.69e+00   8.55e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16800  -4.0364e+00   7.54e-05   1.64e-06   1.69e+00   8.65e+00s
+17000  -4.0358e+00   6.56e-05   1.00e-06   1.69e+00   8.75e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17200  -4.0356e+00   6.02e-05   7.54e-07   1.69e+00   8.85e+00s
+17400  -4.0354e+00   5.53e-05   5.92e-07   1.69e+00   8.95e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17600  -4.0347e+00   4.84e-05   4.49e-08   2.33e-01   9.08e+00s
+17800  -4.0346e+00   4.68e-05   3.30e-08   2.33e-01   9.18e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18000  -4.0345e+00   4.55e-05   2.52e-08   2.33e-01   9.29e+00s
+18200  -4.0344e+00   4.45e-05   2.13e-08   2.33e-01   9.39e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18400  -4.0344e+00   4.35e-05   1.83e-08   2.33e-01   9.49e+00s
+18600  -4.0344e+00   4.27e-05   1.59e-08   2.33e-01   9.59e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18800  -4.0344e+00   4.19e-05   1.39e-08   2.33e-01   9.69e+00s
+19000  -4.0345e+00   4.11e-05   1.23e-08   2.33e-01   9.79e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200  -4.0345e+00   4.04e-05   1.13e-08   2.33e-01   9.89e+00s
+19400  -4.0345e+00   3.97e-05   1.04e-08   2.33e-01   9.99e+00s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19600  -4.0345e+00   3.91e-05   9.65e-09   2.33e-01   1.01e+01s
+19800  -4.0346e+00   3.84e-05   8.98e-09   2.33e-01   1.02e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20000  -4.0346e+00   3.78e-05   8.37e-09   2.33e-01   1.03e+01s
+20200  -4.0346e+00   3.73e-05   7.83e-09   2.33e-01   1.04e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20400  -4.0346e+00   3.67e-05   7.34e-09   2.33e-01   1.05e+01s
+20600  -4.0346e+00   3.61e-05   6.90e-09   2.33e-01   1.06e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20800  -4.0347e+00   3.56e-05   6.50e-09   2.33e-01   1.07e+01s
+21000  -4.0347e+00   3.51e-05   6.13e-09   2.33e-01   1.08e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21200  -4.0347e+00   3.46e-05   5.80e-09   2.33e-01   1.09e+01s
+21400  -4.0347e+00   3.41e-05   5.49e-09   2.33e-01   1.10e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21600  -4.0347e+00   3.36e-05   5.21e-09   2.33e-01   1.11e+01s
+21800  -4.0348e+00   3.15e-05   1.04e-07   1.17e+00   1.12e+01s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21975  -4.0348e+00   2.98e-05   9.55e-08   1.17e+00   1.13e+01s
+
+status:               solved
+solution polish:      unsuccessful
+number of iterations: 21975
+optimal objective:    -4.0348
+run time:             1.14e+01s
+optimal rho estimate: 1.29e+00
+
+-------------------------------------------------------------------------------
+                                    Summary                                    
+-------------------------------------------------------------------------------
+(CVXPY) Jul 07 11:13:07 PM: Problem status: optimal
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:13:07 PM: Optimal value: 4.035e+00
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:13:07 PM: Compilation took 9.934e-02 seconds
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jul 07 11:13:07 PM: Solver (including time spent in interface) took 1.137e+01 seconds
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.034822681213087
+</pre></div>
+</div>
+</div>
+</div>
+<p>We expect the factor model to be at least 20 times faster than the standard model as
+<span class="math notranslate nohighlight">\(n^2 = 20 n m\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is the number of assets and <span class="math notranslate nohighlight">\(m\)</span> is the number of factors.
+This estimate does not yet reflect a smaller number of iterations required for the factor model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Factor model solve time = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prob_factor</span><span class="o">.</span><span class="n">solver_stats</span><span class="o">.</span><span class="n">solve_time</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Single model solve time = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">prob</span><span class="o">.</span><span class="n">solver_stats</span><span class="o">.</span><span class="n">solve_time</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Factor model solve time = 0.08027323900000001
+Single model solve time = 11.360008881999999
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/applications/notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="optimal_ad.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Optimal advertising</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="quantile_regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Quantile regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-allocation-vector">Portfolio allocation vector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asset-returns">Asset returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-markowitz-portfolio-optimization">Classical (Markowitz) portfolio optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-constraints">Portfolio constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variations">Variations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-covariance-model">Factor covariance model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#portfolio-optimization-with-factor-covariance-model">Portfolio optimization with factor covariance model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By CVX
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

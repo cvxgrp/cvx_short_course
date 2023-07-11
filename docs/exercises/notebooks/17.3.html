@@ -1,0 +1,738 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Flux balance analysis in systems biology &#8212; CVX Short Course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/exercises/notebooks/17.3';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Optimal vehicle speed scheduling" href="3.20.html" />
+    <link rel="prev" title="Energy storage trade-offs" href="16.9.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    CVXPY tutorial
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Convex optimization overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python_intro/index.html">Introduction to Python</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/basics.html">Python basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/cvxprob.html">CVXPY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/data_structures.html">Data structures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/namespace.html">Python namespaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/numpy_example.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python_intro/notebooks/plotting.html">Plotting</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro/index.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/SVM.html">Support vector machine classifier with <span class="math notranslate nohighlight">\(\ell_1\)</span>-regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/control.html">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/tv_inpainting.html">Total variation in-painting</a></li>
+
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Constructive Convex Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../constructive.html">Constructive convex analysis</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../dcp/index.html">DCP exercises</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../dcp/notebooks/DCP.html">DCP analysis in CVXPY</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dcp/notebooks/trade_off_curves.html">Trade off curves</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../applications/index.html">Applications</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/huber_regression.html">Huber regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/model_fitting.html">Model fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/optimal_ad.html">Optimal advertising</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/portfolio_optimization.html">Portfolio optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/quantile_regression.html">Quantile regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../applications/notebooks/worst_case_analysis.html">Worst-case risk analysis</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Topics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../advanced.html">Advanced features</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../scipy22_slides/index.html">Slides</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exercises</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Exercises</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="13.20.html">Risk budget allocation.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="13.21.html">Portfolio Rebalancing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="13.22.html">Portfolio optimization using multiple risk models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="13.3.html">Simple portfolio optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="16.9.html">Energy storage trade-offs</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Flux balance analysis in systems biology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3.20.html">Optimal vehicle speed scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DCP_analysis.html">DCP analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Lasso.html">LASSO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hello_world.html">Hello, world!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sum_k_largest.html">A toy mixed-norm regression problem</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Conclusions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../conclusions.html">Conclusions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../local.html">Local execution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/cvxgrp/cvx_short_course/master?urlpath=tree/book/docs/exercises/notebooks/17.3.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course/edit/master/book/docs/exercises/notebooks/17.3.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cvxgrp/cvx_short_course/issues/new?title=Issue%20on%20page%20%2Fdocs/exercises/notebooks/17.3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/exercises/notebooks/17.3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Flux balance analysis in systems biology</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-maximum-growth-rate">(a) Maximum growth rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-essential-genes-and-synthetic-lethals">(b) Essential genes and synthetic lethals</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="flux-balance-analysis-in-systems-biology">
+<h1>Flux balance analysis in systems biology<a class="headerlink" href="#flux-balance-analysis-in-systems-biology" title="Permalink to this heading">#</a></h1>
+<p>Flux balance analysis is based on a very simple model of
+the reactions going on in a cell, keeping track only of the gross rate of consumption and production
+of various chemical species within the cell. Based on the known stoichiometry of the reactions, and
+known upper bounds on some of the reaction rates, we can compute bounds on the other reaction
+rates, or cell growth, for example.</p>
+<p>We focus on m metabolites in a cell, labeled <span class="math notranslate nohighlight">\(M_1, \ldots, M_m\)</span>. There are <span class="math notranslate nohighlight">\(n\)</span> reactions going on, labeled
+<span class="math notranslate nohighlight">\(R_1, \ldots, R_n\)</span>, with nonnegative reaction rates <span class="math notranslate nohighlight">\(v_1, \ldots, v_n\)</span>. Each reaction has a (known) stoichiometry,
+which tells us the rate of consumption and production of the metabolites per unit of reaction rate.
+The stoichiometry data is given by the <em>stoichiometry matrix</em> <span class="math notranslate nohighlight">\(S \in \mathbf{R}^{m \times n}\)</span>, defined as follows: <span class="math notranslate nohighlight">\(S_{ij}\)</span>
+is the rate of production of <span class="math notranslate nohighlight">\(M_i\)</span> due to unit reaction rate <span class="math notranslate nohighlight">\(v_j = 1\)</span>. Here we consider consumption
+of a metabolite as negative production; so <span class="math notranslate nohighlight">\(S_{ij} = −2\)</span>, for example, means that reaction <span class="math notranslate nohighlight">\(R_j\)</span> causes
+metabolite <span class="math notranslate nohighlight">\(M_i\)</span> to be consumed at a rate <span class="math notranslate nohighlight">\(2v_j\)</span>.</p>
+<p>As an example, suppose reaction <span class="math notranslate nohighlight">\(R_1\)</span> has the form <span class="math notranslate nohighlight">\(M_1 \rightarrow M_2 + 2M_3\)</span>. The consumption rate of <span class="math notranslate nohighlight">\(M_1\)</span>,
+due to this reaction, is <span class="math notranslate nohighlight">\(v_1\)</span>; the production rate of <span class="math notranslate nohighlight">\(M_2\)</span> is <span class="math notranslate nohighlight">\(v_1\)</span>; and the production rate of <span class="math notranslate nohighlight">\(M_3\)</span> is <span class="math notranslate nohighlight">\(2v_1\)</span>.
+(The reaction <span class="math notranslate nohighlight">\(R_1\)</span> has no effect on metabolites <span class="math notranslate nohighlight">\(M_4, \ldots, M_m\)</span>.) This corresponds to a first column of
+<span class="math notranslate nohighlight">\(S\)</span> of the form <span class="math notranslate nohighlight">\((−1, 1, 2, 0, \ldots, 0)\)</span>.</p>
+<p>Reactions are also used to model flow of metabolites into and out of the cell. For example, suppose
+that reaction <span class="math notranslate nohighlight">\(R_2\)</span> corresponds to the flow of metabolite <span class="math notranslate nohighlight">\(M_1\)</span> into the cell, with <span class="math notranslate nohighlight">\(v_2\)</span> giving the flow
+rate. This corresponds to a second column of <span class="math notranslate nohighlight">\(S\)</span> of the form <span class="math notranslate nohighlight">\((1, 0, \ldots, 0)\)</span>.</p>
+<p>The last reaction, <span class="math notranslate nohighlight">\(R_n\)</span>, corresponds to biomass creation, or cell growth, so the reaction rate <span class="math notranslate nohighlight">\(v_n\)</span> is
+the cell growth rate. The last column of <span class="math notranslate nohighlight">\(S\)</span> gives the amounts of metabolites used or created per
+unit of cell growth rate.</p>
+<p>Since our reactions include metabolites entering or leaving the cell, as well as those converted
+to biomass within the cell, we have conservation of the metabolites, which can be expressed as
+<span class="math notranslate nohighlight">\(Sv = 0\)</span>. In addition, we are given upper limits on some of the reaction rates, which we express as
+<span class="math notranslate nohighlight">\(v \preceq v^\mathrm{max}\)</span>, where we set <span class="math notranslate nohighlight">\(v^\mathrm{max}_j = \infty\)</span> if no upper limit on reaction rate <span class="math notranslate nohighlight">\(j\)</span> is known. The goal is to
+find the maximum possible cell growth rate (i.e., largest possible value of <span class="math notranslate nohighlight">\(v_n\)</span>) consistent with the
+constraints
+$<span class="math notranslate nohighlight">\(
+Sv = 0, \quad v \succeq 0, \quad v \preceq v^\mathrm{max}.
+\)</span>$</p>
+<section id="a-maximum-growth-rate">
+<h2>(a) Maximum growth rate<a class="headerlink" href="#a-maximum-growth-rate" title="Permalink to this heading">#</a></h2>
+<p>Find the maximum possible cell growth rate <span class="math notranslate nohighlight">\(G^\star\)</span>, using the data provided below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data file for flux balance analysis in systems biology</span>
+<span class="c1"># From Segre, Zucker et al &quot;From annotated genomes to metabolic flux</span>
+<span class="c1"># models and kinetic parameter fitting&quot; OMICS 7 (3), 301-316.</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Stoichiometric matrix</span>
+<span class="c1">#    columns are M1    M2    M3    M4    M5    M6</span>
+<span class="c1"># For your interest, the rows correspond to the following equations</span>
+<span class="c1">#    R1:  extracellular --&gt;  M1</span>
+<span class="c1">#    R2:  M1 --&gt;  M2</span>
+<span class="c1">#    R3:  M1 --&gt;  M3</span>
+<span class="c1">#    R4:  M2 + M5 --&gt; 2 M4</span>
+<span class="c1">#    R5:  extracellular --&gt;  M5</span>
+<span class="c1">#    R6:  2 M2 --&gt;  M3 + M6</span>
+<span class="c1">#    R7:  M3 --&gt;  M4</span>
+<span class="c1">#    R8:  M6 --&gt; extracellular</span>
+<span class="c1">#    R9:  M4 --&gt; cell biomass</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    1,0,0,0,0,0;</span>
+<span class="sd">    -1,1,0,0,0,0;</span>
+<span class="sd">    -1,0,1,0,0,0;</span>
+<span class="sd">    0,-1,0,2,-1,0;</span>
+<span class="sd">    0,0,0,0,1,0;</span>
+<span class="sd">    0,-2,1,0,0,1;</span>
+<span class="sd">    0,0,-1,1,0,0;</span>
+<span class="sd">    0,0,0,0,0,-1;</span>
+<span class="sd">    0,0,0,-1,0,0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<span class="p">)</span>
+<span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="n">vmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+   <span class="p">[</span><span class="mf">10.10</span><span class="p">,</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="mf">5.90</span><span class="p">,</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="mf">3.70</span><span class="p">,</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="mi">100</span><span class="p">,</span>
+    <span class="mi">100</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cvxpy</span> <span class="k">as</span> <span class="nn">cp</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="c1"># TODO: your code here</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Gstar</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-essential-genes-and-synthetic-lethals">
+<h2>(b) Essential genes and synthetic lethals<a class="headerlink" href="#b-essential-genes-and-synthetic-lethals" title="Permalink to this heading">#</a></h2>
+<p>For simplicity, we’ll assume that each reaction is controlled
+by an associated gene, i.e., gene <span class="math notranslate nohighlight">\(G_i\)</span> controls reaction <span class="math notranslate nohighlight">\(R_i\)</span>. Knocking out a set of genes
+associated with some reactions has the effect of setting the reaction rates (or equivalently, the
+associated <span class="math notranslate nohighlight">\(v^\mathrm{max}\)</span> entries) to zero, which of course reduces the maximum possible growth rate.
+If the maximum growth rate becomes small enough or zero, it is reasonable to guess that
+knocking out the set of genes will kill the cell. An <em>essential gene</em> is one that when knocked
+out reduces the maximum growth rate below a given threshold <span class="math notranslate nohighlight">\(G^\mathrm{min}\)</span>. (Note that <span class="math notranslate nohighlight">\(G_n\)</span> is always
+an essential gene.) A <em>synthetic lethal</em> is a pair of non-essential genes that when knocked out
+reduces the maximum growth rate below the threshold. Find all essential genes and synthetic
+lethals for the given problem instance, using the threshold <span class="math notranslate nohighlight">\(G^\mathrm{min} = 0.2G^\star\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check essential genes and synthetic lethals</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="c1"># Taking out genes i and j (i can equal j)</span>
+        <span class="c1"># TODO: your code here</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">G</span> <span class="o">&lt;</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">Gstar</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/exercises/notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="16.9.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Energy storage trade-offs</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3.20.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Optimal vehicle speed scheduling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-maximum-growth-rate">(a) Maximum growth rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-essential-genes-and-synthetic-lethals">(b) Essential genes and synthetic lethals</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By CVX
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
