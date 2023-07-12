@@ -46,5 +46,3 @@ parts:
   - caption: "Appendix"
     chapters:
     - file: docs/local
-
-
