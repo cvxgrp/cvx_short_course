@@ -20,7 +20,7 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install jupyter-book
-    
+
     - uses: actions/cache@v3
       name: Jupyter Cache
       with:
@@ -28,7 +28,7 @@ jobs:
         key: ${{ runner.os }}-jupyter-${{ hashFiles('**/*') }}
         restore-keys: |
           ${{ runner.os }}-jupyter-
-          
+
     # Build the book
     - name: Build the book
       run: |
@@ -42,5 +42,3 @@ jobs:
       with:
           branch: draft # The branch the action should deploy to.
           folder: book/_build/html # The folder the action should deploy.
-
-          
