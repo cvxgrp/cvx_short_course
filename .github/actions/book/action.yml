@@ -21,6 +21,7 @@ runs:
 
       #  Build the book
       - name: Build the book
+        shell: bash
         run: |
           make build
 
