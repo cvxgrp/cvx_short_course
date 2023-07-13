@@ -25,6 +25,14 @@ runs:
         run: |
           make build
 
+      - uses: actions/cache@v3
+        name: Jupyter Cache
+        with:
+          path: book/_build/.jupyter_cache
+          key: ${{ runner.os }}-jupyter-${{ hashFiles('**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-jupyter-
+
       # Push the book's HTML to draft
       - name: GitHub Pages action
         uses: JamesIves/github-pages-deploy-action@v4.2.2
