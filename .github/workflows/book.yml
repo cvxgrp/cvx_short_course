@@ -11,7 +11,8 @@ jobs:
     - uses: actions/checkout@v3
 
     - uses: .github/actions/book
-      with: "draft"
+      with:
+        target-branch: "draft"
 
     # Install dependencies
     #- name: Set up Python 3.10
