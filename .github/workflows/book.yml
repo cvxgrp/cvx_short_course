@@ -13,29 +13,3 @@ jobs:
     - uses: ./.github/actions/book
       with:
         target-branch: "draft"
-
-    # Install dependencies
-    #- name: Set up Python 3.10
-    #  uses: actions/setup-python@v4
-    #  with:
-    #    python-version: '3.10'
-
-    #- uses: actions/cache@v3
-    #  name: Jupyter Cache
-    #  with:
-    #    path: book/_build/.jupyter_cache
-    #    key: ${{ runner.os }}-jupyter-${{ hashFiles('**/*') }}
-    #    restore-keys: |
-    #      ${{ runner.os }}-jupyter-
-
-    # Build the book
-    #- name: Build the book
-    #  run: |
-    #    make build
-
-    # Push the book's HTML to draft
-    #- name: GitHub Pages action
-    #  uses: JamesIves/github-pages-deploy-action@v4.2.2
-    #  with:
-    #      branch: draft # The branch the action should deploy to.
-    #      folder: book/_build/html # The folder the action should deploy.
