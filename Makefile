@@ -22,7 +22,7 @@ fmt: install ## Run autoformatting and linting
 	pre-commit run --all-files
 
 .PHONY: build
-build:  ## Build the book
+build: install ## Build the book
 	source .venv/bin/activate
 	jupyter-book clean book
 	jupyter-book build book
