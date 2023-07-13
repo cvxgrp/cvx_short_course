@@ -1,0 +1,41 @@
+name: Publish book
+
+description: "Publish book to a branch"
+
+on:
+  workflow_call:
+    inputs:
+      target-branch:
+        description: 'Target branch'
+        type: string
+        required: true
+        default: 'gh-pages'
+
+runs:
+  using: "composite"
+  steps:
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10
+
+      - name: Caching
+        uses: actions/cache@v3
+        with:
+          path: book/_build/.jupyter_cache
+          key: ${{ runner.os }}-jupyter-${{ hashFiles('**/*') } }
+          restore-keys: |
+            ${{ runner.os }}-jupyter-
+
+      #  Build the book
+      - name: Build the book
+        run: |
+          make build
+
+
+    # Push the book's HTML to draft
+    - name: GitHub Pages action
+      uses: JamesIves/github-pages-deploy-action@v4.2.2
+      with:
+          branch: draft # The branch the action should deploy to.
+          folder: book/_build/html # The folder the action should deploy.
