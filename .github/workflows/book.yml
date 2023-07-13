@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: .github/actions/book
+    - uses: ./.github/actions/book
       with:
         target-branch: "draft"
 
