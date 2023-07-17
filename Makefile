@@ -1,42 +1,32 @@
 .DEFAULT_GOAL := help
 
-SHELL=/bin/bash
-
-UNAME=$(shell uname -s)
-KERNEL=$(shell poetry version | cut -d' ' -f1)
+VENV :=.venv
 
 .PHONY: install
 install:  ## Install a virtual environment
-
-	python -m venv .venv
-	source .venv/bin/activate
-	pip install -r requirements.txt
-	pip install jupyter-book
-
+	python -m venv ${VENV}
+	${VENV}/bin/pip install --upgrade pip
+	${VENV}/bin/pip install -r requirements.txt
 
 .PHONY: fmt
 fmt: install ## Run autoformatting and linting
-	source .venv/bin/activate
-	pip install pre-commit
-	pre-commit install
-	pre-commit run --all-files
+	${VENV}/bin/pip install pre-commit
+	${VENV}/bin/pre-commit install
+	${VENV}/bin/pre-commit run --all-files
 
 .PHONY: build
-build:  ## Build the book
-	source .venv/bin/activate
-	jupyter-book clean book
-	jupyter-book build book
+build: install ## Build the book
+	${VENV}/bin/pip install jupyter-book
+	${VENV}/bin/jupyter-book clean book
+	${VENV}/bin/jupyter-book build book
 	touch book/_build/html/.nojekyll
-
 
 .PHONY: clean
 clean:  ## Clean up caches and build artifacts
-	@rm -rf .venv
 	@rm -rf .idea
 	@rm -rf .ruff_cache
 	@find . -type f -name '*.py[co]' -delete -or -type d -name __pycache__ -delete
 	@find . -type d -name .ipynb_checkpoints -exec rm -rf {} +
-
 
 .PHONY: help
 help:  ## Display this help screen
