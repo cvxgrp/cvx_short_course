@@ -33,6 +33,7 @@ build:  ## Build the book
 clean:  ## Clean up caches and build artifacts
 	@rm -rf .venv
 	@rm -rf .idea
+	@rm -rf .ruff_cache
 	@find . -type f -name '*.py[co]' -delete -or -type d -name __pycache__ -delete
 	@find . -type d -name .ipynb_checkpoints -exec rm -rf {} +
 
