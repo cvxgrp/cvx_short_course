@@ -35,7 +35,7 @@ runs:
 
       # Push the book's HTML to draft
       - name: GitHub Pages action
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
             branch: ${{ inputs.target-branch }} # The branch the action should deploy to.
             folder: book/_build/html # The folder the action should deploy.
