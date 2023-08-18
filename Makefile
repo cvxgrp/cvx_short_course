@@ -23,10 +23,7 @@ build: install ## Build the book
 
 .PHONY: clean
 clean:  ## Clean up caches and build artifacts
-	@rm -rf .idea
-	@rm -rf .ruff_cache
-	@find . -type f -name '*.py[co]' -delete -or -type d -name __pycache__ -delete
-	@find . -type d -name .ipynb_checkpoints -exec rm -rf {} +
+	@git clean -X -d -f
 
 .PHONY: help
 help:  ## Display this help screen
