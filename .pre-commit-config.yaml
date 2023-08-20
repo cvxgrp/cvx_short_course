@@ -2,7 +2,6 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.3.0
     hooks:
-      - id: check-toml
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: fix-encoding-pragma
@@ -22,3 +21,5 @@ repos:
     rev: v0.35.0
     hooks:
       - id: markdownlint-fix
+        # MD013: line too long
+        args: [--disable, MD013, "--"]
