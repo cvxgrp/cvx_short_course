@@ -8,8 +8,49 @@ jobs:
   deploy-book:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - uses: ./.github/actions/book
-      with:
-        target-branch: "draft"
+      #- uses: actions/cache@v3
+      #  name: Jupyter Cache
+      #  with:
+      #    path: book/_build/.jupyter_cache
+      #    key: ${{ runner.os }}-jupyter-${{ hashFiles('**/*') }}
+      #    restore-keys: |
+      #      ${{ runner.os }}-jupyter-
+
+      #  Build the book
+      - name: Build the book
+        shell: bash
+        run: |
+          make build
+
+      - name: Branch
+        shell: bash
+        id: target
+        run: |
+          echo "Branch: ${{ github.ref }}"
+          if ${{ github.ref == 'refs/heads/main' }}; then
+            echo "branch=gh-pages" >> $GITHUB_OUTPUT
+          else
+            echo "branch=draft" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Publish book
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
+        with:
+            branch: ${{ steps.target.outputs.branch }} # The branch the action should deploy to.
+            folder: book/_build/html # The folder the action should deploy.
+
+
+
+        # find out on which branch we are
+        # if we are on main
+        #   then build the book and push it to gh-pages
+        # else
+        #   build the book and push it to draft
+        #   and create a PR from draft to main
+        #   and assign it to the user who pushed the commit
+        #   and add a comment to the PR with a link to the draft
+        #   and add a comment to the PR with a link to the book
+        #   and add a comment to the PR with a link to the build log
+        #   and add a comment to the PR with a link to the build log
