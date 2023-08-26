@@ -23,3 +23,10 @@ repos:
       - id: markdownlint-fix
         # MD013: line too long
         args: [--disable, MD013, "--"]
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.26.1
+    hooks:
+      - id: check-dependabot
+      - id: check-github-actions
+      - id: check-github-workflows
