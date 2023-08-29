@@ -1,18 +1,18 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.3.0
+    rev: v4.4.0
     hooks:
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: fix-encoding-pragma
 
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.7.0
     hooks:
       - id: black
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: 'v0.0.275'
+    rev: 'v0.0.286'
     hooks:
       - id: ruff
         args: [ --fix, --exit-non-zero-on-fix ]
@@ -25,7 +25,9 @@ repos:
         args: [--disable, MD013, "--"]
 
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.26.1
+    rev: 0.26.3
     hooks:
       - id: check-dependabot
+        args: ["--verbose"]
       - id: check-github-workflows
+        args: ["--verbose"]
