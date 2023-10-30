@@ -183,6 +183,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../intro/index.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/SVM.html">Support vector machine classifier with <span class="math notranslate nohighlight">\(\ell_1\)</span>-regularization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/control.html">Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../intro/notebooks/tv_inpainting.html">Total variation in-painting</a></li>
+
 </ul>
 </li>
 </ul>
@@ -555,12 +557,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.57468877  0.64255644 -1.02561075 -0.83538566]
- [ 1.14366635 -0.99726456 -0.60238315  0.99335292]
- [-1.34328834  0.50813889 -0.30309451  0.00723166]
- [ 0.25580691 -0.62914011  0.319954   -1.09168315]]
-[ 0.64255644 -0.99726456  0.50813889 -0.62914011]
-0.007231659446894772
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.48313493  0.51138297 -0.40853665  0.56172723]
+ [ 1.06314695  0.84517404 -0.84982505  1.0435114 ]
+ [ 0.74233589  0.13101719  0.08530828 -0.62766782]
+ [-0.54211116  1.05386313  1.54194668 -0.09138233]]
+[0.51138297 0.84517404 0.13101719 1.05386313]
+-0.6276678221647533
 </pre></div>
 </div>
 </div>
@@ -583,8 +585,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[3.8571426]]
-3.857142603769716
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.33084554]]
+0.3308455444370029
 </pre></div>
 </div>
 </div>
