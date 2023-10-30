@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
@@ -79,6 +80,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -139,13 +149,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="CVX Short Course - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="CVX Short Course - Home"/>`);</script>
   
   
 </a></div>
@@ -431,10 +442,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -442,7 +453,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -605,6 +616,17 @@ for the training set and the test set.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/cvx_short_course/cvx_short_course/.venv/lib/python3.10/site-packages/cvxpy/reductions/solvers/solving_chain.py:336: FutureWarning: 
+    Your problem is being solved with the ECOS solver by default. Starting in 
+    CVXPY 1.5.0, Clarabel will be used as the default solver instead. To continue 
+    using ECOS, specify the ECOS solver explicitly using the ``solver=cp.ECOS`` 
+    argument to the ``problem.solve`` method.
+    
+  warnings.warn(ECOS_DEPRECATION_MSG, FutureWarning)
+</pre></div>
+</div>
+</div>
 </div>
 <p>Below we plot the full time series, the training data with the three AR models, and the test data with the three AR models.</p>
 <div class="cell docutils container">
@@ -651,7 +673,7 @@ for the training set and the test set.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/76b5f759cd669215be77eb29e2a153f9ec3e72e654992b7d39b70b2a3d770275.svg" src="../../../_images/76b5f759cd669215be77eb29e2a153f9ec3e72e654992b7d39b70b2a3d770275.svg" /><img alt="../../../_images/d25371412851ee5daff00881306decdd33eeaddbb16addffc3eaabd5d3811593.svg" src="../../../_images/d25371412851ee5daff00881306decdd33eeaddbb16addffc3eaabd5d3811593.svg" /><img alt="../../../_images/916d84e1fe9930dde29b5802781af08f55b688f5cf13d1319bbe2032edb6b7ae.svg" src="../../../_images/916d84e1fe9930dde29b5802781af08f55b688f5cf13d1319bbe2032edb6b7ae.svg" /></div>
+<img alt="../../../_images/9782eec37fb74b21af6b679f480f2e68abfe49924428f12ee054d69b564f0bed.svg" src="../../../_images/9782eec37fb74b21af6b679f480f2e68abfe49924428f12ee054d69b564f0bed.svg" /><img alt="../../../_images/1371785c0a95a17d35fc3eceeaab124e1d13f9b5db41f4a8d60311156377776e.svg" src="../../../_images/1371785c0a95a17d35fc3eceeaab124e1d13f9b5db41f4a8d60311156377776e.svg" /><img alt="../../../_images/35aa6d630481d142c981b69c9158c8f376d606ad1a53a876b1fd01ae347d1fa9.svg" src="../../../_images/35aa6d630481d142c981b69c9158c8f376d606ad1a53a876b1fd01ae347d1fa9.svg" /></div>
 </div>
 <p>Below we plot the empirical CDFs of the residuals for the three AR models on the training data and the test data.
 Notice that <span class="math notranslate nohighlight">\(\tau\)</span>-quantile of the optimal residuals is close to zero.</p>
@@ -692,7 +714,7 @@ Notice that <span class="math notranslate nohighlight">\(\tau\)</span>-quantile 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/0e25dbe658dfbd83ff71cbf7f6e85891ad292bba361e3dc4229c956c7062bc4a.svg" src="../../../_images/0e25dbe658dfbd83ff71cbf7f6e85891ad292bba361e3dc4229c956c7062bc4a.svg" /><img alt="../../../_images/16f6c695caf908919cfdc36107d1e54d81b44555bc77410006822858ebe4f3b1.svg" src="../../../_images/16f6c695caf908919cfdc36107d1e54d81b44555bc77410006822858ebe4f3b1.svg" /></div>
+<img alt="../../../_images/aeeebdf44d717ec3dbc1a7eb2546a364e5a31262ca8dfef914007f675c59bb47.svg" src="../../../_images/aeeebdf44d717ec3dbc1a7eb2546a364e5a31262ca8dfef914007f675c59bb47.svg" /><img alt="../../../_images/15050111a446e2d1d809875b923bcbab72ed9757b55208dd0402cd3a277b85b1.svg" src="../../../_images/15050111a446e2d1d809875b923bcbab72ed9757b55208dd0402cd3a277b85b1.svg" /></div>
 </div>
 </section>
 </section>
@@ -722,11 +744,10 @@ Notice that <span class="math notranslate nohighlight">\(\tau\)</span>-quantile 
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="portfolio_optimization.html"
@@ -746,10 +767,7 @@ Notice that <span class="math notranslate nohighlight">\(\tau\)</span>-quantile 
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -814,8 +832,8 @@ By CVX
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
   </footer>

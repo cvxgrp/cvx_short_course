@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
@@ -79,6 +80,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -139,13 +149,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="CVX Short Course - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="CVX Short Course - Home"/>`);</script>
   
   
 </a></div>
@@ -431,10 +442,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -442,7 +453,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -567,6 +578,17 @@ A reasonable choice of <span class="math notranslate nohighlight">\(\lambda\)</s
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/cvx_short_course/cvx_short_course/.venv/lib/python3.10/site-packages/cvxpy/reductions/solvers/solving_chain.py:336: FutureWarning: 
+    Your problem is being solved with the ECOS solver by default. Starting in 
+    CVXPY 1.5.0, Clarabel will be used as the default solver instead. To continue 
+    using ECOS, specify the ECOS solver explicitly using the ``solver=cp.ECOS`` 
+    argument to the ``problem.solve`` method.
+    
+  warnings.warn(ECOS_DEPRECATION_MSG, FutureWarning)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -585,7 +607,7 @@ A reasonable choice of <span class="math notranslate nohighlight">\(\lambda\)</s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/39d8dd7944ea0033cc7712345a20e4d8691ec39ee30a21f4f8b5e4fffe09b223.svg" src="../../../_images/39d8dd7944ea0033cc7712345a20e4d8691ec39ee30a21f4f8b5e4fffe09b223.svg" /></div>
+<img alt="../../../_images/048e8d8ff3ae5a72b770ec75211502c0f5b3a3d0035ceabedcc1f7bc71de019d.svg" src="../../../_images/048e8d8ff3ae5a72b770ec75211502c0f5b3a3d0035ceabedcc1f7bc71de019d.svg" /></div>
 </div>
 <p>We also plot the regularization path, or the <span class="math notranslate nohighlight">\(\beta_i\)</span> versus <span class="math notranslate nohighlight">\(\lambda\)</span>. Notice that the <span class="math notranslate nohighlight">\(\beta_i\)</span> do not necessarily decrease monotonically as <span class="math notranslate nohighlight">\(\lambda\)</span> increases.
 4 features remain non-zero longer for larger <span class="math notranslate nohighlight">\(\lambda\)</span> then the rest, which suggests that these features are the most important. In fact <span class="math notranslate nohighlight">\(\beta_{\mathrm{true}}\)</span> had 4 non-zero values.</p>
@@ -600,7 +622,7 @@ A reasonable choice of <span class="math notranslate nohighlight">\(\lambda\)</s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/9b58cab377944c6886d19dc07f5069002f73e9fc759e74d7d1333bbd39615b3c.svg" src="../../../_images/9b58cab377944c6886d19dc07f5069002f73e9fc759e74d7d1333bbd39615b3c.svg" /></div>
+<img alt="../../../_images/12ac97739127a9de480677f40a1ad8d7fe694289f1ddb26815d0c14e3e7fac2b.svg" src="../../../_images/12ac97739127a9de480677f40a1ad8d7fe694289f1ddb26815d0c14e3e7fac2b.svg" /></div>
 </div>
 </section>
 </section>
@@ -630,11 +652,10 @@ A reasonable choice of <span class="math notranslate nohighlight">\(\lambda\)</s
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../index.html"
@@ -654,10 +675,7 @@ A reasonable choice of <span class="math notranslate nohighlight">\(\lambda\)</s
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -720,8 +738,8 @@ By CVX
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
   </footer>

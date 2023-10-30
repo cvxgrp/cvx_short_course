@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=c5ced968eda925caa686" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=c5ced968eda925caa686" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=c5ced968eda925caa686" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=c5ced968eda925caa686"></script>
 
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
     <script src="../../../_static/jquery.js"></script>
@@ -79,6 +80,15 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -139,13 +149,14 @@ const thebe_selector_output = ".output, .cell_output"
   
   
   
+  
     
     
       
     
     
-    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../../../_static/logo.jpeg" class="logo__image only-light" alt="CVX Short Course - Home"/>
+    <script>document.write(`<img src="../../../_static/logo.jpeg" class="logo__image only-dark" alt="CVX Short Course - Home"/>`);</script>
   
   
 </a></div>
@@ -431,10 +442,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -442,7 +453,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -563,7 +574,14 @@ D {\bf 1} \geq c
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/cvx_short_course/cvx_short_course/.venv/lib/python3.10/site-packages/cvxpy/problems/problem.py:1387: UserWarning: Solution may be inaccurate. Try another solver, adjusting the solver settings, or solve with verbose=True for more information.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/cvx_short_course/cvx_short_course/.venv/lib/python3.10/site-packages/cvxpy/reductions/solvers/solving_chain.py:336: FutureWarning: 
+    Your problem is being solved with the ECOS solver by default. Starting in 
+    CVXPY 1.5.0, Clarabel will be used as the default solver instead. To continue 
+    using ECOS, specify the ECOS solver explicitly using the ``solver=cp.ECOS`` 
+    argument to the ``problem.solve`` method.
+    
+  warnings.warn(ECOS_DEPRECATION_MSG, FutureWarning)
+/home/runner/work/cvx_short_course/cvx_short_course/.venv/lib/python3.10/site-packages/cvxpy/problems/problem.py:1403: UserWarning: Solution may be inaccurate. Try another solver, adjusting the solver settings, or solve with verbose=True for more information.
   warnings.warn(
 </pre></div>
 </div>
@@ -587,7 +605,7 @@ D {\bf 1} \geq c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/10f85ef8354bcb3db7cfc97dccbf8d95ba5e57f014bc0997e2ead9f11546a652.svg" src="../../../_images/10f85ef8354bcb3db7cfc97dccbf8d95ba5e57f014bc0997e2ead9f11546a652.svg" /></div>
+<img alt="../../../_images/d20909e77330f43942c3e9a82e0b630f593f906f57612876da3d6256d58fe2e7.svg" src="../../../_images/d20909e77330f43942c3e9a82e0b630f593f906f57612876da3d6256d58fe2e7.svg" /></div>
 </div>
 <p>We plot the conversion fractions <span class="math notranslate nohighlight">\(P\)</span> below.</p>
 <div class="cell docutils container">
@@ -614,7 +632,7 @@ D {\bf 1} \geq c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/58f0e1ff73ae860c2104e2d593742b096eca4fb07c19c5368e7d7ed927570a7b.svg" src="../../../_images/58f0e1ff73ae860c2104e2d593742b096eca4fb07c19c5368e7d7ed927570a7b.svg" /></div>
+<img alt="../../../_images/8f5639c088b8e22cfdb5290c3980377ec4d4e328f27047b1067d316704a4cf13.svg" src="../../../_images/8f5639c088b8e22cfdb5290c3980377ec4d4e328f27047b1067d316704a4cf13.svg" /></div>
 </div>
 <p>We plot the optimal displays <span class="math notranslate nohighlight">\(D\)</span> below.</p>
 <div class="cell docutils container">
@@ -643,7 +661,7 @@ D {\bf 1} \geq c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/82f7085924f533cdcae9a9f0706cf5e5080d2cdbcccbb7ffaf77d85df4f74155.svg" src="../../../_images/82f7085924f533cdcae9a9f0706cf5e5080d2cdbcccbb7ffaf77d85df4f74155.svg" /></div>
+<img alt="../../../_images/80d0482b7e3165100e248ab8f871e3ba508e8c61c2046210bc6aef5330826cdf.svg" src="../../../_images/80d0482b7e3165100e248ab8f871e3ba508e8c61c2046210bc6aef5330826cdf.svg" /></div>
 </div>
 </section>
 </section>
@@ -673,11 +691,10 @@ D {\bf 1} \geq c
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="model_fitting.html"
@@ -697,10 +714,7 @@ D {\bf 1} \geq c
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -766,8 +780,8 @@ By CVX
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=c5ced968eda925caa686"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=c5ced968eda925caa686"></script>
 
   <footer class="bd-footer">
   </footer>
