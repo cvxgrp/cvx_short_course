@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../../../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Optimal advertising &#8212; CVX Short Course</title>
   
@@ -19,53 +18,49 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/clipboard.min.js"></script>
-    <script src="../../../_static/copybutton.js"></script>
-    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../_static/togglebutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/applications/notebooks/optimal_ad';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="Portfolio optimization" href="portfolio_optimization.html" />
@@ -79,10 +74,9 @@ const thebe_selector_output = ".output, .cell_output"
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
-
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
@@ -123,11 +117,14 @@ const thebe_selector_output = ".output, .cell_output"
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -161,7 +158,18 @@ const thebe_selector_output = ".output, .cell_output"
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -494,12 +502,12 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="optimal-advertising">
-<h1>Optimal advertising<a class="headerlink" href="#optimal-advertising" title="Permalink to this heading">#</a></h1>
+<h1>Optimal advertising<a class="headerlink" href="#optimal-advertising" title="Link to this heading">#</a></h1>
 <section id="ad-display">
-<h2>Ad display<a class="headerlink" href="#ad-display" title="Permalink to this heading">#</a></h2>
+<h2>Ad display<a class="headerlink" href="#ad-display" title="Link to this heading">#</a></h2>
 <p>In this example we solve a simple optimal advertising problem in CVXPY.
 We have <span class="math notranslate nohighlight">\(m\)</span> advertisers/ads, <span class="math notranslate nohighlight">\(i=1, \ldots, m\)</span>, and <span class="math notranslate nohighlight">\(n\)</span> time slots, <span class="math notranslate nohighlight">\(t=1, \ldots, n\)</span>.
 <span class="math notranslate nohighlight">\(T_t\)</span> is the total traffic in time slot <span class="math notranslate nohighlight">\(t\)</span>.
@@ -508,7 +516,7 @@ We have <span class="math notranslate nohighlight">\(m\)</span> advertisers/ads,
 Our goal is to choose <span class="math notranslate nohighlight">\(D_{it}\)</span>.</p>
 </section>
 <section id="clicks-and-revenue">
-<h2>Clicks and revenue<a class="headerlink" href="#clicks-and-revenue" title="Permalink to this heading">#</a></h2>
+<h2>Clicks and revenue<a class="headerlink" href="#clicks-and-revenue" title="Link to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(C_{it}\)</span> is the number of clicks on ad <span class="math notranslate nohighlight">\(i\)</span> in period <span class="math notranslate nohighlight">\(t\)</span>.
 Our click model is <span class="math notranslate nohighlight">\(C_{it} = P_{it}D_{it}\)</span>, where <span class="math notranslate nohighlight">\(P_{it} \in [0,1]\)</span> is the fraction of displays of ad <span class="math notranslate nohighlight">\(i\)</span> in time <span class="math notranslate nohighlight">\(t\)</span> that translate into clicks.</p>
 <p>We are paid <span class="math notranslate nohighlight">\(R_i&gt;0\)</span> per click for ad <span class="math notranslate nohighlight">\(i\)</span>, up to a budget <span class="math notranslate nohighlight">\(B_i\)</span>.
@@ -520,7 +528,7 @@ S_i = \min \left\{ R_i \sum_t C_{it}, B_i\right\},
 <p>a concave function of <span class="math notranslate nohighlight">\(D\)</span>.</p>
 </section>
 <section id="ad-optimization">
-<h2>Ad optimization<a class="headerlink" href="#ad-optimization" title="Permalink to this heading">#</a></h2>
+<h2>Ad optimization<a class="headerlink" href="#ad-optimization" title="Link to this heading">#</a></h2>
 <p>We choose the displays to maximize revenue, i.e., we solve the optimization problem</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -532,7 +540,7 @@ D {\bf 1} \geq c
 <p>where the optimization variable is <span class="math notranslate nohighlight">\(D\in {\bf R}^{m \times n}\)</span> and <span class="math notranslate nohighlight">\(T \in {\bf R}^n\)</span>, <span class="math notranslate nohighlight">\(c \in {\bf R}^m\)</span>, <span class="math notranslate nohighlight">\(R \in {\bf R}^m\)</span>, <span class="math notranslate nohighlight">\(B \in {\bf R}^m\)</span>, and <span class="math notranslate nohighlight">\(P \in {\bf R}^{m \times n}\)</span> are problem data.</p>
 </section>
 <section id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
 <p>In the following code we generate and solve an ad optimization problem with 24 hourly periods and 5 ads (A-E).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -606,7 +614,7 @@ D {\bf 1} \geq c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/a0e9706f6df3e1dd7f06cf83d633f39cbf0cda2024ac6062c7ac0c4609fdacf3.svg" src="../../../_images/a0e9706f6df3e1dd7f06cf83d633f39cbf0cda2024ac6062c7ac0c4609fdacf3.svg" /></div>
+<img alt="../../../_images/1e9843a77b23aa6ef86e3e48ea0f15263bc711ad10e213ff3679be4913a4a03b.svg" src="../../../_images/1e9843a77b23aa6ef86e3e48ea0f15263bc711ad10e213ff3679be4913a4a03b.svg" /></div>
 </div>
 <p>We plot the conversion fractions <span class="math notranslate nohighlight">\(P\)</span> below.</p>
 <div class="cell docutils container">
@@ -633,7 +641,7 @@ D {\bf 1} \geq c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/411e017e7209a6b5ef783f514f2353d933d80f44aea56756da17b76eb812050f.svg" src="../../../_images/411e017e7209a6b5ef783f514f2353d933d80f44aea56756da17b76eb812050f.svg" /></div>
+<img alt="../../../_images/d010ace65a640e5b3a4f51a1bbae185c37541ae45c34ad5298a50446f77d7ef7.svg" src="../../../_images/d010ace65a640e5b3a4f51a1bbae185c37541ae45c34ad5298a50446f77d7ef7.svg" /></div>
 </div>
 <p>We plot the optimal displays <span class="math notranslate nohighlight">\(D\)</span> below.</p>
 <div class="cell docutils container">
@@ -662,7 +670,7 @@ D {\bf 1} \geq c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/8b563817c2d78cfd486bf9166e79721b724bac8e98019c04e965d88897be64da.svg" src="../../../_images/8b563817c2d78cfd486bf9166e79721b724bac8e98019c04e965d88897be64da.svg" /></div>
+<img alt="../../../_images/840c87bc2120f5d5ad82477f2e9968a92991d8fd5bb1a20ba0097812c056220b.svg" src="../../../_images/840c87bc2120f5d5ad82477f2e9968a92991d8fd5bb1a20ba0097812c056220b.svg" /></div>
 </div>
 </section>
 </section>
@@ -724,6 +732,7 @@ D {\bf 1} \geq c
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -758,7 +767,7 @@ By CVX
 
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
@@ -782,8 +791,8 @@ By CVX
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
   </footer>
