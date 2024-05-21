@@ -625,17 +625,6 @@ for the training set and the test set.</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/cvx_short_course/cvx_short_course/.venv/lib/python3.10/site-packages/cvxpy/reductions/solvers/solving_chain.py:336: FutureWarning: 
-    Your problem is being solved with the ECOS solver by default. Starting in 
-    CVXPY 1.5.0, Clarabel will be used as the default solver instead. To continue 
-    using ECOS, specify the ECOS solver explicitly using the ``solver=cp.ECOS`` 
-    argument to the ``problem.solve`` method.
-    
-  warnings.warn(ECOS_DEPRECATION_MSG, FutureWarning)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Below we plot the full time series, the training data with the three AR models, and the test data with the three AR models.</p>
 <div class="cell docutils container">
@@ -682,7 +671,7 @@ for the training set and the test set.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/2628efe9b571c69c2e20d2c92caf7c7bcab92eef7139d1fbc9455810f699bf60.svg" src="../../../_images/2628efe9b571c69c2e20d2c92caf7c7bcab92eef7139d1fbc9455810f699bf60.svg" /><img alt="../../../_images/8156b68573fb65e5a180b6beb1a8b79528a7762f9905422505a1a8a6eee6da30.svg" src="../../../_images/8156b68573fb65e5a180b6beb1a8b79528a7762f9905422505a1a8a6eee6da30.svg" /><img alt="../../../_images/10725c03677595712e5b112f406f4424bd8812bdcf22e47360660ee98c5edf71.svg" src="../../../_images/10725c03677595712e5b112f406f4424bd8812bdcf22e47360660ee98c5edf71.svg" /></div>
+<img alt="../../../_images/d4f76700ce3cb1bd205ad3325c3f23d8713453d9b7d667389549971add5b5e6f.svg" src="../../../_images/d4f76700ce3cb1bd205ad3325c3f23d8713453d9b7d667389549971add5b5e6f.svg" /><img alt="../../../_images/b36b52e3619c36b4fda175a90e84b15cbfddc2c73ea4493878692ba6340e04c6.svg" src="../../../_images/b36b52e3619c36b4fda175a90e84b15cbfddc2c73ea4493878692ba6340e04c6.svg" /><img alt="../../../_images/213e4cd131eaa32e6b2bb7293addacf12e76f1e3d7f6d21194f12e188991e200.svg" src="../../../_images/213e4cd131eaa32e6b2bb7293addacf12e76f1e3d7f6d21194f12e188991e200.svg" /></div>
 </div>
 <p>Below we plot the empirical CDFs of the residuals for the three AR models on the training data and the test data.
 Notice that <span class="math notranslate nohighlight">\(\tau\)</span>-quantile of the optimal residuals is close to zero.</p>
@@ -723,7 +712,7 @@ Notice that <span class="math notranslate nohighlight">\(\tau\)</span>-quantile 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/8e0edd7fed95638f671b19cd937d5499ee0e665152821bc5a1f1d4e57d55d607.svg" src="../../../_images/8e0edd7fed95638f671b19cd937d5499ee0e665152821bc5a1f1d4e57d55d607.svg" /><img alt="../../../_images/52c72aa88a04c580b2725de3f07585a4ff0f6380067f938f3228c9e3f24d885f.svg" src="../../../_images/52c72aa88a04c580b2725de3f07585a4ff0f6380067f938f3228c9e3f24d885f.svg" /></div>
+<img alt="../../../_images/a853deb3311e03ec870d2e7c7a448c7f8a5c47542035fbcd5eebbc6cfd0af792.svg" src="../../../_images/a853deb3311e03ec870d2e7c7a448c7f8a5c47542035fbcd5eebbc6cfd0af792.svg" /><img alt="../../../_images/e7ac392a6f81e64afff676d62ee4858b7bd99637566d258b4226a71b267a7ae2.svg" src="../../../_images/e7ac392a6f81e64afff676d62ee4858b7bd99637566d258b4226a71b267a7ae2.svg" /></div>
 </div>
 </section>
 </section>
