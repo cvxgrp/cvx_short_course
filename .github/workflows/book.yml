@@ -21,7 +21,7 @@ jobs:
         id: target
         run: |
           echo "Branch: ${{ github.ref }}"
-          if ${{ github.ref == 'refs/heads/main' }}; then
+          if ${{ github.ref == 'refs/heads/master' }}; then
             echo "branch=gh-pages" >> $GITHUB_OUTPUT
           else
             echo "branch=draft" >> $GITHUB_OUTPUT
