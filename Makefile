@@ -5,8 +5,8 @@
 .DEFAULT_GOAL := help
 
 # Create a Python virtual environment using uv (faster alternative to venv)
-venv:
-	@if ! command -v uv >/dev/null 2>&1; then \  # Check if uv is installed
+.PHONY: venv
+	@if ! command -v uv >/dev/null 2>&1; then \
 		echo "uv not found. Installing..."; \
 		curl -LsSf https://astral.sh/uv/install.sh | sh; \
 	fi
