@@ -47,3 +47,7 @@ help:  ## Display this help screen
 jupyter: install ## Start jupyterlab
 	@uv pip install jupyterlab  # Install JupyterLab
 	@uv run jupyter lab  # Start JupyterLab server
+
+.PHONY: test
+test: install ## Run the tests
+	@uv run python -m test
