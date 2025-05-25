@@ -1,36 +1,53 @@
+# This Makefile provides commands for setting up the development environment,
+# running formatting tools, and cleaning the repository.
+
+# Set the default target to 'help' when running make without arguments
 .DEFAULT_GOAL := help
 
-VENV :=.venv
+# Create a Python virtual environment using uv (faster alternative to venv)
+.PHONY: venv
+venv:
+	curl -LsSf https://astral.sh/uv/install.sh | sh;
+	@uv venv  # Create a virtual environment in the current directory
 
+# Mark 'install' as a phony target (not associated with a file)
 .PHONY: install
-install:  ## Install a virtual environment
-	python -m venv ${VENV}
-	${VENV}/bin/pip install --upgrade pip
-	${VENV}/bin/pip install -r requirements.txt
+install: venv ## Install a virtual environment
+	@uv pip install --upgrade pip                       # Ensure pip is up to date
+	@uv pip install --no-cache-dir -r requirements.txt  # Install project dependencies from requirements.txt
 
+# Code Quality
 .PHONY: fmt
 fmt: install ## Run autoformatting and linting
-	${VENV}/bin/pip install pre-commit
-	${VENV}/bin/pre-commit install
-	${VENV}/bin/pre-commit run --all-files
+	@uv pip install pre-commit  # Install pre-commit hooks
+	@uv run pre-commit install  # Set up pre-commit hooks
+	@uv run pre-commit run --all-files  # Run pre-commit hooks on all files
 
+# Book Building
 .PHONY: build
 build: install ## Build the book
-	${VENV}/bin/pip install jupyter-book
-	${VENV}/bin/jupyter-book clean book
-	${VENV}/bin/jupyter-book build book
-	touch book/_build/html/.nojekyll
+	@uv pip install jupyter-book  # Install jupyter-book
+	@uv run jupyter-book clean book  # Clean previous builds
+	@uv run jupyter-book build book  # Build the book
+	touch book/_build/html/.nojekyll  # Add .nojekyll file for GitHub Pages
 
+# Cleanup
 .PHONY: clean
 clean:  ## Clean up caches and build artifacts
-	@git clean -X -d -f
+	@git clean -X -d -f  # Remove files ignored by git
 
+# Help
 .PHONY: help
 help:  ## Display this help screen
-	@echo -e "\033[1mAvailable commands:\033[0m"
-	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}' | sort
+	@echo -e "\033[1mAvailable commands:\033[0m"  # Print header in bold
+	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}' | sort  # Extract and format targets with comments
 
+# Jupyter Setup
 .PHONY: jupyter
 jupyter: install ## Start jupyterlab
-	${VENV}/bin/pip install jupyterlab
-	${VENV}/bin/jupyter lab
+	@uv pip install jupyterlab  # Install JupyterLab
+	@uv run jupyter lab  # Start JupyterLab server
+
+.PHONY: test
+test: install ## Run the tests
+	@uv run python -m test
