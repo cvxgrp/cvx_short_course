@@ -6,6 +6,7 @@
 
 # Create a Python virtual environment using uv (faster alternative to venv)
 .PHONY: venv
+venv:
 	curl -LsSf https://astral.sh/uv/install.sh | sh;
 	@uv venv  # Create a virtual environment in the current directory
 
