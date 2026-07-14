@@ -30,6 +30,8 @@
 dcp.pdf
 *.DS_Store
 .ipynb_checkpoints
+__marimo__
+__pycache__
 exercises/*_sltn.ipynb
 
 .idea
